@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PG Educational Dashboard</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            transition: background-color 0.3s ease;
+        }
+        .tab:hover {
+            background-color: #e0e6e8;
+        }
+        .tab.active {
+            background-color: #3498db;
+            color: #fff;
+            border-color: #3498db;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #ecf0f1;
+            padding: 3px;
+            border-radius: 3px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+        }
+        .progress-bar-fill {
+            display: block;
+            height: 22px;
+            background-color: #2ecc71;
+            border-radius: 3px;
+            transition: width 500ms ease-in-out;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="section">
+            <h1>PG Educational Dashboard</h1>
+            <div id="welcome-message">Welcome back, Dr. Smith!</div>
+            <div id="user-profile">
+                <span class="badge">Courses: 4</span>
+                <span class="badge">Research Milestones: 2/5</span>
+                <span class="badge">Skills: Advanced</span>
+            </div>
+            <nav>
+                <a href="#" class="btn">Home</a>
+                <a href="#" class="btn">Profile</a>
+                <a href="#" class="btn">Settings</a>
+            </nav>
+        </header>
+
+        <section class="section" id="field-selection">
+            <h2>Select Your Field of Study</h2>
+            <div class="grid">
+                <div class="card" style="border-top: 5px solid #e74c3c;">
+                    <h3>Engineering</h3>
+                    <a href="#" class="btn">Explore</a>
+                </div>
+                <div class="card" style="border-top: 5px solid #3498db;">
+                    <h3>Social Sciences</h3>
+                    <a href="#" class="btn">Explore</a>
+                </div>
+                <div class="card" style="border-top: 5px solid #2ecc71;">
+                    <h3>Medicine</h3>
+                    <a href="#" class="btn">Explore</a>
+                </div>
+                <div class="card" style="border-top: 5px solid #f39c12;">
+                    <h3>Business</h3>
+                    <a href="#" class="btn">Explore</a>
+                </div>
+                <div class="card" style="border-top: 5px solid #9b59b6;">
+                    <h3>Arts</h3>
+                    <a href="#" class="btn">Explore</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="quick-access">
+            <h2>Quick Access</h2>
+            <a href="#" class="btn">Research Tools</a>
+            <a href="#" class="btn">Career Prep</a>
+            <a href="#" class="btn">Collaboration Hub</a>
+            <a href="#" class="btn">Announcements</a>
+        </section>
+
+        <section class="section" id="announcements">
+            <h2>Announcements</h2>
+            <div class="card">
+                <h3>New Research Grant Opportunity</h3>
+                <p>Applications are now open for the Annual Research Excellence Grant. Deadline: June 30th.</p>
+            </div>
+            <div class="card">
+                <h3>Upcoming Seminar: AI in Healthcare</h3>
+                <p>Join us for a seminar on the latest applications of AI in healthcare. Date: May 15th, 2pm.</p>
+            </div>
+        </section>
+
+        <section class="section" id="course-materials">
+            <h2>Course Materials and Syllabus</h2>
+            <div class="tabs">
+                <div class="tab active">Core Courses</div>
+                <div class="tab">Electives</div>
+                <div class="tab">Specialized Topics</div>
+            </div>
+            <div class="card">
+                <h3>Advanced Data Analysis</h3>
+                <a href="#" class="btn">View Syllabus</a>
+                <a href="#" class="btn">Access OER Resources</a>
+                <a href="#" class="btn">Download Materials</a>
+            </div>
+        </section>
+
+        <section class="section" id="research-projects">
+            <h2>Research Projects</h2>
+            <div class="card">
+                <h3>Thesis Progress</h3>
+                <div class="progress-bar">
+                    <span class="progress-bar-fill" style="width: 60%;"></span>
+                </div>
+                <p>60% Complete</p>
+                <a href="#" class="btn">Update Progress</a>
+            </div>
+            <div class="card">
+                <h3>Current Project: AI in Climate Modeling</h3>
+                <a href="#" class="btn">View Details</a>
+                <a href="#" class="btn">Collaborate</a>
+            </div>
+        </section>
+
+        <section class="section" id="research-hub">
+            <h2>Research and Publication Hub</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Research Tools</h3>
+                    <ul>
+                        <li><a href="#">Statistical Analysis Software</a></li>
+                        <li><a href="#">Data Visualization Tools</a></li>
+                        <li><a href="#">Reference Management Software</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Publication Resources</h3>
+                    <a href="#" class="btn">Academic Writing Guide</a>
+                    <a href="#" class="btn">Journal Submission Tips</a>
+                </div>
+                <div class="card">
+                    <h3>Grant Opportunities</h3>
+                    <a href="#" class="btn">Browse Grants</a>
+                    <a href="#" class="btn">Application Templates</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="skill-building">
+            <h2>Skill Building and Certifications</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Advanced Python for Data Science</h3>
+                    <p>Level: Expert</p>
+                    <a href="#" class="btn">Start Course</a>
+                </div>
+                <div class="card">
+                    <h3>Machine Learning Specialization</h3>
+                    <p>Level: Advanced</p>
+                    <a href="#" class="btn">Enroll Now</a>
+                </div>
+                <div class="card">
+                    <h3>Research Presentation Skills</h3>
+                    <p>Level: Intermediate</p>
+                    <a href="#" class="btn">Access Workshop</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="career-networking">
+            <h2>Career and Networking</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Career Pathways</h3>
+                    <a href="#" class="btn">Academic Careers</a>
+                    <a href="#" class="btn">Industry Roles</a>
+                    <a href="#" class="btn">Research Positions</a>
+                </div>
+                <div class="card">
+                    <h3>Job Board</h3>
+                    <a href="#" class="btn">Browse Opportunities</a>
+                    <a href="#" class="btn">Post-Doctoral Positions</a>
+                </div>
+                <div class="card">
+                    <h3>Networking Events</h3>
+                    <a href="#" class="btn">Upcoming Conferences</a>
+                    <a href="#" class="btn">Alumni Meetups</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="collaboration-hub">
+            <h2>Collaboration and Mentorship Hub</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Research Collaboration Board</h3>
+                    <a href="#" class="btn">Post Project</a>
+                    <a href="#" class="btn">Find Collaborators</a>
+                </div>
+                <div class="card">
+                    <h3>Mentorship Program</h3>
+                    <a href="#" class="btn">Find a Mentor</a>
+                    <a href="#" class="btn">Become a Mentor</a>
+                </div>
+                <div class="card">
+                    <h3>Discussion Forums</h3>
+                    <a href="#" class="btn">Join Conversations</a>
+                    <a href="#" class="btn">Start a Thread</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="faculty-supervisor">
+            <h2>Faculty and Supervisor Panel</h2>
+            <div class="card">
+                <h3>Dr. Jane Doe</h3>
+                <p>Expertise: Artificial Intelligence in Healthcare</p>
+                <a href="#" class="btn">View Profile</a>
+                <a href="#" class="btn">Schedule Meeting</a>
+            </div>
+            <div class="card">
+                <h3>Supervisor Feedback</h3>
+                <a href="#" class="btn">View Recent Feedback</a>
+                <a href="#" class="btn">Submit Work for Review</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // This script would typically be in a separate file
+        // and would include more complex functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set welcome message based on time of day
+            const welcomeMessage = document.getElementById('welcome-message');
+            const hour = new Date().getHours();
+            if (hour < 12) welcomeMessage.textContent = 'Good morning, Dr. Smith!';
+            else if (hour < 18) welcomeMessage.textContent = 'Good afternoon, Dr. Smith!';
+            else welcomeMessage.textContent = 'Good evening, Dr. Smith!';
+
+            // Add tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    // Here you would typically load content based on the selected tab
+                });
+            });
+        });
+    </script>
+</body>
+</html>

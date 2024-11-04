@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Exam Preparation Dashboard</title>
+    <style>
+        /* Basic Styling */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        h1, h2 { color: #2c3e50; }
+        .section { background: #fff; border-radius: 5px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+
+        /* Carousel Styling */
+        .carousel { display: flex; overflow-x: auto; padding: 10px; }
+        .carousel-item { flex: 0 0 auto; width: 300px; background: #3498db; color: #fff; padding: 20px; margin-right: 10px; border-radius: 5px; }
+        
+        /* Button Styling */
+        .btn { display: inline-block; background: #3498db; color: #fff; padding: 10px 15px; border-radius: 5px; text-decoration: none; margin: 5px 0; }
+        .btn:hover { background: #2980b9; }
+
+        /* Progress Bar */
+        .progress-bar { width: 100%; background: #e0e0e0; height: 20px; border-radius: 5px; margin: 10px 0; }
+        .progress { width: 60%; background: #3498db; height: 100%; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Home Section -->
+    <section class="section" id="home">
+        <h1>Welcome to Banking Exam Preparation Dashboard</h1>
+        <p>Your one-stop resource for preparing for exams like IBPS, SBI PO, and other banking positions.</p>
+        
+        <div class="grid">
+            <a href="#quantitative-aptitude" class="btn">Quantitative Aptitude</a>
+            <a href="#reasoning" class="btn">Reasoning</a>
+            <a href="#english" class="btn">English Language</a>
+            <a href="#mock-tests" class="btn">Mock Tests</a>
+        </div>
+        
+        <div class="carousel">
+            <div class="carousel-item">
+                <h3>New Quantitative Aptitude Module</h3>
+                <p>Practice ratios, percentages, profit & loss, and more.</p>
+            </div>
+            <div class="carousel-item">
+                <h3>Mock Test Series Launched</h3>
+                <p>Simulate real banking exams with our timed tests.</p>
+            </div>
+            <div class="carousel-item">
+                <h3>Banking Career Guide</h3>
+                <p>Learn about different roles and career progression in banking.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quantitative Aptitude Section -->
+    <section class="section" id="quantitative-aptitude">
+        <h2>Quantitative Aptitude</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Ratios and Proportions</h3>
+                <p>Master the fundamentals of ratios and proportions.</p>
+                <a href="#" class="btn">Start Learning</a>
+            </div>
+            <div class="card">
+                <h3>Percentages</h3>
+                <p>Practice percentage calculations for banking exams.</p>
+                <a href="#" class="btn">Practice Now</a>
+            </div>
+            <div class="card">
+                <h3>Profit and Loss</h3>
+                <p>Learn profit, loss, and discount calculations.</p>
+                <a href="#" class="btn">Explore Concepts</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reasoning Section -->
+    <section class="section" id="reasoning">
+        <h2>Logical Reasoning</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Puzzles and Seating Arrangements</h3>
+                <p>Improve your skills with puzzles and seating arrangement exercises.</p>
+                <a href="#" class="btn">Start Practicing</a>
+            </div>
+            <div class="card">
+                <h3>Analytical Reasoning</h3>
+                <p>Practice analytical reasoning questions.</p>
+                <a href="#" class="btn">Solve Questions</a>
+            </div>
+            <div class="card">
+                <h3>Syllogisms</h3>
+                <p>Master syllogisms with examples and quizzes.</p>
+                <a href="#" class="btn">Learn Syllogisms</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- English Language Section -->
+    <section class="section" id="english">
+        <h2>English Language</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Reading Comprehension</h3>
+                <p>Practice comprehension passages to improve reading speed.</p>
+                <a href="#" class="btn">Practice Reading</a>
+            </div>
+            <div class="card">
+                <h3>Grammar and Vocabulary</h3>
+                <p>Brush up on grammar rules and vocabulary.</p>
+                <a href="#" class="btn">Learn Grammar</a>
+            </div>
+            <div class="card">
+                <h3>Error Spotting</h3>
+                <p>Identify errors in sentences with targeted exercises.</p>
+                <a href="#" class="btn">Start Practicing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- General Awareness Section -->
+    <section class="section" id="general-awareness">
+        <h2>General Awareness & Banking Awareness</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Banking Knowledge</h3>
+                <p>Learn about banking policies, terms, and recent trends.</p>
+                <a href="#" class="btn">Explore Banking GK</a>
+            </div>
+            <div class="card">
+                <h3>Current Affairs</h3>
+                <p>Weekly updates on economy, finance, and banking sectors.</p>
+                <a href="#" class="btn">Read Updates</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mock Tests Section -->
+    <section class="section" id="mock-tests">
+        <h2>Mock Tests & Exam Analysis</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Full-Length Practice Tests</h3>
+                <p>Simulate real exam conditions with timed tests.</p>
+                <a href="#" class="btn">Start Test</a>
+            </div>
+            <div class="card">
+                <h3>Detailed Solutions</h3>
+                <p>Step-by-step solutions to help improve problem-solving techniques.</p>
+                <a href="#" class="btn">View Solutions</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banking Careers Guide Section -->
+    <section class="section" id="careers-guide">
+        <h2>Banking Careers Guide</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Job Profiles</h3>
+                <p>Details on different roles in banking, such as PO, Clerk, and SO.</p>
+                <a href="#" class="btn">Explore Profiles</a>
+            </div>
+            <div class="card">
+                <h3>Career Progression</h3>
+                <p>Learn about career paths from entry-level positions to senior roles.</p>
+                <a href="#" class="btn">View Career Paths</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>

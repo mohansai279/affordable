@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Affordable Education - Change Lives Today!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFD93D;
+            --text-color: #2C3E50;
+            --background-color: #F7F7F7;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--primary-color),
+                var(--primary-color) 10px,
+                var(--secondary-color) 10px,
+                var(--secondary-color) 20px
+            );
+            animation: stripes 20s linear infinite;
+            opacity: 0.1;
+        }
+        
+        @keyframes stripes {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        h1, h2 {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: -50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .highlight {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            margin: 2rem 0;
+            transform: rotate(-1deg);
+        }
+        
+        .qr-code {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .qr-code img {
+            max-width: 250px;
+            border: 10px solid var(--secondary-color);
+            border-radius: 10px;
+        }
+        
+        form {
+            background-color: var(--background-color);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        button[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, transform 0.1s;
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            text-align: center;
+        }
+        
+        .popup h2 {
+            color: var(--primary-color);
+        }
+        
+        .popup p {
+            margin: 1rem 0;
+        }
+        
+        .popup button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .popup button:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 var(--primary-color), 0 0 var(--secondary-color), 0 0 var(--accent-color);
+            animation: firework 2s ease-out infinite;
+        }
+        
+        @keyframes firework {
+            0% { transform: translate(var(--x), var(--initialY)); width: 5px; opacity: 1; }
+            50% { width: 8px; opacity: 1; }
+            100% { width: 0px; opacity: 0; transform: translate(var(--x), var(--finalY)); }
+        }
+        
+        #languageSelector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <select id="languageSelector" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="hi">हिन्दी</option>
+        </select>
+        <h1 id="mainTitle">Ignite a Future: Support Affordable Education</h1>
+    </header>
+    
+    <div class="container">
+        <div class="content">
+            <p id="mainDescription">Join our mission to provide quality education to all, regardless of financial background. Your generosity can transform a child's life, opening doors to prestigious schools and colleges they once only dreamed of.</p>
+            
+            <div class="highlight" id="highlight">
+                Together, we're partnering with over 100 schools, colleges, and dedicated educators to make quality education accessible to everyone.
+            </div>
+            
+            <h2 id="donationTitle">Your Donation, Their Future</h2>
+            <p id="donationDescription">Every contribution, no matter the size, has the power to change a life. When you donate, we'll show you exactly how your generosity impacts a child's educational journey.</p>
+            
+            <div class="qr-code">
+                <h2 id="qrTitle">Scan to Donate</h2>
+                <p>UPI ID: 9494417644@ybl</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=9494417644@ybl&pn=AffordableEducation" alt="QR Code for donation" width="250" height="250">
+            </div>
+            
+            <form id="donationForm">
+                <label for="utr" id="utrLabel">UTR Number (After Payment):</label>
+                <input type="text" id="utr" name="utr" required>
+                
+                <label for="name" id="nameLabel">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email" id="emailLabel">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="phone" id="phoneLabel">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+                
+                <label for="amount" id="amountLabel">Donation Amount:</label>
+                <input type="text" id="amount" name="amount" required>
+                
+                <button type="submit" id="submitButton">Confirm Donation</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="popup" id="thankYouPopup">
+        <h2 id="popupTitle">Thank You for Your Donation!</h2>
+        <p id="blessing"></p>
+        <p id="continueServing">Please continue to serve and support those in need. Your generosity makes a real difference!</p>
+        <button onclick="closePopup()" id="closeButton">Close</button>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                mainTitle: "Ignite a Future: Support Affordable Education",
+                mainDescription: "Join our mission to provide quality education to all, regardless of financial background. Your generosity can transform a child's life, opening doors to prestigious schools and colleges they once only dreamed of.",
+                highlight: "Together, we're partnering with over 100 schools, colleges, and dedicated educators to make quality education accessible to everyone.",
+                donationTitle: "Your Donation, Their Future",
+                donationDescription: "Every contribution, no matter the size, has the power to change a life. When you donate, we'll show you exactly how your generosity impacts a child's educational journey.",
+                qrTitle: "Scan to Donate",
+                utrLabel: "UTR Number (After Payment):",
+                nameLabel: "Your Name:",
+                emailLabel: "Email:",
+                phoneLabel: "Phone Number:",
+                amountLabel: "Donation Amount:",
+                submitButton: "Confirm Donation",
+                popupTitle: "Thank You for Your Donation!",
+                continueServing: "Please continue to serve and support those in need. Your generosity makes a real difference!",
+                closeButton: "Close"
+            },
+            es: {
+                mainTitle: "Enciende un Futuro: Apoya la Educación Asequible",
+                mainDescription: "Únete a nuestra misión de proporcionar educación de calidad a todos, independientemente de su situación financiera. Tu generosidad puede transformar la vida de un niño, abriendo puertas a escuelas y universidades prestigiosas que antes solo soñaban.",
+                highlight: "Juntos, nos asociamos con más de 100 escuelas, universidades y educadores dedicados para hacer que la educación de calidad sea accesible para todos.",
+                donationTitle: "Tu Donación, Su Futuro",
+                donationDescription: "Cada contribución, sin importar el tamaño, tiene el poder de cambiar una vida. Cuando dones, te mostraremos exactamente cómo tu generosidad impacta el viaje educativo de un niño.",
+                qrTitle: "Escanea para Donar",
+                utrLabel: "Número UTR (Después del Pago):",
+                nameLabel: "Tu Nombre:",
+                emailLabel: "Correo Electrónico:",
+                phoneLabel: "Número de Teléfono:",
+                amountLabel: "Cantidad de Donación:",
+                submitButton: "Confirmar Donación",
+                popupTitle: "¡Gracias por Tu Donación!",
+                continueServing: "Por favor, continúa sirviendo y apoyando a los necesitados. ¡Tu generosidad marca una verdadera diferencia!",
+                closeButton: "Cerrar"
+            },
+            fr: {
+                mainTitle: "Allumez un Avenir : Soutenez l'Éducation Abordable",
+                mainDescription: "Rejoignez notre mission de fournir une éducation de qualité à tous, indépendamment de leur situation financière. Votre générosité peut transformer la vie d'un enfant, ouvrant des portes vers des écoles et des universités prestigieuses dont ils ne pouvaient que rêver auparavant.",
+                highlight: "Ensemble, nous nous associons à plus de 100 écoles, universités et éducateurs dévoués pour rendre l'éducation de qualité accessible à tous.",
+                donationTitle: "Votre Don, Leur Avenir",
+                donationDescription: "Chaque contribution, quelle que soit sa taille, a le pouvoir de changer une vie. Lorsque vous faites un don, nous vous montrerons exactement comment votre générosité impacte le parcours éducatif d'un enfant.",
+                qrTitle: "Scannez pour Faire un Don",
+                utrLabel: "Numéro UTR (Après Paiement) :",
+                nameLabel: "Votre Nom :",
+                emailLabel: "Email :",
+                phoneLabel: "Numéro de Téléphone :",
+                amountLabel: "Montant du Don :",
+                submitButton: "Confirmer le Don",
+                popupTitle: "Merci pour Votre Don !",
+                continueServing: "S'il vous plaît, continuez à servir et à soutenir ceux dans le besoin. Votre générosité fait une réelle différence !",
+                closeButton: "Fermer"
+            },
+            hi: {
+                mainTitle: "भविष्य को प्रज्वलित करें: सस्ती शिक्षा का समर्थन करें",
+                mainDescription: "वित्तीय पृष्ठभूमि की परवाह किए बिना सभी को गुणवत्तापूर्ण शिक्षा प्रदान करने के हमारे मिशन में शामिल हों। आपकी उदारता एक बच्चे के जीवन को बदल सकती है, प्रतिष्ठित स्कूलों और कॉलेजों के दरवाजे खोल सकती है जिनके बारे में वे पहले केवल सपने देखते थे।",
+                highlight: "साथ मिलकर, हम  गुणवत्तापूर्ण शिक्षा को सभी के लिए सुलभ बनाने के लिए 100 से अधिक स्कूलों, कॉलेजों और समर्पित शिक्षकों के साथ साझेदारी कर रहे हैं।",
+                donationTitle: "आपका दान, उनका भविष्य",
+                donationDescription: "हर योगदान, चाहे वह कितना भी छोटा हो, एक जीवन बदलने की शक्ति रखता है। जब आप दान करते हैं, तो हम आपको दिखाएंगे कि आपकी उदारता एक बच्चे की शैक्षिक यात्रा को कैसे प्रभावित करती है।",
+                qrTitle: "दान करने के लिए स्कैन करें",
+                utrLabel: "UTR नंबर (भुगतान के बाद):",
+                nameLabel: "आपका नाम:",
+                emailLabel: "ईमेल:",
+                phoneLabel: "फोन नंबर:",
+                amountLabel: "दान राशि:",
+                submitButton: "दान की पुष्टि करें",
+                popupTitle: "आपके दान के लिए धन्यवाद!",
+                continueServing: "कृपया जरूरतमंदों की सेवा और समर्थन करना जारी रखें। आपकी उदारता वास्तविक अंतर लाती है!",
+                closeButton: "बंद करें"
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById('languageSelector').value;
+            const texts = translations[lang];
+            
+            document.getElementById('mainTitle').textContent = texts.mainTitle;
+            document.getElementById('mainDescription').textContent = texts.mainDescription;
+            document.getElementById('highlight').textContent = texts.highlight;
+            document.getElementById('donationTitle').textContent = texts.donationTitle;
+            document.getElementById('donationDescription').textContent = texts.donationDescription;
+            document.getElementById('qrTitle').textContent = texts.qrTitle;
+            document.getElementById('utrLabel').textContent = texts.utrLabel;
+            document.getElementById('nameLabel').textContent = texts.nameLabel;
+            document.getElementById('emailLabel').textContent = texts.emailLabel;
+            document.getElementById('phoneLabel').textContent = texts.phoneLabel;
+            document.getElementById('amountLabel').textContent = texts.amountLabel;
+            document.getElementById('submitButton').textContent = texts.submitButton;
+            document.getElementById('popupTitle').textContent = texts.popupTitle;
+            document.getElementById('continueServing').textContent = texts.continueServing;
+            document.getElementById('closeButton').textContent = texts.closeButton;
+        }
+
+        document.getElementById('donationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('submitButton').textContent = '';
+            showPopup();
+        });
+
+        function showPopup() {
+            const blessings = [
+                "May your kindness return to you a hundredfold!",
+                "Your generosity will light up many lives. Thank you!",
+                "Bless you for being a beacon of hope in a child's life!",
+                "Your compassion will create ripples of change. Thank you!",
+                "May your life be as bright as the futures you're helping to build!"
+            ];
+            const randomBlessing = blessings[Math.floor(Math.random() * blessings.length)];
+            document.getElementById('blessing').textContent = randomBlessing;
+            document.getElementById('thankYouPopup').style.display = 'block';
+            
+            for (let i = 0; i < 10; i++) {
+                createFirework();
+            }
+        }
+
+        function closePopup() {
+            document.getElementById('thankYouPopup').style.display = 'none';
+            document.getElementById('submitButton').textContent = 'Confirm Donation';
+        }
+
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            document.body.appendChild(firework);
+
+            const x = Math.random() * window.innerWidth;
+            const initialY = window.innerHeight;
+            const finalY = initialY - Math.random() * 200;
+
+            firework.style.setProperty('--x', `${x}px`);
+            firework.style.setProperty('--initialY', `${initialY}px`);
+            firework.style.setProperty('--finalY', `${finalY}px`);
+
+            firework.style.left = `${x}px`;
+            firework.style.top = `${initialY}px`;
+
+            setTimeout(() => {
+                firework.remove();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

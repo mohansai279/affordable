@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Education Finder with Certificate Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script src="https://kit.fontawesome.com/8bd6864b0f.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+            font-family: 'Courier New', Courier, monospace;
+        }
+        body {
+            font-family:'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            perspective: 1000px;
+            background-repeat:repeat-y;
+            background-size:cover;
+            background-image:url('https://thumbs.dreamstime.com/b/joyful-graduates-celebrating-confetti-balloons-graduation-time-educational-institutions-generative-ai-technology-315705209.jpg')
+        }
+        .container {
+            background-color: rgba(216, 231, 230, 0.826);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(240, 20, 20, 0.1);
+            transition: transform 0.3s ease;
+            width: 80%;
+            max-width: 800px;
+        }
+        .container:hover {
+            transform: rotateX(0deg) rotateY(0deg);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .input-container {
+            width: 48%;
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #results {
+            margin-top: 20px;
+        }
+        .institution {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .certificate-link {
+            background-color: #066ef7;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .certificate-link:hover {
+            background-color: #45a049;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #previewCanvas {
+            width: 100%;
+            height: auto;
+        }
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+        .button-group button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Indian Education Institutions </h1>
+        <div class="input-group">
+            <div class="input-container">
+                <label for="state">Select State:</label>
+                <select id="state" onchange="enableClassSelection()">
+                    <option value="">--Select State--</option>
+                    <!-- States will be populated dynamically -->
+                </select>
+            </div>
+            <div class="input-container">
+                <label for="class">Select Class:</label>
+                <select id="class" onchange="handleClassSelection()" disabled>
+                    <option value="">--Select Class--</option>
+                    <option value="school">School (1-10)</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="ug">UG</option>
+                    <option value="pg">PG</option>
+                </select>
+            </div>
+            <div class="input-container" id="boardContainer" style="display: none;">
+                <label for="board">Select Board:</label>
+                <select id="board" onchange="handleBoardSelection()">
+                    <option value="">--Select Board--</option>
+                    <option value="cbse">CBSE</option>
+                    <option value="icse">ICSE</option>
+                    <option value="state">State Board</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="input-container" id="otherBoardContainer" style="display: none;">
+                <label for="otherBoard">Specify Board:</label>
+                <input type="text" id="otherBoard" onchange="showInstitutions()">
+            </div>
+        </div>
+        <div id="results"></div>
+    </div>
+
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Certificate Preview</h2>
+            <canvas id="previewCanvas"></canvas>
+            <div class="button-group">
+                <button onclick="closePreview()">Close</button>
+                <button onclick="downloadCertificate()">Download</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const states = [
+            "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+            "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+            "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+            "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+            "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+            "Uttarakhand", "Uttar Pradesh", "West Bengal",
+            "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman & Diu",
+            "The Government of NCT of Delhi", "Jammu & Kashmir", "Ladakh",
+            "Lakshadweep", "Puducherry"
+        ];
+
+        const institutions = {
+            school: [
+                "Sunshine Public School", "Green Valley High School", "Bluebird International School",
+                "Harmony Academy", "Everest Heights School", "Riverside Elementary",
+                "Golden Gate Public School", "Pinnacle High", "Zenith International School",
+                "Oakridge School"
+            ],
+            intermediate: [
+                "City College", "Greenfield Junior College", "Horizon Intermediate College",
+                "Lakeside Pre-University", "Mountainview Junior College", "Northstar Intermediate",
+                "Parkview College", "Queensway Pre-University", "Riverside Junior College",
+                "Sunbeam Intermediate College"
+            ],
+            ug: [
+                "Alpha University", "Beta Institute of Technology", "Gamma College of Arts and Science",
+                "Delta Engineering College", "Epsilon Medical University", "Zeta Law School",
+                "Eta Business School", "Theta College of Agriculture", "Iota Institute of Design",
+                "Kappa University of Applied Sciences"
+            ],
+            pg: [
+                "Advanced Institute of Management", "Biotech Research University",
+                "Center for Environmental Studies", "Digital Media Academy",
+                "Energy Sciences University", "Futuristic Technology Institute",
+                "Global Health Research Center", "Hospitality Management School",
+                "Institute of Data Science", "Journalism and Mass Communication University"
+            ]
+        };
+
+        let currentCertificate = null;
+
+        // Populate state dropdown
+        const stateSelect = document.getElementById('state');
+        states.forEach(state => {
+            const option = document.createElement('option');
+            option.value = state.toLowerCase().replace(/ /g, '_');
+            option.textContent = state;
+            stateSelect.appendChild(option);
+        });
+
+        function enableClassSelection() {
+            const classSelect = document.getElementById('class');
+            classSelect.disabled = !stateSelect.value;
+            classSelect.value = '';
+            document.getElementById('boardContainer').style.display = 'none';
+            document.getElementById('otherBoardContainer').style.display = 'none';
+            document.getElementById('results').innerHTML = '';
+        }
+
+        function handleClassSelection() {
+            const classSelect = document.getElementById('class');
+            const boardContainer = document.getElementById('boardContainer');
+            const otherBoardContainer = document.getElementById('otherBoardContainer');
+            const resultsDiv = document.getElementById('results');
+
+            if (classSelect.value === 'school' || classSelect.value === 'intermediate') {
+                boardContainer.style.display = 'block';
+                otherBoardContainer.style.display = 'none';
+                resultsDiv.innerHTML = '';
+            } else if (classSelect.value === 'ug' || classSelect.value === 'pg') {
+                boardContainer.style.display = 'none';
+                otherBoardContainer.style.display = 'none';
+                showInstitutions();
+            } else {
+                boardContainer.style.display = 'none';
+                otherBoardContainer.style.display = 'none';
+                resultsDiv.innerHTML = '';
+            }
+        }
+
+        function handleBoardSelection() {
+            const boardSelect = document.getElementById('board');
+            const otherBoardContainer = document.getElementById('otherBoardContainer');
+            if (boardSelect.value === 'other') {
+                otherBoardContainer.style.display = 'block';
+            } else {
+                otherBoardContainer.style.display = 'none';
+                showInstitutions();
+            }
+        }
+
+        function showInstitutions() {
+            const stateSelect = document.getElementById('state');
+            const classSelect = document.getElementById('class');
+            const boardSelect = document.getElementById('board');
+            const otherBoardInput = document.getElementById('otherBoard');
+            const resultsDiv = document.getElementById('results');
+
+            if (stateSelect.value && classSelect.value) {
+                let boardValue = '';
+                if (classSelect.value === 'school' || classSelect.value === 'intermediate') {
+                    if (boardSelect.value === 'other') {
+                        if (!otherBoardInput.value) return;
+                        boardValue = otherBoardInput.value;
+                    } else {
+                        if (!boardSelect.value) return;
+                        boardValue = boardSelect.value;
+                    }
+                }
+
+                const selectedInstitutions = institutions[classSelect.value];
+
+                resultsDiv.innerHTML = '<h2>Institutions:</h2>';
+                selectedInstitutions.forEach((institution) => {
+                    resultsDiv.innerHTML += `
+                        <div class="institution">
+                            <span>${institution}</span>
+                            <div>
+                                <span class="certificate-link" onclick="generateCertificate('${institution}', '${boardValue}', '${classSelect.value}', true)"><i class="fa-solid fa-eye" style="color: #000000;"></i>  Preview</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                resultsDiv.innerHTML = '';
+            }
+        }
+
+        function generateCertificate(institution, board, educationLevel, isPreview) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Set background color
+            doc.setFillColor(240, 240, 240);
+            doc.rect(0, 0, 210, 297, 'F');
+
+            // Add border
+            doc.setDrawColor(0);
+            doc.setLineWidth(5);
+            doc.rect(10, 10, 190, 277);
+
+            // Add title
+            doc.setFontSize(24);
+            doc.setFont("helvetica", "bold");
+            doc.text("Certificate of Achievement", 105, 30, null, null, "center");
+
+            // Add logos (placeholder positions, you'll need to replace with actual logos)
+            doc.addImage("https://www.hranker.com/blog/wp-content/uploads/2021/03/government-of-india.jpg", "JPEG", 20, 40, 30, 30);
+            doc.addImage("https://upload.wikimedia.org/wikipedia/en/a/a6/CISCE_logo.png", "PNG", 160, 40, 30, 30);
+
+            // Add institution name
+            doc.setFontSize(18);
+            doc.setFont("helvetica", "normal");
+            doc.text(institution, 105, 80, null, null, "center");
+
+            // Add certificate content
+            doc.setFontSize(14);
+            doc.text("This is to certify that", 105, 100, null, null, "center");
+            doc.setFont("helvetica", "bold");
+            doc.text("John Doe", 105, 110, null, null, "center");
+            doc.setFont("helvetica", "normal");
+            doc.text("has successfully completed the course of study", 105, 120, null, null, "center");
+            doc.text("in accordance with the prescribed syllabus", 105, 130, null, null, "center");
+
+            // Add date
+            const currentDate = new Date().toLocaleDateString();
+            doc.text(`Date: ${currentDate}`, 105, 150, null, null, "center");
+
+            // Add collaboration text
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("AFFORDABLE EDUCATION IN COLLABORATION WITH", 105, 170, null, null, "center");
+            doc.text(`${institution.toUpperCase()}`, 105, 180, null, null, "center");
+
+            // Add head name and title
+            const headTitle = educationLevel === 'school' ? 'Principal' : 'Dean';
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "normal");
+            doc.text(`${headTitle}:  Dr. Jane Smith`, 105, 200, null, null, "center");
+
+            // Add signatures (placeholder positions)
+            doc.setFontSize(12);
+            doc.text("Institution Head Signature", 50, 240, null, null, "center");
+            doc.text("Affordable Education Representative", 160, 240, null, null, "center");
+
+            if (isPreview) {
+                currentCertificate = doc;
+                showPreview(doc.output('datauristring'));
+            } else {
+                doc.save(`${institution}_Certificate.pdf`);
+            }
+        }
+
+        function showPreview(pdfDataUri) {
+            const modal = document.getElementById('previewModal');
+            const canvas = document.getElementById('previewCanvas');
+            modal.style.display = 'block';
+
+            // Load the PDF using pdf.js
+            pdfjsLib.getDocument({data: atob(pdfDataUri.split(',')[1])}).promise.then(function(pdf) {
+                pdf.getPage(1).then(function(page) {
+                    const scale = 1.5;
+                    const viewport = page.getViewport({scale: scale});
+
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    const renderContext = {
+                        canvasContext: canvas.getContext('2d'),
+                        viewport: viewport
+                    };
+                    page.render(renderContext);
+                });
+            });
+        }
+
+        function closePreview() {
+            const modal = document.getElementById('previewModal');
+            modal.style.display = 'none';
+        }
+
+        function downloadCertificate() {
+            if (currentCertificate) {
+                currentCertificate.save('Certificate.pdf');
+            }
+            closePreview();
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('previewModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Close the modal when clicking the close button
+        document.querySelector('.close').onclick = function() {
+            closePreview();
+        }
+    </script>
+</body>
+</html>

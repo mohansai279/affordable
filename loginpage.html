@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabbed Login and Sign Up with Demo Request</title>
+  <style>
+    /* Reset and basic styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 700px;
+      width: 100%;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    /* Header with Request Demo button */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .header h2 {
+      font-size: 1.8rem;
+      color: #333;
+      margin: 0;
+    }
+    .request-demo {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+    .request-demo:hover {
+      background-color: #0056b3;
+    }
+
+    /* Tabs styling */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #333;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+    }
+    .tab.active {
+      border-bottom: 2px solid #ff5722;
+      color: #ff5722;
+      font-weight: bold;
+    }
+
+    /* Form fields */
+    label {
+      font-size: 1rem;
+      color: #666;
+      display: block;
+      margin-top: 1rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #ff5722;
+      outline: none;
+    }
+    
+    /* Button styling */
+    .button {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff5722;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .button:hover {
+      background-color: #e04e1f;
+    }
+
+    /* Form content visibility */
+    .form-content {
+      display: none;
+    }
+    .form-content.active {
+      display: block;
+    }
+
+    /* Forgot password link */
+    .forgot-password {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .forgot-password a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header with Request for Demo button -->
+  <div class="header">
+    <h2>Access Educational Resources</h2>
+    <a href="demo-request.html" class="request-demo">Request for Demo</a>
+  </div>
+
+  <!-- Tabs for switching between Sign Up and Log In -->
+  <div class="tabs">
+    <div class="tab active" onclick="showForm('signup')">Sign Up</div>
+    <div class="tab" onclick="showForm('login')">Log In</div>
+  </div>
+
+  <!-- Sign Up Form -->
+  <div id="signup" class="form-content active">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      <label for="fullName">Full Name *</label>
+      <input type="text" id="fullName" placeholder="Enter your full name" required>
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="password">Password *</label>
+      <input type="password" id="password" placeholder="Create a password" required>
+
+      <label for="confirmPassword">Confirm Password *</label>
+      <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+
+      <label for="dob">Date of Birth *</label>
+      <input type="date" id="dob" required>
+
+      <label for="gender">Gender *</label>
+      <select id="gender" required>
+        <option value="">Select your gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="state">State *</label>
+      <select id="state" required>
+        <option value="">Select your state</option>
+        <option value="andhra-pradesh">Andhra Pradesh</option>
+        <option value="telangana">Telangana</option>
+        <option value="karnataka">Karnataka</option>
+        <option value="tamil-nadu">Tamil Nadu</option>
+        <option value="kerala">Kerala</option>
+      </select>
+
+      <label for="district">District *</label>
+      <input type="text" id="district" placeholder="Enter your district" required />
+        
+      <label for="educationStatus">Education Status *</label>
+      <select id="educationStatus" required>
+        <option value="">Select your education status</option>
+        <option value="currently-studying">Currently Studying</option>
+        <option value="completed-10th">Completed 10th</option>
+        <option value="completed-12th">Completed 12th</option>
+        <option value="dropped-out-before-10th">Dropped out before 10th</option>
+        <option value="dropped-out-after-10th">Dropped out after 10th</option>
+        <option value="dropped-out-after-12th">Dropped out after 12th</option>
+        <option value="completed-degree">Completed Degree</option>
+        <option value="never-attended">Never attended formal education</option>
+      </select>
+
+      <label for="background">Background *</label>
+      <select id="background" required>
+        <option value="">Select your background</option>
+        <option value="general">General</option>
+        <option value="sc">Scheduled Caste (SC)</option>
+        <option value="st">Scheduled Tribe (ST)</option>
+        <option value="obc">Other Backward Class (OBC)</option>
+        <option value="ews">Economically Weaker Section (EWS)</option>
+        <option value="bpl">Below Poverty Line (BPL)</option>
+        <option value="minority">Minority</option>
+        <option value="high-altitude">High Altitude</option>
+        <option value="tribal">Tribal</option>
+        <option value="urban">Urban</option>
+        <option value="village">Village</option>
+        <option value="ngo">NGO</option>
+        <option value="pwd">Person with Disability</option>
+      </select>
+
+      <label for="proofDocument">Proof Document *</label>
+      <input type="file" id="proofDocument" accept=".pdf,.jpg,.jpeg,.png" required />
+      <p style="font-size: 0.9rem; color: gray;">Please upload a valid document as proof of your background status (PDF, JPG, JPEG, or PNG)</p>
+
+      <label for="internetAccess">Internet Access *</label>
+      <select id="internetAccess" required>
+        <option value="">Select your internet access</option>
+        <option value="reliable">Reliable Access</option>
+        <option value="occasional">Occasional Access</option>
+        <option value="none">No Access</option>
+      </select>
+
+      <label for="learningDevice">Learning Device *</label>
+      <select id="learningDevice" required>
+        <option value="">Select your learning device</option>
+        <option value="smartphone">Smartphone</option>
+        <option value="tablet">Tablet</option>
+        <option value="laptop">Laptop/Computer</option>
+        <option value="none">None</option>
+      </select>
+
+      <label for="educationalNeeds">Educational Needs and Challenges</label>
+      <textarea id="educationalNeeds" placeholder="Describe any specific educational needs or challenges you face"></textarea>
+
+      <label>Are you aware of any government subsidies for education?</label>
+      <div>
+        <input type="radio" id="subsidy-yes" name="subsidy" value="yes" />
+        <label for="subsidy-yes">Yes</label>
+      </div>
+      <div>
+        <input type="radio" id="subsidy-no" name="subsidy" value="no" checked />
+        <label for="subsidy-no">No</label>
+      </div>
+
+      <label for="subsidyDetails">If yes, please provide details:</label>
+      <textarea id="subsidyDetails" placeholder="Enter details about the government subsidies you're aware of or currently receiving"></textarea>
+
+      <div>
+        <input type="checkbox" id="terms" required />
+        <label for="terms">I agree to the terms and conditions</label>
+      </div>
+
+      <button type="submit" class="button">Sign Up</button>
+    </form>
+  </div>
+
+  <!-- Log In Form -->
+  <div id="login" class="form-content">
+    <h2>Log In</h2>
+    <form id="loginForm">
+      <label for="loginEmail">Email *</label>
+      <input type="email" id="loginEmail" placeholder="Enter your email" required>
+
+      <label for="loginPassword">Password *</label>
+      <input type="password" id="loginPassword" placeholder="Enter your password" required>
+
+      <button type="submit" class="button">Log In</button>
+
+      <div class="forgot-password">
+        <a href="#">Forgot password?</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function showForm(formId) {
+    document.querySelectorAll('.form-content').forEach(form => form.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+    
+    document.getElementById(formId).classList.add('active');
+    document.querySelector(`.tab.${formId}`).classList.add('active');
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Year Subjects - Fun Learning Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 50px;
+            text-align: center;
+        }
+        h1 {
+            color: #ff69b4;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .subjects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .subject-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 200px;
+            transition: transform 0.3s ease;
+        }
+        .subject-card:hover {
+            transform: translateY(-5px);
+        }
+        .subject-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .subject-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .subject-button:hover {
+            background-color: #45a049;
+        }
+        .games-section {
+            margin-top: 50px;
+        }
+        .game-button {
+            background-color: #ff69b4;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .game-button:hover {
+            background-color: #ff1493;
+            transform: scale(1.05);
+        }
+        #gameContainer {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Second Year Subjects - Fun Learning Hub</h1>
+    <div class="subjects-container">
+        <div class="subject-card">
+            <i class="fas fa-square-root-alt subject-icon" style="color: #4CAF50;"></i>
+            <h2>Mathematics 2A</h2>
+            <a href="mathematics2A.html" class="subject-button">Explore</a>
+        </div>
+        <div class="subject-card">
+            <i class="fas fa-infinity subject-icon" style="color: #2196F3;"></i>
+            <h2>Mathematics 2B</h2>
+            <a href="mathematics2B.html" class="subject-button">Explore</a>
+        </div>
+        <div class="subject-card">
+            <i class="fas fa-atom subject-icon" style="color: #FF9800;"></i>
+            <h2>Physics</h2>
+            <a href="physcis2.html" class="subject-button">Explore</a>
+        </div>
+        <div class="subject-card">
+            <i class="fas fa-flask subject-icon" style="color: #9C27B0;"></i>
+            <h2>Chemistry</h2>
+            <a href="chemistry2.html" class="subject-button">Explore</a>
+        </div>
+    </div>
+
+    <div class="games-section">
+        <h2>Educational Games</h2>
+        <button class="game-button" onclick="loadGame('mathGame')">Math Racing</button>
+        <button class="game-button" onclick="loadGame('scienceQuiz')">Science Quiz</button>
+        <button class="game-button" onclick="loadGame('chemistryPuzzle')">Chemistry Puzzle</button>
+    </div>
+
+    <div id="gameContainer"></div>
+
+    <script>
+        function loadGame(gameName) {
+            const gameContainer = document.getElementById('gameContainer');
+            gameContainer.style.display = 'block';
+            gameContainer.innerHTML = '';
+
+            switch(gameName) {
+                case 'mathGame':
+                    gameContainer.innerHTML = `
+                        <h3>Math Racing Game</h3>
+                        <p>Solve math problems to move your car forward!</p>
+                        <div id="mathProblem"></div>
+                        <input type="number" id="mathAnswer">
+                        <button onclick="checkMathAnswer()">Submit</button>
+                        <div id="mathCar" style="width: 50px; height: 30px; background-color: red; position: relative; left: 0;"></div>
+                    `;
+                    generateMathProblem();
+                    break;
+                case 'scienceQuiz':
+                    gameContainer.innerHTML = `
+                        <h3>Science Quiz</h3>
+                        <p>Test your science knowledge!</p>
+                        <div id="scienceQuestion"></div>
+                        <div id="scienceOptions"></div>
+                        <button onclick="checkScienceAnswer()">Submit</button>
+                    `;
+                    generateScienceQuestion();
+                    break;
+                case 'chemistryPuzzle':
+                    gameContainer.innerHTML = `
+                        <h3>Chemistry Element Matching</h3>
+                        <p>Match the element symbols with their names!</p>
+                        <div id="elementSymbols"></div>
+                        <div id="elementNames"></div>
+                        <button onclick="checkChemistryMatches()">Check Matches</button>
+                    `;
+                    generateChemistryPuzzle();
+                    break;
+            }
+        }
+
+        function generateMathProblem() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('mathProblem').textContent = `${num1} + ${num2} = ?`;
+            window.correctMathAnswer = num1 + num2;
+        }
+
+        function checkMathAnswer() {
+            const userAnswer = parseInt(document.getElementById('mathAnswer').value);
+            if (userAnswer === window.correctMathAnswer) {
+                const car = document.getElementById('mathCar');
+                car.style.left = (parseInt(car.style.left) || 0) + 50 + 'px';
+                generateMathProblem();
+            } else {
+                alert('Try again!');
+            }
+        }
+
+        function generateScienceQuestion() {
+            const questions = [
+                { q: "What is the largest planet in our solar system?", options: ["Mars", "Jupiter", "Saturn", "Earth"], answer: 1 },
+                { q: "What is the chemical symbol for water?", options: ["Wa", "H2O", "Wt", "W"], answer: 1 },
+                { q: "What is the process by which plants make their food?", options: ["Digestion", "Photosynthesis", "Respiration", "Transpiration"], answer: 1 }
+            ];
+            const randomQ = questions[Math.floor(Math.random() * questions.length)];
+            document.getElementById('scienceQuestion').textContent = randomQ.q;
+            const optionsHtml = randomQ.options.map((opt, index) => `<button onclick="selectScienceAnswer(${index})">${opt}</button>`).join('');
+            document.getElementById('scienceOptions').innerHTML = optionsHtml;
+            window.correctScienceAnswer = randomQ.answer;
+        }
+
+        function selectScienceAnswer(index) {
+            window.selectedScienceAnswer = index;
+            const buttons = document.getElementById('scienceOptions').getElementsByTagName('button');
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].style.backgroundColor = i === index ? '#ff69b4' : '';
+            }
+        }
+
+        function checkScienceAnswer() {
+            if (window.selectedScienceAnswer === window.correctScienceAnswer) {
+                alert('Correct! Great job!');
+                generateScienceQuestion();
+            } else {
+                alert('Try again!');
+            }
+        }
+
+        function generateChemistryPuzzle() {
+            const elements = [
+                { symbol: 'H', name: 'Hydrogen' },
+                { symbol: 'O', name: 'Oxygen' },
+                { symbol: 'C', name: 'Carbon' },
+                { symbol: 'N', name: 'Nitrogen' }
+            ];
+            const shuffledElements = elements.sort(() => Math.random() - 0.5);
+            const symbolsHtml = shuffledElements.map(el => `<button class="element-symbol" data-symbol="${el.symbol}">${el.symbol}</button>`).join('');
+            const namesHtml = shuffledElements.sort(() => Math.random() - 0.5).map(el => `<button class="element-name" data-name="${el.name}">${el.name}</button>`).join('');
+            document.getElementById('elementSymbols').innerHTML = symbolsHtml;
+            document.getElementById('elementNames').innerHTML = namesHtml;
+
+            let selectedSymbol = null;
+            document.querySelectorAll('.element-symbol').forEach(btn => {
+                btn.onclick = function() {
+                    if (selectedSymbol) selectedSymbol.style.backgroundColor = '';
+                    this.style.backgroundColor = '#ff69b4';
+                    selectedSymbol = this;
+                };
+            });
+
+            document.querySelectorAll('.element-name').forEach(btn => {
+                btn.onclick = function() {
+                    if (selectedSymbol) {
+                        const symbolData = selectedSymbol.getAttribute('data-symbol');
+                        const nameData = this.getAttribute('data-name');
+                        const matchingElement = elements.find(el => el.symbol === symbolData && el.name === nameData);
+                        if (matchingElement) {
+                            selectedSymbol.style.backgroundColor = '#4CAF50';
+                            this.style.backgroundColor = '#4CAF50';
+                            selectedSymbol.disabled = true;
+                            this.disabled = true;
+                        } else {
+                            alert('Try again!');
+                        }
+                        selectedSymbol = null;
+                    }
+                };
+            });
+        }
+
+        function checkChemistryMatches() {
+            const allMatched = Array.from(document.querySelectorAll('.element-symbol')).every(el => el.disabled);
+            if (allMatched) {
+                alert('Congratulations! You matched all elements correctly!');
+                generateChemistryPuzzle();
+            } else {
+                alert('Keep going! Some elements are still unmatched.');
+            }
+        }
+    </script>
+</body>
+</html>

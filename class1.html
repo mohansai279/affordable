@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 1 Subjects</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .banner {
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .subject-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .subject-btn {
+            background: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .subject-btn:hover, .subject-btn.active {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        .subject-btn i {
+            margin-right: 10px;
+        }
+        #lessons {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        tr {
+            background-color: #f8f9fa;
+            transition: all 0.3s;
+        }
+        tr:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .online-banner {
+            text-align: center;
+            margin-top: 30px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .online-banner img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .caste-select {
+            margin-bottom: 20px;
+            width: 200px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        .course-features {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .course-features i {
+            margin-right: 5px;
+            color: #4facfe;
+        }
+        .total-marks {
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #4facfe;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <h1>Welcome to Class 1 Learning Hub</h1>
+            <p>Explore our interactive lessons and start your learning journey!</p>
+        </div>
+
+        <select id="casteSelect" class="caste-select" onchange="filterCourses(this.value)">
+            <option value="General">General</option>
+            <option value="SC">SC</option>
+            <option value="ST">ST</option>
+            <option value="OBC">OBC</option>
+            <option value="EWS">EWS</option>
+            <option value="Minority">Minority</option>
+            <option value="Disabled">Disabled</option>
+        </select>
+
+        <div class="subject-list">
+            <button class="subject-btn" onclick="showLessons('english')"><i class="fas fa-comment"></i>ENGLISH</button>
+            <button class="subject-btn" onclick="showLessons('maths')"><i class="fas fa-calculator"></i>MATHS</button>
+            <button class="subject-btn" onclick="showLessons('science')"><i class="fas fa-flask"></i>SCIENCE</button>
+            <button class="subject-btn" onclick="showLessons('telugu')"><i class="fas fa-book"></i>TELUGU</button>
+            <button class="subject-btn" onclick="showLessons('social')"><i class="fas fa-globe"></i>SOCIAL</button>
+        </div>
+
+        <div id="lessons" style="display: none;">
+            <h2 id="subjectTitle"></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lesson Number</th>
+                        <th>Lesson Name</th>
+                        <th>Instructor</th>
+                        <th>Price (₹)</th>
+                        <th>Type</th>
+                        <th>Features</th>
+                    </tr>
+                </thead>
+                <tbody id="lessonList"></tbody>
+            </table>
+            <div class="total-marks">Total Maximum Marks: 100</div>
+        </div>
+
+        <div class="online-banner">
+            <img src="https://placehold.co/600x200/4a90e2/ffffff?text=Start+Your+Learning+Adventure+Today!" alt="Online Learning Banner">
+            <p>Unlock your potential with our engaging online lessons!</p>
+        </div>
+    </div>
+
+    <script>
+        let currentCaste = 'General';
+
+        function filterCourses(caste) {
+            currentCaste = caste;
+            showLessons(document.querySelector('.subject-btn.active').textContent.trim().toLowerCase());
+        }
+
+        function showLessons(subject) {
+            const lessons = {
+                english: [
+                    { number: 1, name: 'Basic Grammar', price: 0, type: 'Free', instructor: 'Ms. Emily Johnson' },
+                    { number: 2, name: 'Reading Skills', price: 0, type: 'Free', instructor: 'Mr. David Brown' },
+                    { number: 3, name: 'Story Writing', price: 300, type: 'Premium', instructor: 'Dr. Sarah Wilson' },
+                    { number: 4, name: 'Poetry Introduction', price: 350, type: 'Premium', instructor: 'Prof. Michael Lee' }
+                ],
+                maths: [
+                    { number: 1, name: 'Simple Addition', price: 0, type: 'Free', instructor: 'Ms. Jessica Patel' },
+                    { number: 2, name: 'Subtraction Basics', price: 0, type: 'Free', instructor: 'Mr. Robert Chen' },
+                    { number: 3, name: 'Multiplication & Division', price: 400, type: 'Premium', instructor: 'Dr. Alex Thompson' },
+                    { number: 4, name: 'Geometry Basics', price: 325, type: 'Premium', instructor: 'Prof. Olivia Garcia' }
+                ],
+                science: [
+                    { number: 1, name: 'Living Things', price: 0, type: 'Free', instructor: 'Ms. Rachel Green' },
+                    { number: 2, name: 'Water Cycle', price: 0, type: 'Free', instructor: 'Mr. Daniel Kim' },
+                    { number: 3, name: 'The Solar System', price: 375, type: 'Premium', instructor: 'Dr. Emma Watson' },
+                    { number: 4, name: 'Animal Classification', price: 350, type: 'Premium', instructor: 'Prof. Christopher Lee' }
+                ],
+                telugu: [
+                    { number: 1, name: 'అక్షరాలు (Letters)', price: 0, type: 'Free', instructor: 'శ్రీమతి సుజాత రెడ్డి' },
+                    { number: 2, name: 'తెలుగు పదాలు (Telugu Words)', price: 0, type: 'Free', instructor: 'శ్రీ రాము నాయుడు' },
+                    { number: 3, name: 'తెలుగు కథలు (Telugu Stories)', price: 325, type: 'Premium', instructor: 'డా. లక్ష్మి దేవి' },
+                    { number: 4, name: 'తెలుగు నిఘంటువు (Telugu Dictionary)', price: 375, type: 'Premium', instructor: 'ప్రొఫెసర్ కృష్ణ మూర్తి' }
+                ],
+                social: [
+                    { number: 1, name: 'Our Community', price: 0, type: 'Free', instructor: 'Ms. Priya Sharma' },
+                    { number: 2, name: 'Local History', price: 0, type: 'Free', instructor: 'Mr. Rahul Gupta' },
+                    { number: 3, name: 'Geography Basics', price: 300, type: 'Premium', instructor: 'Dr. Anita Desai' },
+                    { number: 4, name: 'Civic Responsibilities', price: 350, type: 'Premium', instructor: 'Prof. Vikram Singh' }
+                ]
+            };
+
+            const lessonDiv = document.getElementById('lessons');
+            const subjectTitle = document.getElementById('subjectTitle');
+            const lessonList = document.getElementById('lessonList');
+            lessonList.innerHTML = ''; // Clear previous lessons
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.subject-btn').forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            document.querySelector(`.subject-btn:nth-child(${['english', 'maths', 'science', 'telugu', 'social'].indexOf(subject) + 1})`).classList.add('active');
+
+            if (lessons[subject]) {
+                subjectTitle.innerText = subject.charAt(0).toUpperCase() + subject.slice(1) + ' Lessons';
+                lessons[subject].forEach(lesson => {
+                    const row = document.createElement('tr');
+                    let price = lesson.price;
+                    if (price > 0) {
+                        switch (currentCaste) {
+                            case 'SC':
+                            case 'ST':
+                                price = Math.max(100, Math.min(400, Math.floor(price * 0.6))); // 40% discount
+                                break;
+                            case 'OBC':
+                            case 'EWS':
+                                price = Math.max(100, Math.min(400, Math.floor(price * 0.7))); // 30% discount
+                                break;
+                            case 'Minority':
+                            case 'Disabled':
+                                price = Math.max(100, Math.min(400, Math.floor(price * 0.8))); // 20% discount
+                                break;
+                            default: // General
+                                price = Math.max(100, Math.min(400, price)); // No discount, but within range
+                        }
+                    }
+                    const features = lesson.type === 'Premium' ?
+                        '<i class="fas fa-video"></i> Video lectures<br>' +
+                        '<i class="fas fa-file-pdf"></i> PDFs<br>' +
+                        '<i class="fas fa-sticky-note"></i> Notes<br>' +
+                        '<i class="fas fa-book"></i> Textbook<br>' +
+                        '<i class="fas fa-question-circle"></i> Doubt sessions<br>' +
+                        '<i class="fas fa-headset"></i> 24/7 support<br>' +
+                        '<i class="fas fa-phone"></i> +91 1234567890<br>' +
+                        '<i class="fas fa-envelope"></i> instructor@example.com' :
+                        '<i class="fas fa-link"></i> Resource Links<br>' +
+                        '<i class="fas fa-headset"></i> 24/7 support<br>' +
+                        '<i class="fas fa-book"></i> Textbooks<br>' +
+                        '<i class="fas fa-phone"></i> +91 1234567890<br>' +
+                        '<i class="fas fa-envelope"></i> instructor@example.com';
+                    row.innerHTML = `
+                        <td>${lesson.number}</td>
+                        <td>${lesson.name}</td>
+                        <td>${lesson.instructor}</td>
+                        <td>${price > 0 ? '₹' + price : 'Free'}</td>
+                        <td>${lesson.type}</td>
+                        <td class="course-features">${features}</td>
+                    `;
+                    lessonList.appendChild(row);
+                });
+                lessonDiv.style.display = 'block';
+            }
+        }
+
+        // Initialize with English lessons and 'General' caste
+        filterCourses('General');
+        showLessons('english');
+    </script>
+</body>
+</html>

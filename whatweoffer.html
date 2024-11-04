@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Education Courses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            transition: background-color 0.5s;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            font-size: 2em;
+            color: #4CAF50;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2em;
+            color: #555;
+            margin: 5px 0 20px;
+        }
+        .select-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 2px solid #4CAF50;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        select:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        #courseContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .course-tile {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            width: calc(33.33% - 20px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            transform: perspective(1000px) rotateX(0deg);
+        }
+        .course-tile:hover {
+            transform: perspective(1000px) rotateX(5deg) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .course-tile h3 {
+            margin-top: 0;
+            color: #2C3E50;
+        }
+        .course-tile p {
+            margin-bottom: 10px;
+            color: #34495E;
+        }
+        .course-tile .cost {
+            font-weight: bold;
+            color: #4CAF50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .plus-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .plus-button:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+        #loginModal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #000;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .cancel-button {
+            background-color: #f44336;
+            color: white;
+        }
+        .login-button {
+            background-color: #000000;
+            color: white;
+        }
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>What We Offer</h1>
+        <p>Your pathway to diverse learning, enhanced by course enrollment</p>
+    </header>
+
+    <div class="select-container">
+        <select id="educationLevel">
+            <option value="">Select Education Level</option>
+            <option value="1-10">1st to 10th</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="ug">Undergraduate (UG)</option>
+            <option value="pg">Postgraduate (PG)</option>
+            <option value="other">Other</option>
+            <option value="competitive">Competitive Exam</option>
+        </select>
+
+        <select id="background" style="display: none;">
+            <option value="">Select Background</option>
+            <option value="general">General</option>
+            <option value="sc">SC</option>
+            <option value="st">ST</option>
+            <option value="ews">EWS</option>
+            <option value="tribal">Tribal</option>
+            <option value="obc">OBC</option>
+        </select>
+    </div>
+
+    <div id="courseContainer"></div>
+
+    <div id="loginModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Login and verify your details to avail this course.</p>
+            <div class="modal-buttons">
+                <button class="modal-button cancel-button">Cancel</button>
+                <button class="modal-button login-button">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const educationLevel = document.getElementById('educationLevel');
+        const background = document.getElementById('background');
+        const courseContainer = document.getElementById('courseContainer');
+        const loginModal = document.getElementById('loginModal');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const cancelBtn = document.querySelector('.cancel-button');
+        const loginBtn = document.querySelector('.login-button');
+
+        const courses = {
+            '1-10': [
+                { name: 'Basic Computer Skills', description: 'Learn fundamental computer operations and software usage.', baseCost: 500 },
+                { name: 'English Language', description: 'Improve your English reading, writing, and speaking skills.', baseCost: 600 },
+                { name: 'Mathematics Fundamentals', description: 'Master basic mathematical concepts and problem-solving.', baseCost: 550 },
+                { name: 'Science Exploration', description: 'Discover the wonders of science through interactive lessons.', baseCost: 700 },
+                { name: 'Art and Craft', description: 'Develop creativity through various art and craft projects.', baseCost: 450 },
+                { name: 'Coding for Kids', description: 'Introduction to programming concepts for young learners.', baseCost: 800 }
+            ],
+            'intermediate': [
+                { name: 'Advanced Mathematics', description: 'Prepare for college-level math with advanced topics.', baseCost: 900 },
+                { name: 'Physics and Chemistry', description: 'In-depth study of physics and chemistry concepts.', baseCost: 1000 },
+                { name: 'Literature Analysis', description: 'Develop critical thinking skills through literary analysis.', baseCost: 750 },
+                { name: 'Web Development Basics', description: 'Learn HTML, CSS, and JavaScript fundamentals.', baseCost: 1200 },
+                { name: 'Digital Marketing', description: 'Explore the basics of online marketing strategies.', baseCost: 850 },
+                { name: 'Biology and Life Sciences', description: 'Explore the complexities of living organisms and ecosystems.', baseCost: 950 },
+                { name: 'Economics Fundamentals', description: 'Understand basic economic principles and their real-world applications.', baseCost: 800 },
+                { name: 'Computer Science Principles', description: 'Learn core concepts of computer science and programming.', baseCost: 1100 },
+                { name: 'Foreign Language (Spanish)', description: 'Begin your journey to Spanish fluency with this introductory course.', baseCost: 700 },
+                { name: 'Graphic Design Essentials', description: 'Master the basics of visual communication and design software.', baseCost: 1000 },
+                { name: 'Environmental Science', description: 'Study the environment and learn about sustainability practices.', baseCost: 850 },
+                { name: 'Public Speaking', description: 'Develop confidence and improve your presentation skills.', baseCost: 600 }
+            ],
+            'ug': [
+                { name: 'Data Structures and Algorithms', description: 'Master fundamental programming concepts for interviews.', baseCost: 1500 },
+                { name: 'Business Management', description: 'Learn key business concepts and management strategies.', baseCost: 1300 },
+                { name: 'Graphic Design', description: 'Develop skills in visual communication and design software.', baseCost: 1100 },
+                { name: 'Machine Learning Basics', description: 'Introduction to AI and machine learning concepts.', baseCost: 1800 },
+                { name: 'Financial Accounting', description: 'Learn the fundamentals of accounting and financial reporting.', baseCost: 1400 }
+            ],
+            'pg': [
+                { name: 'Advanced Data Science', description: 'Deep dive into statistical analysis and machine learning.', baseCost: 2500 },
+                { name: 'Project Management', description: 'Learn to lead and manage complex projects effectively.', baseCost: 2000 },
+                { name: 'Artificial Intelligence', description: 'Explore advanced AI concepts and applications.', baseCost: 2800 },
+                { name: 'Digital Transformation', description: 'Understand how to lead digital change in organizations.', baseCost: 2200 },
+                { name: 'Cybersecurity', description: 'Learn to protect systems and networks from cyber threats.', baseCost: 2600 }
+            ],
+            'other': [
+                { name: 'Photography', description: 'Master the art of capturing and editing stunning photos.', baseCost: 1000 },
+                { name: 'Creative Writing', description: 'Develop your storytelling skills across various genres.', baseCost: 800 },
+                { name: 'Public Speaking', description: 'Build confidence and improve your presentation skills.', baseCost: 900 },
+                { name: 'Personal Finance', description: 'Learn to manage your money and plan for the future.', baseCost: 750 },
+                { name: 'Yoga and Meditation', description: 'Improve your physical and mental well-being.', baseCost: 600 }
+            ],
+            'competitive': [
+                { name: '1. Banking Sector', description: 'IBPS PO, IBPS Clerk, IBPS SO, SBI PO, SBI Clerk, RBI Grade B Officer, RBI Assistant, NABARD Grade A & B, NABARD Development Assistant, SIDBI Officer Grade A', baseCost: 3000 },
+                { name: '2. Railway Sector', description: 'RRB NTPC, RRB Group D, RRB JE, RRB ALP, RRB SSE', baseCost: 2500 },
+                { name: '3. Civil Services', description: 'UPSC Civil Services Examination (CSE), State PSC Exams, IES, IFS', baseCost: 5000 },
+                { name: '4. Defense Sector', description: 'NDA, CDS, AFCAT, Indian Coast Guard, CAPF, Indian Army TES, Indian Navy SSR & AA', baseCost: 3500 },
+                { name: '5. Teaching and Education Sector', description: 'CTET, UPTET, STET, NET, KVS & NVS, DSSSB', baseCost: 2000 },
+                { name: '6. Insurance Sector', description: 'LIC AAO, LIC ADO, NIACL AO, NICL AO', baseCost: 2800 },
+                { name: '7. SSC Exams', description: 'SSC CGL, SSC CHSL, SSC JE, SSC GD, SSC MTS, SSC CPO', baseCost: 3200 },
+                { name: '8. Public Sector Undertakings (PSUs)', description: 'GATE, ISRO Scientist/Engineer Recruitment, DRDO CEPTAM, BHEL, ONGC, NTPC, SAIL exams', baseCost: 4000 },
+                { name: '9. Other Government and Competitive Exams', description: 'RRB Paramedical, ESIC UDC, India Post GDS, SSC Stenographer, High Court Exams, EPFO', baseCost: 2700 },
+                { name: '10. State-Specific Competitive Exams', description: 'State Subordinate Services Exams, State Police Service Exams, Patwari Exams', baseCost: 2300 }
+            ]
+        };
+
+        function calculateDiscount(baseCost, background) {
+            switch (background) {
+                case 'sc':
+                case 'st':
+                case 'tribal':
+                    return Math.floor(baseCost * 0.5); // 50% discount
+                case 'ews':
+                case 'obc':
+                    return Math.floor(baseCost * 0.7); // 30% discount
+                default:
+                    return baseCost;
+            }
+        }
+
+        educationLevel.addEventListener('change', function() {
+            if (this.value) {
+                background.style.display = 'block';
+                if (background.value) {
+                    displayCourses(this.value, background.value);
+                } else {
+                    courseContainer.innerHTML = '';
+                }
+            } else {
+                background.style.display = 'none';
+                courseContainer.innerHTML = '';
+            }
+        });
+
+        background.addEventListener('change', function() {
+            if (educationLevel.value && this.value) {
+                displayCourses(educationLevel.value, this.value);
+            }
+        });
+
+        function displayCourses(level, bg) {
+            courseContainer.innerHTML = '';
+            const levelCourses = courses[level] || [];
+            levelCourses.forEach(course => {
+                const cost = calculateDiscount(course.baseCost, bg);
+                const courseElement = document.createElement('div');
+                courseElement.className = 'course-tile';
+                courseElement.innerHTML = `
+                    <h3>${course.name}</h3>
+                    <p>${course.description}</p>
+                    <div class="cost">
+                        <span>Cost: ₹${cost}</span>
+                        <button class="plus-button">+</button>
+                    </div>
+                `;
+                courseContainer.appendChild(courseElement);
+            });
+            addPlusButtonListeners();
+        }
+
+        function addPlusButtonListeners() {
+            const plusButtons = 
+
+ document.querySelectorAll('.plus-button');
+            plusButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    loginModal.style.display = 'block';
+                });
+            });
+        }
+
+        closeBtn.onclick = function() {
+            loginModal.style.display = 'none';
+        }
+
+        cancelBtn.onclick = function() {
+            loginModal.style.display = 'none';
+        }
+
+        loginBtn.onclick = function() {
+            // Add login functionality here
+            alert('Login functionality to be implemented');
+            loginModal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == loginModal) {
+                loginModal.style.display = 'none';
+            }
+        }
+
+        // Change background color based on education level
+        educationLevel.addEventListener('change', function() {
+            switch(this.value) {
+                case '1-10':
+                    document.body.style.backgroundColor = '#E8F5E9';
+                    break;
+                case 'intermediate':
+                    document.body.style.backgroundColor = '#E3F2FD';
+                    break;
+                case 'ug':
+                    document.body.style.backgroundColor = '#FFF3E0';
+                    break;
+                case 'pg':
+                    document.body.style.backgroundColor = '#F3E5F5';
+                    break;
+                case 'other':
+                    document.body.style.backgroundColor = '#EFEBE9';
+                    break;
+                case 'competitive':
+                    document.body.style.backgroundColor = '#E0F7FA';
+                    break;
+                default:
+                    document.body.style.backgroundColor = '#f0f0f0';
+            }
+        });
+    </script>
+</body>
+</html>

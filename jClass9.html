@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High School Dashboard</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #34495e;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            border-bottom: 3px solid #3498db;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Grid and Card Styles */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: linear-gradient(135deg, #3498db 0%, #8e44ad 100%);
+            color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            display: inline-block;
+            background-color: #e67e22;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #d35400;
+        }
+
+        /* Tabs and Accordion Styles */
+        .tabs {
+            display: flex;
+            border-bottom: 3px solid #ddd;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #666;
+            transition: color 0.3s ease;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background-color: #3498db;
+            color: #fff;
+            border-bottom: 3px solid #3498db;
+        }
+        .tab-content {
+            display: none;
+            padding: 15px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .accordion {
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            padding: 15px;
+            margin-top: 10px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.4s ease;
+        }
+        .accordion:hover {
+            background-color: #2980b9;
+        }
+        .panel {
+            padding: 15px;
+            background-color: #f9f9f9;
+            display: none;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>9th Grade Dashboard</h1>
+
+        <!-- Subjects Section -->
+        <section class="section">
+            <h2>Subjects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>📐 Mathematics</h3>
+                    <a href="#" class="btn">Access Materials</a>
+                </div>
+                <div class="card">
+                    <h3>🧪 Science</h3>
+                    <a href="#" class="btn">Access Materials</a>
+                </div>
+                <div class="card">
+                    <h3>📚 English</h3>
+                    <a href="#" class="btn">Access Materials</a>
+                </div>
+                <div class="card">
+                    <h3>🌍 Social Studies</h3>
+                    <a href="#" class="btn">Access Materials</a>
+                </div>
+                <div class="card">
+                    <h3>💻 Computer Science</h3>
+                    <a href="#" class="btn">Access Materials</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Lessons Section -->
+        <section class="section">
+            <h2>Video Lessons</h2>
+            <div class="tabs">
+                <div class="tab active" data-tab="math">Mathematics</div>
+                <div class="tab" data-tab="science">Science</div>
+                <div class="tab" data-tab="english">English</div>
+                <div class="tab" data-tab="social">Social Studies</div>
+                <div class="tab" data-tab="computer">Computer Science</div>
+            </div>
+
+            <div class="tab-content active" id="math">
+                <button class="accordion">Chapter 1: Algebra Basics</button>
+                <div class="panel">
+                    <ul>
+                        <li>Lesson 1: Introduction to Algebra</li>
+                        <li>Lesson 2: Linear Equations</li>
+                        <li>Lesson 3: Polynomials</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-content" id="science">
+                <button class="accordion">Chapter 1: Introduction to Chemistry</button>
+                <div class="panel">
+                    <ul>
+                        <li>Lesson 1: Atomic Theory</li>
+                        <li>Lesson 2: States of Matter</li>
+                        <li>Lesson 3: Basics of Chemical Reactions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assignments Section -->
+        <section class="section">
+            <h2>Assignments</h2>
+            <div class="card">
+                <h3>Current Assignments</h3>
+                <ul>
+                    <li>Mathematics: Algebra Practice <a href="#" class="btn">Submit</a></li>
+                    <li>Science: Experiment Report <a href="#" class="btn">Submit</a></li>
+                    <li>English: Poem Analysis <a href="#" class="btn">Submit</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Quizzes Section -->
+        <section class="section">
+            <h2>Quizzes</h2>
+            <div class="card">
+                <h3>Upcoming Quizzes</h3>
+                <ul>
+                    <li>Mathematics: Friday, 10:00 AM <a href="#" class="btn">Take Quiz</a></li>
+                    <li>Science: Monday, 1:00 PM <a href="#" class="btn">Take Quiz</a></li>
+                    <li>English: Wednesday, 9:30 AM <a href="#" class="btn">Take Quiz</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Weekly Timetable -->
+        <section class="section">
+            <h2>Weekly Timetable</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9:00 AM</td>
+                        <td>Mathematics</td>
+                        <td>Science</td>
+                        <td>English</td>
+                        <td>Social Studies</td>
+                        <td>Computer Science</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Doubt Clearance Sessions Section -->
+        <section class="section">
+            <h2>Doubt Clearance Sessions</h2>
+            <div class="card">
+                <h3>Upcoming Sessions</h3>
+                <ul>
+                    <li>Mathematics: Tuesday, 4:00 PM <a href="#" class="btn">Join</a></li>
+                    <li>Science: Wednesday, 5:00 PM <a href="#" class="btn">Join</a></li>
+                    <li>English: Thursday, 3:30 PM <a href="#" class="btn">Join</a></li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+
+        // Accordion functionality
+        document.querySelectorAll('.accordion').forEach(accordion => {
+            accordion.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>
+

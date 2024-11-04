@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postgraduate Courses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: firework 1s ease-out;
+        }
+        @keyframes firework {
+            0% { transform: translate(0, 0); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 text-black">
+        <h1 class="text-3xl font-bold mb-6 text-center text-purple-600">Postgraduate Courses</h1>
+        
+        <div class="mb-4">
+            <label for="mainCourse" class="block text-sm font-medium">Select Main Course:</label>
+            <select id="mainCourse" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="">Select a course</option>
+                <option value="ma">Master of Arts (M.A.)</option>
+                <option value="msc">Master of Science (M.Sc.)</option>
+                <option value="mba">Master of Business Administration (MBA)</option>
+                <option value="mcom">Master of Commerce (M.Com)</option>
+                <option value="mtech">Master of Technology (M.Tech) / Master of Engineering (M.E.)</option>
+                <option value="mca">Master of Computer Applications (MCA)</option>
+                <option value="llm">Master of Laws (LL.M.)</option>
+                <option value="med">Master of Education (M.Ed.)</option>
+                <option value="msw">Master of Social Work (MSW)</option>
+                <option value="mph">Master of Public Health (MPH)</option>
+                <option value="mfa">Master of Fine Arts (MFA)</option>
+                <option value="march">Master of Architecture (M.Arch)</option>
+                <option value="mpharm">Master of Pharmacy (M.Pharm)</option>
+            </select>
+        </div>
+
+        <div id="subCategoryContainer" class="mb-4 hidden">
+            <label for="subCategory" class="block text-sm font-medium">Select Sub-category:</label>
+            <select id="subCategory" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </select>
+        </div>
+
+        <div id="classContainer" class="mb-4 hidden">
+            <label for="class" class="block text-sm font-medium">Select Your Class:</label>
+            <select id="class" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="general">General</option>
+                <option value="sc">SC</option>
+                <option value="st">ST</option>
+                <option value="obc">OBC</option>
+                <option value="ews">EWS</option>
+                <option value="bpl">BPL</option>
+                <option value="minority">Minority</option>
+                <option value="pwd">Person with Disability</option>
+            </select>
+        </div>
+
+        <button id="submitBtn" class="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 mb-4">Submit</button>
+
+        <div id="subjectsContainer" class="hidden">
+            <h2 class="text-2xl font-semibold mb-4">Subjects</h2>
+            <div id="subjectsList" class="space-y-4"></div>
+        </div>
+
+        <div id="contentContainer" class="hidden mt-6">
+            <h2 class="text-2xl font-semibold mb-4">Course Content</h2>
+            <div class="bg-green-100 p-4 rounded-md mb-4">
+                <h3 class="text-lg font-medium mb-2">Free Content</h3>
+                <button id="textbookBtn" class="bg-green-500 text-white py-1 px-3 rounded-md hover:bg-green-600 transition duration-300 mr-2">
+                    <i class="fas fa-book mr-2"></i>Download Textbook
+                </button>
+                <button id="notesBtn" class="bg-green-500 text-white py-1 px-3 rounded-md hover:bg-green-600 transition duration-300">
+                    <i class="fas fa-file-alt mr-2"></i>Download Notes
+                </button>
+            </div>
+            <div class="bg-yellow-100 p-4 rounded-md">
+                <h3 class="text-lg font-medium mb-2">Premium Content</h3>
+                <div id="premiumContent" class="space-y-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartContainer" class="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-md hidden">
+        <h2 class="text-xl font-semibold mb-2">Cart</h2>
+        <div id="cartItems" class="mb-2"></div>
+        <div id="cartTotal" class="font-bold mb-2"></div>
+        <button id="checkoutBtn" class="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300">
+            <i class="fas fa-shopping-cart mr-2"></i>Checkout
+        </button>
+    </div>
+
+    <div id="checkoutModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-4">Checkout</h2>
+            <p class="mb-2">Total: ₹<span id="checkoutTotal"></span></p>
+            <p class="mb-2">UPI ID: 9494417644@ybl</p>
+            <div id="qrcode" class="mb-4"></div>
+            <input type="text" id="utrNumber" placeholder="Enter UTR Number" class="w-full p-2 border border-gray-300 rounded-md mb-4">
+            <button id="confirmPaymentBtn" class="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300">
+                <i class="fas fa-check mr-2"></i>Confirm Payment
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const courses = {
+            ma: {
+                name: "Master of Arts (M.A.)",
+                subcategories: ["English", "History", "Political Science", "Sociology", "Psychology", "Economics", "Philosophy", "Public Administration", "Anthropology", "International Relations"],
+                subjects: {
+                    "English": ["Literature", "Linguistics", "Creative Writing"],
+                    "History": ["Ancient History", "Modern History", "Art History"],
+                    "Political Science": ["Political Theory", "International Relations", "Comparative Politics"],
+                    "Sociology": ["Social Theory", "Research Methods", "Urban Sociology"],
+                    "Psychology": ["Clinical Psychology", "Cognitive Psychology", "Social Psychology"],
+                    "Economics": ["Microeconomics", "Macroeconomics", "Econometrics"],
+                    "Philosophy": ["Ethics", "Metaphysics", "Logic"],
+                    "Public Administration": ["Public Policy", "Organizational Behavior", "Public Finance"],
+                    "Anthropology": ["Cultural Anthropology", "Biological Anthropology", "Archaeological Anthropology"],
+                    "International Relations": ["Diplomacy", "Global Governance", "International Security"]
+                }
+            },
+            msc: {
+                name: "Master of Science (M.Sc.)",
+                subcategories: ["Physics", "Chemistry", "Mathematics", "Biology", "Environmental Science", "Biotechnology", "Microbiology", "Data Science", "Computer Science", "Information Technology"],
+                subjects: {
+                    "Physics": ["Quantum Mechanics", "Astrophysics", "Solid State Physics"],
+                    "Chemistry": ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry"],
+                    "Mathematics": ["Analysis", "Algebra", "Topology"],
+                    "Biology": ["Genetics", "Ecology", "Molecular Biology"],
+                    "Environmental Science": ["Climate Change", "Ecosystem Management", "Environmental Policy"],
+                    "Biotechnology": ["Genetic Engineering", "Bioinformatics", "Bioprocess Technology"],
+                    "Microbiology": ["Bacteriology", "Virology", "Immunology"],
+                    "Data Science": ["Machine Learning", "Big Data Analytics", "Statistical Computing"],
+                    "Computer Science": ["Algorithms", "Artificial Intelligence", "Computer Networks"],
+                    "Information Technology": ["Database Management", "Web Technologies", "Cybersecurity"]
+                }
+            },
+            mba: {
+                name: "Master of Business Administration (MBA)",
+                subcategories: ["Finance", "Marketing", "Human Resource Management (HRM)", "Operations Management", "International Business", "Business Analytics", "Supply Chain Management", "Information Technology", "Entrepreneurship", "Healthcare Management"],
+                subjects: {
+                    "Finance": ["Financial Management", "Investment Analysis", "Corporate Finance"],
+                    "Marketing": ["Consumer Behavior", "Digital Marketing", "Brand Management"],
+                    "Human Resource Management (HRM)": ["Organizational Behavior", "Talent Management", "Labor Laws"],
+                    "Operations Management": ["Project Management", "Quality Management", "Logistics Management"],
+                    "International Business": ["Global Strategy", "Cross-Cultural Management", "International Trade"],
+                    "Business Analytics": ["Data Mining", "Predictive Analytics", "Business Intelligence"],
+                    "Supply Chain Management": ["Procurement", "Inventory Management", "Distribution Management"],
+                    "Information Technology": ["IT Strategy", "Enterprise Systems", "Digital Transformation"],
+                    "Entrepreneurship": ["New Venture Creation", "Innovation Management", "Business Plan Development"],
+                    "Healthcare Management": ["Healthcare Policy", "Hospital Administration", "Healthcare Informatics"]
+                }
+            },
+            mcom: {
+                name: "Master of Commerce (M.Com)",
+                subcategories: ["Accounting & Finance", "Taxation", "Banking & Insurance", "Business Analytics", "International Business", "Corporate Governance", "Financial Markets"],
+                subjects: {
+                    "Accounting & Finance": ["Advanced Financial Accounting", "Management Accounting", "Financial Reporting"],
+                    "Taxation": ["Direct Taxation", "Indirect Taxation", "International Taxation"],
+                    "Banking & Insurance": ["Banking Operations", "Risk Management", "Insurance Management"],
+                    "Business Analytics": ["Data Analysis", "Business Intelligence", "Predictive Modeling"],
+                    "International Business": ["Global Trade", "International Finance", "Cross-Border Taxation"],
+                    "Corporate Governance": ["Business Ethics", "Corporate Law", "Compliance Management"],
+                    "Financial Markets": ["Securities Analysis", "Portfolio Management", "Derivatives"]
+                }
+            },
+            mtech: {
+                name: "Master of Technology (M.Tech) / Master of Engineering (M.E.)",
+                subcategories: ["Computer Science Engineering (CSE)", "Mechanical Engineering", "Civil Engineering", "Electrical Engineering", "Electronics and Communication Engineering", "Information Technology", "Robotics", "Power Systems", "Embedded Systems", "Structural Engineering"],
+                subjects: {
+                    "Computer Science Engineering (CSE)": ["Advanced Algorithms", "Machine Learning", "Cloud Computing"],
+                    "Mechanical Engineering": ["Advanced Thermodynamics", "Robotics", "CAD/CAM"],
+                    "Civil Engineering": ["Structural Analysis", "Geotechnical Engineering", "Transportation Engineering"],
+                    "Electrical Engineering": ["Power Systems", "Control Systems", "Electric Drives"],
+                    "Electronics and Communication Engineering": ["Digital Signal Processing", "VLSI Design", "Wireless Communication"],
+                    "Information Technology": ["Big Data Analytics", "Internet of Things", "Cybersecurity"],
+                    "Robotics": ["Robot Kinematics", "Computer Vision", "Artificial Intelligence"],
+                    "Power Systems": ["Power Generation", "Smart Grid Technology", "Renewable Energy Systems"],
+                    "Embedded Systems": ["Microcontrollers", "Real-Time Operating Systems", "IoT Protocols"],
+                    "Structural Engineering": ["Advanced Concrete Technology", "Earthquake Engineering", "Bridge Engineering"]
+                }
+            },
+            mca: {
+                name: "Master of Computer Applications (MCA)",
+                subcategories: ["Software Development", "Web Development", "Systems Management", "Cloud Computing", "Cybersecurity", "Database Management", "Artificial Intelligence", "Data Science", "Networking"],
+                subjects: {
+                    "Software Development": ["Object-Oriented Programming", "Software Engineering", "Mobile App Development"],
+                    "Web Development": ["Front-end Technologies", "Back-end Development", "Web Security"],
+                    "Systems Management": ["Operating Systems", "Distributed Systems", "System Administration"],
+                    "Cloud Computing": ["Cloud Architecture", "Virtualization", "Cloud Security"],
+                    "Cybersecurity": ["Network Security", "Ethical Hacking", "Digital Forensics"],
+                    "Database Management": ["Advanced DBMS", "Data Warehousing", "NoSQL Databases"],
+                    "Artificial Intelligence": ["Machine Learning", "Natural Language Processing", "Computer Vision"],
+                    "Data Science": ["Statistical Analysis", "Data Mining", "Big Data Technologies"],
+                    "Networking": ["Computer Networks", "Network Protocols", "Wireless Networks"]
+                }
+            },
+            llm: {
+                name: "Master of Laws (LL.M.)",
+                subcategories: ["Constitutional Law", "International Law", "Corporate Law", "Criminal Law", "Intellectual Property Law", "Human Rights Law", "Environmental Law", "Taxation Law"],
+                subjects: {
+                    "Constitutional Law": ["Fundamental Rights", "Administrative Law", "Comparative Constitutional Law"],
+                    "International Law": ["Public International Law", "Private International Law", "International Trade Law"],
+                    "Corporate Law": ["Company Law", "Mergers and Acquisitions", "Corporate Governance"],
+                    "Criminal Law": ["Criminal Procedure", "Criminology", "White Collar Crimes"],
+                    "Intellectual Property Law": ["Patent Law", "Copyright Law", "Trademark Law"],
+                    "Human Rights  Law": ["International Human Rights", "Refugee Law", "Gender and Law"],
+                    "Environmental Law": ["Environmental Regulations", "Climate Change Law", "Natural Resources Law"],
+                    "Taxation Law": ["Direct Taxation", "International Taxation", "GST"]
+                }
+            },
+            med: {
+                name: "Master of Education (M.Ed.)",
+                subcategories: ["Educational Psychology", "Educational Technology", "Curriculum and Instruction", "Leadership in Education", "Special Education", "Pedagogy"],
+                subjects: {
+                    "Educational Psychology": ["Child Development", "Learning Theories", "Assessment and Evaluation"],
+                    "Educational Technology": ["Instructional Design", "E-Learning", "Educational Software"],
+                    "Curriculum and Instruction": ["Curriculum Development", "Instructional Strategies", "Educational Research"],
+                    "Leadership in Education": ["School Administration", "Educational Policy", "Organizational Behavior"],
+                    "Special Education": ["Inclusive Education", "Learning Disabilities", "Gifted Education"],
+                    "Pedagogy": ["Teaching Methods", "Classroom Management", "Student Engagement"]
+                }
+            },
+            msw: {
+                name: "Master of Social Work (MSW)",
+                subcategories: ["Medical and Psychiatric Social Work", "Community Development", "Rural and Urban Development", "Criminology and Correctional Work", "Social Work in the Corporate Sector", "Child Protection and Welfare"],
+                subjects: {
+                    "Medical and Psychiatric Social Work": ["Healthcare Systems", "Mental Health", "Counseling Techniques"],
+                    "Community Development": ["Community Organization", "Social Policy", "Sustainable Development"],
+                    "Rural and Urban Development": ["Rural Sociology", "Urban Planning", "Poverty Alleviation"],
+                    "Criminology and Correctional Work": ["Criminal Justice System", "Rehabilitation", "Juvenile Justice"],
+                    "Social Work in the Corporate Sector": ["Corporate Social Responsibility", "Employee Welfare", "Industrial Relations"],
+                    "Child Protection and Welfare": ["Child Rights", "Child Psychology", "Family Counseling"]
+                }
+            },
+            mph: {
+                name: "Master of Public Health (MPH)",
+                subcategories: ["Epidemiology", "Biostatistics", "Health Policy and Management", "Environmental Health", "Global Health", "Health Education", "Maternal and Child Health"],
+                subjects: {
+                    "Epidemiology": ["Disease Surveillance", "Research Methods", "Clinical Trials"],
+                    "Biostatistics": ["Statistical Methods", "Data Analysis", "Research Design"],
+                    "Health Policy and Management": ["Healthcare Systems", "Health Economics", "Public Health Law"],
+                    "Environmental Health": ["Occupational Health", "Toxicology", "Environmental Risk Assessment"],
+                    "Global Health": ["International Health Systems", "Infectious Diseases", "Health Equity"],
+                    "Health Education": ["Health Promotion", "Behavioral Change", "Community Health"],
+                    "Maternal and Child Health": ["Reproductive Health", "Child Nutrition", "Adolescent Health"]
+                }
+            },
+            mfa: {
+                name: "Master of Fine Arts (MFA)",
+                subcategories: ["Painting", "Sculpture", "Graphic Design", "Photography", "Printmaking", "Film and Television", "Applied Arts"],
+                subjects: {
+                    "Painting": ["Color Theory", "Composition", "Art History"],
+                    "Sculpture": ["3D Design", "Materials and Techniques", "Installation Art"],
+                    "Graphic Design": ["Typography", "Digital Illustration", "User Interface Design"],
+                    "Photography": ["Digital Photography", "Lighting Techniques", "Photo Editing"],
+                    "Printmaking": ["Etching", "Lithography", "Screen Printing"],
+                    "Film and Television": ["Screenwriting", "Cinematography", "Film Editing"],
+                    "Applied Arts": ["Product Design", "Textile Design", "Ceramics"]
+                }
+            },
+            march: {
+                name: "Master of Architecture (M.Arch)",
+                subcategories: ["Urban Design", "Landscape Architecture", "Sustainable Architecture", "Interior Design", "Architectural Conservation"],
+                subjects: {
+                    "Urban Design": ["City Planning", "Urban Ecology", "Public Space Design"],
+                    "Landscape Architecture": ["Site Planning", "Environmental Design", "Plant Materials"],
+                    "Sustainable Architecture": ["Green Building Design", "Energy Efficient Systems", "Environmental Impact Assessment"],
+                    "Interior Design": ["Space Planning", "Lighting Design", "Furniture Design"],
+                    "Architectural Conservation": ["Heritage Conservation", "Restoration Techniques", "Adaptive Reuse"]
+                }
+            },
+            mpharm: {
+                name: "Master of Pharmacy (M.Pharm)",
+                subcategories: ["Pharmacology", "Pharmaceutical Chemistry", "Pharmaceutics", "Pharmacognosy", "Pharmaceutical Analysis", "Clinical Pharmacy"],
+                subjects: {
+                    "Pharmacology": ["Drug Metabolism", "Toxicology", "Pharmacokinetics"],
+                    "Pharmaceutical Chemistry": ["Medicinal Chemistry", "Drug Design", "Organic Synthesis"],
+                    "Pharmaceutics": ["Drug Delivery Systems", "Pharmaceutical Technology", "Biopharmaceutics"],
+                    "Pharmacognosy": ["Natural Products", "Herbal Medicine", "Phytochemistry"],
+                    "Pharmaceutical Analysis": ["Instrumental Analysis", "Quality Control", "Bioanalytical Techniques"],
+                    "Clinical Pharmacy": ["Therapeutics", "Drug Information", "Pharmacovigilance"]
+                }
+            }
+        };
+
+        const premiumContentTypes = [
+            { name: "Video Lectures", price: 499, icon: "fas fa-video" },
+            { name: "Practice Problems", price: 299, icon: "fas fa-tasks" },
+            { name: "Live Doubt Clearing Sessions", price: 799, icon: "fas fa-comments" },
+            { name: "Mock Tests", price: 399, icon: "fas fa-file-alt" },
+            { name: "Study Materials", price: 599, icon: "fas fa-book" }
+        ];
+
+        let cart = [];
+        let userClass = '';
+
+        document.getElementById('mainCourse').addEventListener('change', function() {
+            const subCategoryContainer = document.getElementById('subCategoryContainer');
+            const subCategorySelect = document.getElementById('subCategory');
+            const selectedCourse = this.value;
+
+            if (selectedCourse) {
+                subCategorySelect.innerHTML = '<option value="">Select a sub-category</option>';
+                courses[selectedCourse].subcategories.forEach(subcat => {
+                    const option = document.createElement('option');
+                    option.value = subcat;
+                    option.textContent = subcat;
+                    subCategorySelect.appendChild(option);
+                });
+                subCategoryContainer.classList.remove('hidden');
+            } else {
+                subCategoryContainer.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('subCategory').addEventListener('change', function() {
+            if (this.value) {
+                document.getElementById('classContainer').classList.remove('hidden');
+            } else {
+                document.getElementById('classContainer').classList.add('hidden');
+            }
+        });
+
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const mainCourse = document.getElementById('mainCourse').value;
+            const subCategory = document.getElementById('subCategory').value;
+            userClass = document.getElementById('class').value;
+            const subjectsContainer = document.getElementById('subjectsContainer');
+            const subjectsList = document.getElementById('subjectsList');
+
+            if (mainCourse && subCategory && userClass) {
+                subjectsList.innerHTML = '';
+                courses[mainCourse].subjects[subCategory].forEach(subject => {
+                    const subjectBtn = document.createElement('button');
+                    subjectBtn.textContent = subject;
+                    subjectBtn.className = 'bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition duration-300 w-full';
+                    subjectBtn.addEventListener('click', () => showContent(subject));
+                    subjectsList.appendChild(subjectBtn);
+                });
+                subjectsContainer.classList.remove('hidden');
+            }
+        });
+
+        function showContent(subject) {
+            const contentContainer = document.getElementById('contentContainer');
+            const premiumContentContainer = document.getElementById('premiumContent');
+            
+            contentContainer.classList.remove('hidden');
+            premiumContentContainer.innerHTML = '';
+
+            premiumContentTypes.forEach(content => {
+                const contentBtn = document.createElement('button');
+                contentBtn.innerHTML = `<i class="${content.icon} mr-2"></i>${content.name} (₹${calculatePrice(content.price)})`;
+                contentBtn.className = 'bg-yellow-500 text-white py-1 px-3 rounded-md hover:bg-yellow-600 transition duration-300 w-full';
+                contentBtn.addEventListener('click', () => addToCart(subject, content));
+                premiumContentContainer.appendChild(contentBtn);
+            });
+        }
+
+        function calculatePrice(basePrice) {
+            const discountCategories = ['sc', 'st', 'obc', 'ews', 'bpl'];
+            if (discountCategories.includes(userClass)) {
+                return Math.max(100, Math.min(basePrice * 0.6, 500));
+            } else {
+                return Math.max(300, Math.min(basePrice, 1000));
+            }
+        }
+
+        function addToCart(subject, content) {
+            const price = calculatePrice(content.price);
+            cart.push({ subject, name: content.name, price });
+            updateCart();
+            createFireworks(event);
+        }
+
+        function updateCart() {
+            const cartContainer = document.getElementById('cartContainer');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.textContent = `${item.subject} - ${item.name}: ₹${item.price}`;
+                const removeBtn = document.createElement('button');
+                removeBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                removeBtn.className = 'ml-2 text-red-500 hover:text-red-700';
+                removeBtn.addEventListener('click', () => removeFromCart(index));
+                itemElement.appendChild(removeBtn);
+                cartItems.appendChild(itemElement);
+                total += item.price;
+            });
+
+            cartTotal.textContent = `Total: ₹${total}`;
+            cartContainer.classList.remove('hidden');
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            const checkoutModal = document.getElementById('checkoutModal');
+            const checkoutTotal = document.getElementById('checkoutTotal');
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            
+            checkoutTotal.textContent = total;
+            
+            const qr = qrcode(0, 'M');
+            qr.addData(`upi://pay?pa=9494417644@ybl&pn=PGCourses&am=${total}&cu=INR`);
+            qr.make();
+            document.getElementById('qrcode').innerHTML = qr.createImgTag(5);
+            
+            checkoutModal.classList.remove('hidden');
+        });
+
+        document.getElementById('confirmPaymentBtn').addEventListener('click', function() {
+            const utrNumber = document.getElementById('utrNumber').value;
+            if (utrNumber) {
+                alert('Your order is being processed. You will receive a confirmation email shortly.');
+                cart = [];
+                updateCart();
+                document.getElementById('checkoutModal').classList.add('hidden');
+            } else {
+                alert('Please enter the UTR number.');
+            }
+        });
+
+        function createFireworks(event) {
+            for (let i = 0; i < 5; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                firework.style.left = `${event.clientX}px`;
+                firework.style.top = `${event.clientY}px`;
+                firework.style.setProperty('--x', `${Math.random() * 200 - 100}px`);
+                firework.style.setProperty('--y', `${Math.random() * 200 - 100}px`);
+                firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                document.body.appendChild(firework);
+                setTimeout(() => {
+                    firework.remove();
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>

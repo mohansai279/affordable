@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0D0D0D;
+            background-image: url('dashboardbackground.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        .hero {
+            padding: 100px 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            color: #b3b3b3;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.1em;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .enroll {
+            background-color: #3F51B5;
+            color: white;
+        }
+
+        .progress {
+            background-color: transparent;
+            border: 2px solid #3F51B5;
+            color: #3F51B5;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="hero">
+            <h1>Your Personalized Student Dashboard</h1>
+            <p>Streamline your academic journey with our intuitive student dashboard, putting you in control of your success.</p>
+            <div class="cta-buttons">
+                <div class="button enroll">Enroll in Courses</div>
+                <div class="button progress">View My Progress</div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        document.querySelector('.enroll').addEventListener('click', function() {
+            alert("Redirecting to course enrollment page.");
+            window.location.href = "#";
+        });
+
+        document.querySelector('.progress').addEventListener('click', function() {
+            alert("Opening your progress dashboard.");
+            window.location.href = "#";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law Entrance Preparation Dashboard</title>
+    <style>
+        /* Basic Styling */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        h1, h2 { color: #2c3e50; }
+        .section { background: #fff; border-radius: 5px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+
+        /* Carousel Styling */
+        .carousel { display: flex; overflow-x: auto; padding: 10px; }
+        .carousel-item { flex: 0 0 auto; width: 300px; background: #3498db; color: #fff; padding: 20px; margin-right: 10px; border-radius: 5px; }
+        
+        /* Button Styling */
+        .btn { display: inline-block; background: #3498db; color: #fff; padding: 10px 15px; border-radius: 5px; text-decoration: none; margin: 5px 0; }
+        .btn:hover { background: #2980b9; }
+
+        /* Progress Bar */
+        .progress-bar { width: 100%; background: #e0e0e0; height: 20px; border-radius: 5px; margin: 10px 0; }
+        .progress { width: 60%; background: #3498db; height: 100%; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Home Section -->
+    <section class="section" id="home">
+        <h1>Welcome to Law Entrance Preparation Dashboard</h1>
+        <p>Your gateway to resources, study materials, and mock tests to prepare for law entrance exams like CLAT and other national and state-level exams.</p>
+        
+        <div class="grid">
+            <a href="#legal-aptitude" class="btn">Legal Aptitude</a>
+            <a href="#logical-reasoning" class="btn">Logical Reasoning</a>
+            <a href="#general-knowledge" class="btn">General Knowledge</a>
+            <a href="#mock-tests" class="btn">Mock Tests</a>
+        </div>
+        
+        <div class="carousel">
+            <div class="carousel-item">
+                <h3>New: Legal Aptitude Module</h3>
+                <p>Explore legal principles and case law updates.</p>
+            </div>
+            <div class="carousel-item">
+                <h3>Mock Test Series Launched</h3>
+                <p>Take timed tests to assess your preparation level.</p>
+            </div>
+            <div class="carousel-item">
+                <h3>Top Law Schools Guide</h3>
+                <p>Profiles of leading law schools and their admission process.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Aptitude Section -->
+    <section class="section" id="legal-aptitude">
+        <h2>Legal Aptitude Preparation</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Legal Principles</h3>
+                <p>Study legal concepts and principles commonly tested in exams.</p>
+                <a href="#" class="btn">Start Learning</a>
+            </div>
+            <div class="card">
+                <h3>Case Laws</h3>
+                <p>Important case laws and judgments for legal awareness.</p>
+                <a href="#" class="btn">Explore Cases</a>
+            </div>
+            <div class="card">
+                <h3>Judiciary Functions</h3>
+                <p>Learn about the functions and structure of the judiciary.</p>
+                <a href="#" class="btn">View Resources</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logical Reasoning Section -->
+    <section class="section" id="logical-reasoning">
+        <h2>Logical Reasoning</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Analytical Reasoning</h3>
+                <p>Practice questions on analytical reasoning skills.</p>
+                <a href="#" class="btn">Start Practicing</a>
+            </div>
+            <div class="card">
+                <h3>Logical Puzzles</h3>
+                <p>Sharpen your problem-solving skills with logical puzzles.</p>
+                <a href="#" class="btn">Solve Puzzles</a>
+            </div>
+            <div class="card">
+                <h3>Mock Quizzes</h3>
+                <p>Test your logical reasoning skills with timed quizzes.</p>
+                <a href="#" class="btn">Take Quiz</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- General Knowledge Section -->
+    <section class="section" id="general-knowledge">
+        <h2>General Knowledge & Current Affairs</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Daily News Updates</h3>
+                <p>Get daily updates on important national and international events.</p>
+                <a href="#" class="btn">Read Updates</a>
+            </div>
+            <div class="card">
+                <h3>Weekly GK Quizzes</h3>
+                <p>Reinforce learning with quizzes on current affairs and GK.</p>
+                <a href="#" class="btn">Take Quiz</a>
+            </div>
+            <div class="card">
+                <h3>Monthly Current Affairs</h3>
+                <p>Monthly digest covering important events and updates.</p>
+                <a href="#" class="btn">View Digest</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mock Tests Section -->
+    <section class="section" id="mock-tests">
+        <h2>Mock Tests & Practice Papers</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Full-Length Mock Tests</h3>
+                <p>Simulate real exam conditions with timed mock tests.</p>
+                <a href="#" class="btn">Start Test</a>
+            </div>
+            <div class="card">
+                <h3>Previous Year Papers</h3>
+                <p>Access past papers to understand exam patterns and questions.</p>
+                <a href="#" class="btn">Download Papers</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career and Law School Guide Section -->
+    <section class="section" id="career-guide">
+        <h2>Career & Law School Guide</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Top Law Schools</h3>
+                <p>Profiles of leading law schools, admission criteria, and career prospects.</p>
+                <a href="#" class="btn">Explore Schools</a>
+            </div>
+            <div class="card">
+                <h3>Career Paths in Law</h3>
+                <p>Overview of careers in judiciary, corporate law, and public policy.</p>
+                <a href="#" class="btn">View Careers</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>

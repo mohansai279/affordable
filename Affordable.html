@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced High Quality Educational Content</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        .top-banner {
+            background-color: #4a90e2;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            color: #34495e;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            background-color: transparent;
+        }
+        th, td {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+        }
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .marquee {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 0;
+            overflow: hidden;
+        }
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .visitor-counter {
+            background-color: #34495e;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .course-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .price-tag {
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .free-tag {
+            background-color: #2ecc71;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        .premium-tag {
+            background-color: #f39c12;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        .date-time {
+            background-color: #95a5a6;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .gif-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+        .course-features {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .course-features li {
+            margin-bottom: 5px;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .progress {
+            width: 0;
+            height: 10px;
+            background-color: #3498db;
+            border-radius: 5px;
+            transition: width 0.5s ease-in-out;
+        }
+        .support-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2ecc71;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .support-btn:hover {
+            background-color: #27ae60;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-banner">
+        <i class="fas fa-graduation-cap"></i> Budget-Friendly & User-Friendly Educational Platform
+    </div>
+
+    <div class="date-time" id="dateTime"></div>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            <span><i class="fas fa-newspaper"></i> Latest News: New AI course launched! | </span>
+            <span><i class="fas fa-trophy"></i> Congratulations to our coding competition winners! | </span>
+            <span><i class="fas fa-book"></i> Explore our expanded library of resources | </span>
+            <span><i class="fas fa-users"></i> Join our growing community of learners | </span>
+            <span><i class="fas fa-globe"></i> Now offering courses in 10 languages! | </span>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1><i class="fas fa-book-open icon"></i>Enhanced High Quality Educational Content</h1>
+        <p>Our courses are created by industry experts and provide in-depth learning experiences. Below are some of our offerings with added features.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Course Mentor</th>
+                    <th>Price</th>
+                    <th>Features</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="gif-container">
+                            <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" alt="School/Classes" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <br>
+                        <i class="fas fa-laptop-code course-icon"></i><br>
+                        SCHOOL/CLASSES
+                    </td>
+                    <td>Rajesh Kumar</td>
+                    <td><span class="free-tag">Free</span></td>
+                    <td>
+                        <ul class="course-features">
+                            <li><i class="fas fa-video"></i> Basic Videos</li>
+                            <li><i class="fas fa-comments"></i> Q&A Forum</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="full_stack.html" class="btn" onclick="createFireworks(event)">Enroll Now</a>
+                        <div class="progress-bar">
+                            <div class="progress" data-progress="70"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="gif-container">
+                            <img src="https://media.giphy.com/media/l0HlNaQ6gWfllcjDO/giphy.gif" alt="Intermediate" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <br>
+                        <i class="fas fa-chart-bar course-icon"></i><br>
+                        Intermediate
+                    </td>
+                    <td>Priya Sharma</td>
+                    <td><span class="premium-tag">Premium</span></td>
+                    <td>
+                        <ul class="course-features">
+                            <li><i class="fas fa-file-alt"></i> All Resources</li>
+                            <li><i class="fas fa-project-diagram"></i> Project Work</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="data_science_masterclass.html" class="btn" onclick="createFireworks(event)">Enroll Now</a>
+                        <div class="progress-bar">
+                            <div class="progress" data-progress="50"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="gif-container">
+                            <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" alt="Undergraduate" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <br>
+                        <i class="fas fa-robot course-icon"></i><br>
+                        Undergraduate
+                    </td>
+                    <td>Amit Patel</td>
+                    <td><span class="premium-tag">Premium</span></td>
+                    <td>
+                        <ul class="course-features">
+                            <li><i class="fas fa-flask"></i> Interactive Labs</li>
+                            <li><i class="fas fa-certificate"></i> Certifications</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="undergraduate.html" class="btn" onclick="createFireworks(event)">Enroll Now</a>
+                        <div class="progress-bar">
+                            <div class="progress" data-progress="30"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="gif-container">
+                            <img src="https://media.giphy.com/media/l0HlNaQ6gWfllcjDO/giphy.gif" alt="Postgraduate" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <br>
+                        <i class="fas fa-microscope course-icon"></i><br>
+                        Postgraduate
+                    </td>
+                    <td>Dr. Sneha Gupta</td>
+                    <td><span class="premium-tag">Premium</span></td>
+                    <td>
+                        <ul class="course-features">
+                            <li><i class="fas fa-search"></i> Advanced Research</li>
+                            <li><i class="fas fa-handshake"></i> Industry Partnerships</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="pg1.html" class="btn" onclick="createFireworks(event)">Enroll Now</a>
+                        <div class="progress-bar">
+                            <div class="progress" data-progress="10"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="gif-container">
+                            <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" alt="Educational Games" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <br>
+                        <i class="fas fa-gamepad course-icon"></i><br>
+                        Educational Games
+                    </td>
+                    <td>Vikram Singh</td>
+                    <td><span class="free-tag">Free</span> / <span class="premium-tag">Premium</span></td>
+                    <td>
+                        <ul class="course-features">
+                            <li><i class="fas fa-calculator"></i> Math Games</li>
+                            <li><i class="fas fa-atom"></i> Science Quizzes</li>
+                            <li><i class="fas fa-language"></i> Language Puzzles</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="edu_games.html" class="btn" onclick="createFireworks(event)">Play Now</a>
+                        <div class="progress-bar">
+                            <div class="progress" data-progress="90"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="visitor-counter">
+        <i class="fas fa-users"></i> Visitors: <span id="visitorCount">1</span>
+    </div>
+
+    <a href="#" class="support-btn" onclick="alert('Contacting Thunders Team for support...')">
+        <i class="fas fa-headset"></i> Support
+    </a>
+
+    <script>
+        function createFireworks(event) {
+            event.preventDefault();
+            for (let i = 0; i < 30; i++) {
+                createParticle(event.clientX, event.clientY);
+            }
+            setTimeout(() => {
+                window.location.href = event.target.href;
+            }, 1000);
+        }
+
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.classList.add('firework');
+            document.body.appendChild(particle);
+
+            const size = Math.random() * 8 + 4;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+
+            const destinationX = x + (Math.random() - 0.5) * 200;
+            const  destinationY = y + (Math.random() - 0.5) * 200;
+
+            const animation = particle.animate([
+                { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 1 },
+                { transform: `translate(${destinationX}px, ${destinationY}px) scale(1)`, opacity: 0 }
+            ], {
+                duration: 1000,
+                easing: 'cubic-bezier(0, .9, .57, 1)',
+                delay: Math.random() * 200
+            });
+
+            animation.onfinish = () => particle.remove();
+        }
+
+        // Simulated visitor counter
+        let visitorCount = 1;
+        setInterval(() => {
+            visitorCount += Math.floor(Math.random() * 5) + 1;
+            document.getElementById('visitorCount').textContent = visitorCount;
+        }, 5000);
+
+        // Date and Time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('dateTime').textContent = now.toLocaleDateString('en-US', options);
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // Animate progress bars
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBars = document.querySelectorAll('.progress');
+            progressBars.forEach(bar => {
+                const progress = bar.getAttribute('data-progress');
+                setTimeout(() => {
+                    bar.style.width = `${progress}%`;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future of Affordable Education</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f2ff;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5em;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        .image-container {
+            perspective: 1000px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .image-3d {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .image-container:hover .image-3d {
+            transform: rotateY(10deg) rotateX(10deg);
+        }
+        h2 {
+            color: #0066cc;
+            cursor: pointer;
+        }
+        p {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Future of Affordable Education</h1>
+    <div class="container">
+        <div class="card">
+            <div class="image-container" onclick="redirect('govt.html')">
+                <div class="image-3d" style="background-image: url('https://t4.ftcdn.net/jpg/09/46/91/57/360_F_946915734_E7pDr1zaNR39JZpCLiPSFY4hEZWGbq9q.jpg');"></div>
+            </div>
+            <h2 onclick="redirect('govt.html')">Government</h2>
+            <p>View educational institutions by State & Board</p>
+        </div>
+        <div class="card">
+            <div class="image-container" onclick="redirect('tech1.html')">
+                <div class="image-3d" style="background-image: url('https://st4.depositphotos.com/13349494/26799/i/450/depositphotos_267998672-stock-photo-selective-focus-young-woman-virtual.jpg');"></div>
+            </div>
+            <h2 onclick="redirect('tech1.html')">Technology used</h2>
+            <p>Cost-effective production of educational models and materials.</p>
+        </div>
+        <div class="card">
+            <div class="image-container" onclick="redirect('whatweoffer.html')">
+                <div class="image-3d" style="background-image: url('https://cdn-icons-png.flaticon.com/512/9464/9464471.png');"></div>
+            </div>
+            <h2 onclick="redirect('whatweoffer.html')">We Offer</h2>
+            <p>Secure, verifiable educational certificates, additional courses and many more</p>
+        </div>
+    </div>
+
+    <script>
+        function redirect(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

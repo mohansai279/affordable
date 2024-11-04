@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPS Aspirant Dashboard</title>
+    <style>
+        /* Basic Styling */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        h1, h2 { color: #2c3e50; }
+        .section { background: #fff; border-radius: 5px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        
+        /* Carousel Styling */
+        .carousel { display: flex; overflow-x: auto; padding: 10px; }
+        .carousel-item { flex: 0 0 auto; width: 300px; background: #3498db; color: #fff; padding: 20px; margin-right: 10px; border-radius: 5px; }
+        
+        /* Button Styling */
+        .btn { display: inline-block; background: #3498db; color: #fff; padding: 10px 15px; border-radius: 5px; text-decoration: none; margin: 5px 0; }
+        .btn:hover { background: #2980b9; }
+
+        /* Progress Bar */
+        .progress-bar { width: 100%; background: #e0e0e0; height: 20px; border-radius: 5px; margin: 10px 0; }
+        .progress { width: 60%; background: #3498db; height: 100%; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Home Section -->
+    <section class="section" id="home">
+        <h1>Welcome to IPS Aspirant Dashboard</h1>
+        <p>Prepare for the Civil Services Examination with resources tailored for IPS aspirants, including study guides, physical fitness standards, and personality development tools.</p>
+        
+        <div class="grid">
+            <a href="#exam-preparation" class="btn">Prelims & Mains Preparation</a>
+            <a href="#fitness-guide" class="btn">Physical Fitness Guide</a>
+            <a href="#law-resources" class="btn">Law and Order Resources</a>
+            <a href="#personality-development" class="btn">Personality Development</a>
+        </div>
+        
+        <div class="carousel">
+            <div class="carousel-item">
+                <h3>New: Law and Order Resource</h3>
+                <p>Explore the latest updates on IPC and CrPC.</p>
+            </div>
+            <div class="carousel-item">
+                <h3>Physical Fitness Standards for IPS</h3>
+                <p>Review the medical and fitness requirements for IPS qualification.</p>
+            </div>
+            <div class="carousel-item">
+                <h3>Mock Interview Preparation</h3>
+                <p>Practice with situational and behavioral interview simulations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exam Preparation Section -->
+    <section class="section" id="exam-preparation">
+        <h2>Prelims & Mains Preparation</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>General Studies</h3>
+                <p>Comprehensive study material for Prelims GS topics.</p>
+                <a href="#" class="btn">View Resources</a>
+            </div>
+            <div class="card">
+                <h3>CSAT</h3>
+                <p>Practice aptitude and reasoning for the CSAT paper.</p>
+                <a href="#" class="btn">Start Practicing</a>
+            </div>
+            <div class="card">
+                <h3>Mains - Law, Ethics & Governance</h3>
+                <p>Focused content for Mains on law, ethics, and governance.</p>
+                <a href="#" class="btn">View Details</a>
+            </div>
+            <div class="card">
+                <h3>Mock Tests & Quizzes</h3>
+                <p>Timed quizzes and full-length mock tests with score analysis.</p>
+                <a href="#" class="btn">Take Test</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Physical Fitness Section -->
+    <section class="section" id="fitness-guide">
+        <h2>Physical Fitness Guide</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Workout Plans</h3>
+                <p>Fitness routines to help meet IPS physical standards.</p>
+                <a href="#" class="btn">View Workout Plans</a>
+            </div>
+            <div class="card">
+                <h3>Medical Requirements</h3>
+                <p>Physical and medical standards required for IPS qualification.</p>
+                <a href="#" class="btn">View Medical Requirements</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Law and Order Resources Section -->
+    <section class="section" id="law-resources">
+        <h2>Law and Order Resources</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Indian Penal Code (IPC)</h3>
+                <p>Study material on IPC sections relevant for IPS.</p>
+                <a href="#" class="btn">View IPC Guide</a>
+            </div>
+            <div class="card">
+                <h3>Criminal Procedure Code (CrPC)</h3>
+                <p>Detailed resources on CrPC for IPS aspirants.</p>
+                <a href="#" class="btn">View CrPC Guide</a>
+            </div>
+            <div class="card">
+                <h3>Case Studies</h3>
+                <p>Real-life cases on law enforcement and crisis management.</p>
+                <a href="#" class="btn">Explore Case Studies</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personality Development Section -->
+    <section class="section" id="personality-development">
+        <h2>Personality Development & Interview Preparation</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Mock Interviews</h3>
+                <p>Simulated interviews with situational questions for personality test.</p>
+                <a href="#" class="btn">Start Mock Interview</a>
+            </div>
+            <div class="card">
+                <h3>Public Speaking & Communication Skills</h3>
+                <p>Resources to enhance communication and public speaking skills.</p>
+                <a href="#" class="btn">Improve Skills</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>

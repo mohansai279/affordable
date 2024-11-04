@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Support</title>
+    <script src="https://kit.fontawesome.com/8bd6864b0f.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --bg-color: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            background-image: url('https://cdn.vectorstock.com/i/500p/33/48/hand-drawn-seamless-pattern-online-education-vector-31103348.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 20px;
+            
+           
+        }
+        .contain{
+            max-width: 100%;
+            position: relative;
+            top: -25px;
+
+        }
+
+        header {
+            background-color: transparent;
+            padding: 20px 0;
+            box-shadow: none;
+            margin-top: 0%;
+            top:0%;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+        }
+
+        .category-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            width: 80%;
+        }
+
+        .category-bar:hover {
+            background-color: #2980b9;
+            transform: scale(1.02);
+        }
+
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+        }
+
+        .category-content.show {
+            max-height: 1000px;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-radius: 10px;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .download-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #27ae60;
+            transform: scale(1.1);
+        }
+
+        .note {
+            background-color:rgb(248, 154, 31);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        #supportDetails {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        #supportDetails.show {
+            max-height: 5000px;
+        }
+
+        #freelancerContent, #studentContent {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        #freelancerContent.show, #studentContent.show {
+            max-height: 3000px;
+        }
+
+        .m {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 15px;
+            padding: 10px;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        marquee {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 0;
+            font-weight: 600;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            main.container {
+                padding: 10px 20px;
+            }
+            .m {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>    
+    <header>
+        <div class="contain">
+            <h1 class="m">STUDENT SUPPORT</h1>
+        </div>
+    </header>
+    <marquee>We're always ready to invite and collaborate with skilled freelancers and passionate students who are eager to join us in making meaningful changes and impactful solutions together. Register yourself and start your journey with Affordable education!</marquee>
+    <main class="container">
+        <section class="card">
+            <h2>Technology Support for Students</h2>
+            <h3>For Students Who Cannot Afford:</h3>
+            <ul>
+                <li>Tablets: 10-inch screen, 4GB RAM, 64GB storage, Android 11</li>
+                <li>Laptops: 14-inch screen, Intel i3 processor, 8GB RAM, 256GB SSD, Windows 10</li>
+                <li>Hard copy notes for all subjects</li>
+            </ul>
+            <h3>For All Students:</h3>
+            <ul>
+                <li>Exclusive merchandise (T-shirts, notebooks, pens)</li>
+                <li>Option to purchase tablets and laptops at discounted rates</li>
+            </ul>
+            <button id="learnMoreBtn">Learn More About Support</button>
+            <div id="supportDetails">
+                <select id="userType">
+                    <option value="">Select User Type</option>
+                    <option value="freelancer">Freelancer</option>
+                    <option value="student">Student</option>
+                </select>
+                <div id="freelancerContent">
+                    <h3>What We Offer to Freelancers</h3>
+                    <div class="category-bar" data-category="freelancer-educational">
+                        Educational Tools
+                        <button class="download-btn">↓</button>
+                    </div>
+                    <div class="category-content" id="freelancer-educational-content">
+                        <table>
+                            <tr>
+                                <th>Tool</th>
+                                <th>Our Price</th>
+                                <th>Market Price</th>
+                            </tr>
+                            <tr>
+                                <td>Digital Whiteboard Access</td>
+                                <td>₹250/month</td>
+                                <td>₹1000/month</td>
+                            </tr>
+                            <tr>
+                                <td>Collaboration Software</td>
+                                <td>₹150/month</td>
+                                <td>₹600/month</td>
+                            </tr>
+                            <tr>
+                                <td>Project Management Tool</td>
+                                <td>₹200/month</td>
+                                <td>₹800/month</td>
+                            </tr>
+                            <tr>
+                                <td>Time Tracking Software</td>
+                                <td>₹100/month</td>
+                                <td>₹400/month</td>
+                            </tr>
+                            <tr>
+                                <td>Video Conferencing Tool</td>
+                                <td>₹175/month</td>
+                                <td>₹700/month</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="category-bar" data-category="freelancer-electronics">
+                        Electronics
+                        <button class="download-btn">↓</button>
+                    </div>
+                    <div class="category-content" id="freelancer-electronics-content">
+                        <table>
+                            <tr>
+                                <th>Device</th>
+                                <th>Our Price</th>
+                                <th>Market Price</th>
+                            </tr>
+                            <tr>
+                                <td>Laptop (14-inch, i5, 8GB RAM)</td>
+                                <td>₹17,500</td>
+                                <td>₹45,000</td>
+                            </tr>
+                            <tr>
+                                <td>Tablet (10-inch, 4GB RAM)</td>
+                                <td>₹7,500</td>
+                                <td>₹20,000</td>
+                            </tr>
+                            <tr>
+                                <td>Noise-Cancelling Headphones</td>
+                                <td>₹3000</td>
+                                <td>₹9000</td>
+                            </tr>
+                            <tr>
+                                <td>Ergonomic Keyboard</td>
+                                <td>₹2,500</td>
+                                <td>₹7,000</td>
+                            </tr>
+                            <tr>
+                                <td>Wireless Mouse</td>
+                                <td>₹650</td>
+                                <td>₹1200</td>
+                            </tr>
+                            <tr>
+                                <td>External Monitor (24-inch)</td>
+                                <td>₹7,000</td>
+                                <td>₹18,000</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="studentContent">
+                    <h3>What We Offer to Students</h3>
+                    <div class="category-bar" data-category="student-educational">
+                        Educational Materials
+                        <button class="download-btn">↓</button>
+                    </div>
+                    <div class="category-content" id="student-educational-content">
+                        <table>
+                            <tr>
+                                <th>Material</th>
+                                <th>Our Price</th>
+                                <th>Market Price</th>
+                            </tr>
+                            <tr>
+                                <td>Textbook Set</td>
+                                <td>₹2000</td>
+                                <td>₹3500</td>
+                            </tr>
+                            <tr>
+                                <td>Online Course Access</td>
+                                <td>₹500/month</td>
+                                <td>₹1000/month</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="category-bar" data-category="student-electronics">
+                        Electronics
+                        <button class="download-btn">↓</button>
+                    </div>
+                    <div class="category-content" id="student-electronics-content">
+                        <table>
+                            <tr>
+                                <th>Device</th>
+                                <th>Our Price</th>
+                                <th>Market Price</th>
+                            </tr>
+                            <tr>
+                                <td>Student Laptop</td>
+                                <td>₹25,000</td>
+                                <td>₹35,000</td>
+                            </tr>
+                            <tr>
+                                <td>E-reader</td>
+                                <td>₹8,000</td>
+                                <td>₹12,000</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="category-bar" data-category="student-support">
+                        Support Services
+                        <button class="download-btn">↓</button>
+                    </div>
+                    <div class="category-content" id="student-support-content">
+                        <table>
+                            <tr>
+                                <th>Service</th>
+                                <th>Our Price</th>
+                                <th>Market Price</th>
+                            </tr>
+                            <tr>
+                                <td>24/7 Tutoring</td>
+                                <td>₹1500/month</td>
+                                <td>₹3000/month</td>
+                            </tr>
+                            <tr>
+                                <td>Career Counseling</td>
+                                
+                                <td>₹2000/session</td>
+                                <td>₹4000/session</td>
+                            </tr>
+                            <tr>
+                                <td>Doubt Clearing Session</td>
+                                <td>₹500/session</td>
+                                <td>₹1000/session</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="note">
+            <h2 style="color: #333;">Important Information</h2>
+            <ul>
+                <li>No long-term agreements required from our side.</li>
+                <li>Minimal intimation time needed for leaving the service.</li>
+                <li>You'll receive access to our digital board and resources.</li>
+                <li>Exclusive merchandise will be provided.</li>
+                <li>A minimum deposit of 15,000 or a check is required, returnable upon relief from service.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Student Support Organization. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const learnMoreBtn = document.getElementById('learnMoreBtn');
+            const supportDetails = document.getElementById('supportDetails');
+            const userTypeSelect = document.getElementById('userType');
+            const freelancerContent = document.getElementById('freelancerContent');
+            const studentContent = document.getElementById('studentContent');
+            const categoryBars = document.querySelectorAll('.category-bar');
+
+            learnMoreBtn.addEventListener('click', function() {
+                supportDetails.classList.toggle('show');
+                this.textContent = supportDetails.classList.contains('show') ? 'Hide Support Details' : 'Learn More About Support';
+            });
+
+            userTypeSelect.addEventListener('change', function() {
+                if (this.value === 'freelancer') {
+                    freelancerContent.classList.add('show');
+                    studentContent.classList.remove('show');
+                } else if (this.value === 'student') {
+                    freelancerContent.classList.remove('show');
+                    studentContent.classList.add('show');
+                } else {
+                    freelancerContent.classList.remove('show');
+                    studentContent.classList.remove('show');
+                }
+            });
+
+            categoryBars.forEach(bar => {
+                bar.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    const content = document.getElementById(`${category}-content`);
+                    content.classList.toggle('show');
+                });
+            });
+
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const category = this.parentElement.getAttribute('data-category');
+                    const content = document.getElementById(`${category}-content`);
+                    const tableData = content.querySelector('table').innerText;
+                    const blob = new Blob([tableData], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${category}_data.txt`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

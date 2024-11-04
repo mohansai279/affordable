@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoology Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes wave {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(5px) rotate(5deg); }
+            50% { transform: translateX(0) rotate(0deg); }
+            75% { transform: translateX(-5px) rotate(-5deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+        @keyframes swim {
+            0% { transform: translateX(0) scaleX(1); }
+            25% { transform: translateX(10px) scaleX(0.8); }
+            50% { transform: translateX(20px) scaleX(1); }
+            75% { transform: translateX(10px) scaleX(0.8); }
+            100% { transform: translateX(0) scaleX(1); }
+        }
+        @keyframes flutter {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(5px) rotate(-5deg); }
+        }
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+        .animate-slideIn { animation: slideIn 0.5s ease-out; }
+        .animate-pulse { animation: pulse 2s infinite; }
+        .animate-rainbow {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffecd2, #fcb69f, #ff9a9e);
+            background-size: 400% 400%;
+            animation: rainbow 15s ease infinite;
+        }
+        .animate-rotate { animation: rotate 10s linear infinite; }
+        .animate-bounce { animation: bounce 2s infinite; }
+        .animate-wave { animation: wave 2s infinite; }
+        .animate-swim { animation: swim 5s infinite; }
+        .animate-flutter { animation: flutter 3s infinite; }
+        .animate-sway { animation: sway 3s infinite; }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 min-h-screen font-sans">
+    <div class="container mx-auto p-6">
+        <h1 class="text-5xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-600 animate-rainbow p-4">Zoology Course - Chapters</h1>
+        
+        <div class="text-center mb-4 text-2xl font-bold text-gray-800 animate-bounce">
+            Total Maximum Marks for Zoology: 60
+        </div>
+
+        <div class="mb-6 animate-slideIn">
+            <label for="categorySelect" class="block text-lg font-medium text-gray-700 mb-2">Select your category:</label>
+            <select id="categorySelect" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700">
+                <option value="general">General</option>
+                <option value="bpl">Below Poverty Line (BPL)</option>
+                <option value="sc">Schedule Caste (SC)</option>
+                <option value="st">Schedule Tribe (ST)</option>
+                <option value="obc">Other Backward Class (OBC)</option>
+                <option value="ews">Economically Weaker Section (EWS)</option>
+                <option value="minority">Minority</option>
+                <option value="disabled">Disabled</option>
+            </select>
+        </div>
+
+        <div id="courseContainer" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Course cards will be dynamically populated here -->
+        </div>
+    </div>
+
+    <div class="fixed bottom-0 left-0 w-full overflow-hidden pointer-events-none">
+        <div class="animate-swim text-6xl absolute bottom-2 left-2">🐠</div>
+        <div class="animate-flutter text-6xl absolute top-2 right-2">🦋</div>
+        <div class="animate-sway text-6xl absolute bottom-2 right-2">🌿</div>
+        <div class="animate-bounce text-6xl absolute top-1/2 left-2">🐸</div>
+        <div class="animate-wave text-6xl absolute top-1/4 right-2">🦉</div>
+    </div>
+
+    <!-- Modal for displaying question papers and resources -->
+    <div id="modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalTitle"></h3>
+                <div class="mt-2 px-7 py-3" id="modalContent">
+                    <!-- Content will be dynamically populated here -->
+                </div>
+                <div class="items-center px-4 py-3">
+                    <button id="closeModal" class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const courses = [
+            { 
+                name: "Animal Diversity", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Dr. A. Patel",
+                email: "a.patel@example.com",
+                phone: "+91 98765 43210",
+                textbook: "Introduction to Animal Diversity by A. Patel",
+                resourceLink: "https://zoology.example.com/resources/animal-diversity",
+                relatedSubjects: ["Biology", "Ecology"],
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/animal-diversity",
+                    TS: "https://zoology.example.com/papers/ts/animal-diversity"
+                },
+                resourceContent: `
+                    <h4 class="font-bold mb-2">Animal Diversity Resources</h4>
+                    <ul class="list-disc pl-5">
+                        <li><a href="#" class="text-blue-500 hover:underline">Introduction to Animal Phyla</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Vertebrate vs Invertebrate Animals</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Evolution and Diversity</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Animal Classification Systems</a></li>
+                    </ul>
+                `
+            },
+            { 
+                name: "Structural Organisation in Animals", 
+                status: "Premium", 
+                basePrice: 200, 
+                instructor: "Prof. R. Verma",
+                email: "r.verma@example.com",
+                phone: "+91 98765 43211",
+                textbook: "Animal Structures and Functions by R. Verma",
+                videoLecture: "https://zoology.example.com/video/animal-structure",
+                pdfNotes: "https://zoology.example.com/pdf/animal-structure.pdf",
+                doubtSession: "Every Tuesday, 4-6 PM",
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/animal-structure",
+                    TS: "https://zoology.example.com/papers/ts/animal-structure"
+                }
+            },
+            { 
+                name: "Cell Structure and Functions", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Dr. N. Sharma",
+                email: "n.sharma@example.com",
+                phone: "+91 98765 43212",
+                textbook: "Fundamentals of Cell Biology by N. Sharma",
+                resourceLink: "https://zoology.example.com/resources/cell-biology",
+                relatedSubjects: ["Microbiology", "Biochemistry"],
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/cell-biology",
+                    TS: "https://zoology.example.com/papers/ts/cell-biology"
+                },
+                resourceContent: `
+                    <h4 class="font-bold mb-2">Cell Biology Resources</h4>
+                    <ul class="list-disc pl-5">
+                        <li><a href="#" class="text-blue-500 hover:underline">Cell Organelles and Their Functions</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Cell Division: Mitosis and Meiosis</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Cellular Respiration</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Cell Signaling Pathways</a></li>
+                    </ul>
+                `
+            },
+            { 
+                name: "Biomolecules", 
+                status: "Premium", 
+                basePrice: 150, 
+                instructor: "Prof. K. Mehta",
+                email: "k.mehta@example.com",
+                phone: "+91 98765 43213",
+                textbook: "Advanced Biomolecules by K. Mehta",
+                videoLecture: "https://zoology.example.com/video/biomolecules",
+                pdfNotes: "https://zoology.example.com/pdf/biomolecules.pdf",
+                doubtSession: "Every Thursday, 3-5 PM",
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/biomolecules",
+                    TS: "https://zoology.example.com/papers/ts/biomolecules"
+                }
+            },
+            { 
+                name: "Digestion and Absorption", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Dr. V. Rao",
+                email: "v.rao@example.com",
+                phone: "+91 98765 43214",
+                textbook: "Animal Nutrition and Digestion by V. Rao",
+                resourceLink: "https://zoology.example.com/resources/digestion",
+                relatedSubjects: ["Physiology", "Biochemistry"],
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/digestion",
+                    TS: "https://zoology.example.com/papers/ts/digestion"
+                },
+                resourceContent: `
+                    <h4 class="font-bold mb-2">Digestion and Absorption Resources</h4>
+                    <ul class="list-disc pl-5">
+                        <li><a href="#" class="text-blue-500 hover:underline">Digestive System Overview</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Enzymes in Digestion</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Absorption of Nutrients</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Digestive Disorders</a></li>
+                    </ul>
+                `
+            },
+            { 
+                name: "Breathing and Exchange of Gases", 
+                status: "Premium", 
+                basePrice: 180, 
+                instructor: "Prof. S. Gupta",
+                email: "s.gupta@example.com",
+                phone: "+91 98765 43215",
+                textbook: "Respiratory Systems in Animals by S. Gupta",
+                videoLecture: "https://zoology.example.com/video/respiration",
+                pdfNotes: "https://zoology.example.com/pdf/respiration.pdf",
+                doubtSession: "Every Wednesday, 4-6 PM",
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/respiration",
+                    TS: "https://zoology.example.com/papers/ts/respiration"
+                }
+            },
+            { 
+                name: "Body Fluids and Circulation", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Dr. H. Desai",
+                email: "h.desai@example.com",
+                phone: "+91 98765 43216",
+                textbook: "Circulatory Systems in Animals by H. Desai",
+                resourceLink: "https://zoology.example.com/resources/circulation",
+                relatedSubjects: ["Physiology", "Anatomy"],
+                questionPapers: {
+                    AP:  "https://zoology.example.com/papers/ap/circulation",
+                    TS: "https://zoology.example.com/papers/ts/circulation"
+                },
+                resourceContent: `
+                    <h4 class="font-bold mb-2">Body Fluids and Circulation Resources</h4>
+                    <ul class="list-disc pl-5">
+                        <li><a href="#" class="text-blue-500 hover:underline">Blood Composition and Functions</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Heart Structure and Function</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Blood Vessels and Circulation</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Lymphatic System</a></li>
+                    </ul>
+                `
+            },
+            { 
+                name: "Excretory Products and Their Elimination", 
+                status: "Premium", 
+                basePrice: 220, 
+                instructor: "Prof. P. Kumar",
+                email: "p.kumar@example.com",
+                phone: "+91 98765 43217",
+                textbook: "Animal Excretory Systems by P. Kumar",
+                videoLecture: "https://zoology.example.com/video/excretion",
+                pdfNotes: "https://zoology.example.com/pdf/excretion.pdf",
+                doubtSession: "Every Friday, 3-5 PM",
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/excretion",
+                    TS: "https://zoology.example.com/papers/ts/excretion"
+                }
+            },
+            { 
+                name: "Locomotion and Movement", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Dr. A. Singh",
+                email: "a.singh@example.com",
+                phone: "+91 98765 43218",
+                textbook: "Animal Locomotion and Biomechanics by A. Singh",
+                resourceLink: "https://zoology.example.com/resources/locomotion",
+                relatedSubjects: ["Biomechanics", "Evolution"],
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/locomotion",
+                    TS: "https://zoology.example.com/papers/ts/locomotion"
+                },
+                resourceContent: `
+                    <h4 class="font-bold mb-2">Locomotion and Movement Resources</h4>
+                    <ul class="list-disc pl-5">
+                        <li><a href="#" class="text-blue-500 hover:underline">Types of Animal Locomotion</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Muscular System in Animals</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Skeletal Systems and Movement</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Biomechanics of Animal Movement</a></li>
+                    </ul>
+                `
+            },
+            { 
+                name: "Neural Control and Coordination", 
+                status: "Premium", 
+                basePrice: 250, 
+                instructor: "Prof. L. Jain",
+                email: "l.jain@example.com",
+                phone: "+91 98765 43219",
+                textbook: "Neurobiology and Animal Behavior by L. Jain",
+                videoLecture: "https://zoology.example.com/video/neurobiology",
+                pdfNotes: "https://zoology.example.com/pdf/neurobiology.pdf",
+                doubtSession: "Every Saturday, 10 AM-12 PM",
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/neurobiology",
+                    TS: "https://zoology.example.com/papers/ts/neurobiology"
+                }
+            },
+            { 
+                name: "Chemical Coordination and Integration", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Dr. S. Kapoor",
+                email: "s.kapoor@example.com",
+                phone: "+91 98765 43220",
+                textbook: "Endocrinology and Animal Hormones by S. Kapoor",
+                resourceLink: "https://zoology.example.com/resources/endocrinology",
+                relatedSubjects: ["Biochemistry", "Physiology"],
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/endocrinology",
+                    TS: "https://zoology.example.com/papers/ts/endocrinology"
+                },
+                resourceContent: `
+                    <h4 class="font-bold mb-2">Chemical Coordination and Integration Resources</h4>
+                    <ul class="list-disc pl-5">
+                        <li><a href="#" class="text-blue-500 hover:underline">Endocrine System Overview</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Hormones and Their Functions</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Feedback Mechanisms</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Endocrine Disorders</a></li>
+                    </ul>
+                `
+            },
+            { 
+                name: "Reproduction in Organisms", 
+                status: "Premium", 
+                basePrice: 230, 
+                instructor: "Dr. M. Reddy",
+                email: "m.reddy@example.com",
+                phone: "+91 98765 43221",
+                textbook: "Animal Reproduction and Development by M. Reddy",
+                videoLecture: "https://zoology.example.com/video/reproduction",
+                pdfNotes: "https://zoology.example.com/pdf/reproduction.pdf",
+                doubtSession: "Every Sunday, 4-6 PM",
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/reproduction",
+                    TS: "https://zoology.example.com/papers/ts/reproduction"
+                }
+            },
+            { 
+                name: "Principles of Inheritance and Variation", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Prof. G. Sharma",
+                email: "g.sharma@example.com",
+                phone: "+91 98765 43222",
+                textbook: "Genetics and Heredity by G. Sharma",
+                resourceLink: "https://zoology.example.com/resources/genetics",
+                relatedSubjects: ["Molecular Biology", "Evolution"],
+                questionPapers: {
+                    AP: "https://zoology.example.com/papers/ap/genetics",
+                    TS: "https://zoology.example.com/papers/ts/genetics"
+                },
+                resourceContent: `
+                    <h4 class="font-bold mb-2">Principles of Inheritance and Variation Resources</h4>
+                    <ul class="list-disc pl-5">
+                        <li><a href="#" class="text-blue-500 hover:underline">Mendelian Genetics</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Chromosomal Theory of Inheritance</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Genetic Disorders</a></li>
+                        <li><a href="#" class="text-blue-500 hover:underline">Population Genetics</a></li>
+                    </ul>
+                `
+            }
+        ];
+
+        function getDiscountFactor(category) {
+            switch (category) {
+                case 'bpl': return 0.1;
+                case 'sc': return 0.3;
+                case 'st': return 0.2;
+                case 'obc': return 0.5;
+                case 'ews': return 0.4;
+                case 'minority': return 0.6;
+                case 'disabled': return 0.3;
+                default: return 1;
+            }
+        }
+
+        function updateCourseDisplay() {
+            const courseContainer = document.getElementById('courseContainer');
+            const category = document.getElementById('categorySelect').value;
+            const discountFactor = getDiscountFactor(category);
+
+            courseContainer.innerHTML = '';
+
+            courses.forEach((course, index) => {
+                const adjustedPrice = Math.round(course.basePrice * discountFactor);
+                const priceDisplay = course.status === "Free" ? "Free" : `₹${adjustedPrice.toLocaleString('en-IN')}`;
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-lg overflow-hidden animate-fadeIn transform transition-all duration-300 hover:scale-105';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                let cardContent = `
+                    <div class="p-4 ${course.status === 'Premium' ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white' : 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white'}">
+                        <h3 class="text-xl font-bold mb-2">${course.name}</h3>
+                        <p class="text-sm">${course.instructor}</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="px-3 py-1 rounded-full text-sm font-semibold ${course.status === 'Premium' ? 'bg-yellow-400 text-gray-800' : 'bg-green-400 text-white'} animate-pulse">
+                                ${course.status}
+                            </span>
+                            <span class="font-bold text-lg ${course.status === 'Premium' ? 'text-blue-600' : 'text-green-600'}">
+                                ${priceDisplay}
+                            </span>
+                        </div>
+                        <p class="mb-2"><i class="fas fa-book mr-2 animate-bounce"></i><strong>Textbook:</strong> ${course.textbook}</p>
+                        <p class="mb-2"><i class="fas fa-user-tie mr-2 animate-wave"></i><strong>Instructor:</strong> ${course.instructor}</p>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2 animate-pulse"></i><strong>Email:</strong> ${course.email}</p>
+                        <p class="mb-2"><i class="fas fa-phone mr-2 animate-rotate"></i><strong>Phone:</strong> ${course.phone}</p>
+                        <p class="mb-2"><i class="fas fa-headset mr-2 animate-pulse"></i><strong>24/7 Support:</strong> Available</p>
+                `;
+
+                if (course.status === 'Premium') {
+                    cardContent += `
+                        <p class="mb-2"><i class="fas fa-video mr-2 animate-pulse"></i><strong>Video Lecture:</strong> <a href="${course.videoLecture}" class="text-blue-500 hover:underline" target="_blank">Watch</a></p>
+                        <p class="mb-2"><i class="fas fa-file-pdf mr-2 animate-bounce"></i><strong>PDF Notes:</strong> <a href="${course.pdfNotes}" class="text-blue-500 hover:underline" target="_blank">Download</a></p>
+                        <p class="mb-2"><i class="fas fa-question-circle mr-2 animate-wave"></i><strong>Doubt Session:</strong> ${course.doubtSession}</p>
+                    `;
+                } else {
+                    cardContent += `
+                        <p class="mb-2"><i class="fas fa-link mr-2 animate-pulse"></i><strong>Resource Link:</strong> <a href="#" class="text-blue-500 hover:underline" onclick="showResources('${course.name}')">Access</a></p>
+                        <p class="mb-2"><i class="fas fa-project-diagram mr-2 animate-wave"></i><strong>Related Subjects:</strong> ${course.relatedSubjects.join(', ')}</p>
+                    `;
+                }
+
+                cardContent += `
+                    <p class="mb-2"><i class="fas fa-file-alt mr-2 animate-bounce"></i><strong>Previous Year Papers:</strong></p>
+                    <p class="ml-6">
+                        <a href="#" class="text-blue-500 hover:underline" onclick="showQuestionPaper('${course.name}', 'AP')">AP</a> | 
+                        <a href="#" class="text-blue-500 hover:underline" onclick="showQuestionPaper('${course.name}', 'TS')">TS</a>
+                    </p>
+                    </div>
+                `;
+
+                card.innerHTML = cardContent;
+                courseContainer.appendChild(card);
+            });
+        }
+
+        function showQuestionPaper(courseName, state) {
+            const course = courses.find(c => c.name === courseName);
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            modalTitle.textContent = `${state} Question Paper for ${courseName}`;
+            modalContent.innerHTML = `
+                <p>This is a sample question paper for ${courseName} (${state}).</p>
+                <ol class="list-decimal pl-5 mt-4">
+                    <li>What is the importance of ${courseName} in modern zoology?</li>
+                    <li>Describe the key concepts related to ${courseName}.</li>
+                    <li>Explain the evolutionary significance of ${courseName}.</li>
+                    <li>How does ${courseName} relate to other areas of biology?</li>
+                    <li>Discuss any recent advancements in the field of ${courseName}.</li>
+                </ol>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        function showResources(courseName) {
+            const course = courses.find(c => c.name === courseName);
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            modalTitle.textContent = `Resources for ${courseName}`;
+            modalContent.innerHTML = course.resourceContent || 'No resources available for this course.';
+
+            modal.classList.remove('hidden');
+        }
+
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('modal').classList.add('hidden');
+        });
+
+        document.getElementById('categorySelect').addEventListener('change', updateCourseDisplay);
+        updateCourseDisplay(); // Initial course display
+    </script>
+</body>
+</html>

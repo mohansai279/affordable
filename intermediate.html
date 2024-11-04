@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediate Student Dashboard</title>
+    <style>
+        /* Base Styling */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; line-height: 1.6; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section { background-color: #fff; padding: 20px; margin-bottom: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        /* Card Grid Styling */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: #fff; border-radius: 5px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .btn { display: inline-block; background-color: #007bff; color: #fff; padding: 10px 15px; text-decoration: none; border-radius: 5px; cursor: pointer; }
+        .btn:hover { background-color: #0056b3; }
+
+        /* Tabs and Progress Bars */
+        .tabs { display: flex; margin-bottom: 20px; }
+        .tab { padding: 10px 15px; cursor: pointer; background-color: #e9ecef; border: 1px solid #dee2e6; }
+        .tab.active { background-color: #fff; border-bottom: none; }
+        .progress-bar { width: 100%; background-color: #e0e0e0; padding: 3px; border-radius: 3px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2); }
+        .progress-bar-fill { display: block; height: 22px; background-color: #659cef; border-radius: 3px; transition: width 500ms ease-in-out; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome and Quick Access -->
+        <header class="section">
+            <h1>Intermediate Dashboard - Grade 11/12</h1>
+            <div id="greeting">Welcome back, Student!</div>
+            <nav>
+                <a href="#" class="btn">Home</a>
+                <a href="#" class="btn">My Subjects</a>
+                <a href="#" class="btn">Assignments</a>
+                <a href="#" class="btn">Exams & Results</a>
+                <a href="#" class="btn">Resources</a>
+            </nav>
+        </header>
+
+        <!-- Academics Section (Subjects Overview) -->
+        <section class="section" id="subjects-overview">
+            <h2>My Subjects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Mathematics</h3>
+                    <p>Current Grade: 85%</p>
+                    <a href="#" class="btn">View Lessons</a>
+                    <a href="#" class="btn">Assignments</a>
+                </div>
+                <div class="card">
+                    <h3>Physics</h3>
+                    <p>Current Grade: 78%</p>
+                    <a href="#" class="btn">View Lessons</a>
+                    <a href="#" class="btn">Assignments</a>
+                </div>
+                <div class="card">
+                    <h3>Chemistry</h3>
+                    <p>Current Grade: 82%</p>
+                    <a href="#" class="btn">View Lessons</a>
+                    <a href="#" class="btn">Assignments</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assignments Section -->
+        <section class="section" id="assignments">
+            <h2>Assignments</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Math Assignment</h3>
+                    <p>Due Date: 2023-11-10</p>
+                    <div class="progress-bar">
+                        <span class="progress-bar-fill" style="width: 60%;"></span>
+                    </div>
+                    <p>60% Complete</p>
+                    <a href="#" class="btn">View Assignment</a>
+                </div>
+                <div class="card">
+                    <h3>Physics Lab Report</h3>
+                    <p>Due Date: 2023-11-15</p>
+                    <div class="progress-bar">
+                        <span class="progress-bar-fill" style="width: 30%;"></span>
+                    </div>
+                    <p>30% Complete</p>
+                    <a href="#" class="btn">View Assignment</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exams & Results Section -->
+        <section class="section" id="exams-results">
+            <h2>Exams & Results</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Midterm Exam</h3>
+                    <p>Date: 2023-11-20</p>
+                    <a href="#" class="btn">View Details</a>
+                </div>
+                <div class="card">
+                    <h3>Final Exam Results</h3>
+                    <p>Mathematics: 88%</p>
+                    <p>Physics: 78%</p>
+                    <p>Chemistry: 82%</p>
+                    <a href="#" class="btn">Download Report</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Resources Section -->
+        <section class="section" id="career-resources">
+            <h2>Career Resources</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>University Preparation</h3>
+                    <a href="#" class="btn">Explore Programs</a>
+                </div>
+                <div class="card">
+                    <h3>Career Planning</h3>
+                    <a href="#" class="btn">Start Planning</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Communication Hub -->
+        <section class="section" id="communication-hub">
+            <h2>Communication Hub</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Message Your Teachers</h3>
+                    <a href="#" class="btn">Open Messages</a>
+                </div>
+                <div class="card">
+                    <h3>Class Forum</h3>
+                    <a href="#" class="btn">Join Forum</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // JavaScript for Dynamic Greeting
+        document.addEventListener('DOMContentLoaded', function() {
+            const greeting = document.getElementById('greeting');
+            const hour = new Date().getHours();
+            if (hour < 12) greeting.textContent = 'Good morning, Student!';
+            else if (hour < 18) greeting.textContent = 'Good afternoon, Student!';
+            else greeting.textContent = 'Good evening, Student!';
+        });
+    </script>
+</body>
+</html>

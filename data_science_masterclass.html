@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Masterclass</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Light cyan background for a calming feel */
+            margin: 0;
+            padding: 50px;
+            text-align: center;
+        }
+        h1 {
+            color: #ff5722;
+            margin-bottom: 30px;
+            font-size: 2.5em; /* Increased font size for title */
+            text-shadow: 2px 2px #e1bee7; /* Soft text shadow for depth */
+        }
+        label {
+            font-size: 20px;
+            color: #00796b; /* Teal color for labels */
+            margin-top: 20px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        select {
+            padding: 12px;
+            font-size: 18px;
+            margin: 15px auto;
+            display: block;
+            width: 220px;
+            border-radius: 6px;
+            border: 1px solid #00897b; /* Teal border */
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            margin-top: 25px;
+            background-color: #ff7043; /* Vibrant orange */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #d84315; /* Darker orange on hover */
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        /* New GIFs added */
+        .education-gif {
+            width: 100px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        /* Footer style */
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #616161;
+        }
+    </style>
+    <script>
+        function showYearSelect() {
+            const selectedStream = document.getElementById('streamSelect').value;
+            const yearSelect = document.getElementById('yearSelect');
+
+            if (selectedStream) {
+                yearSelect.style.display = 'block'; // Show year select dropdown
+            } else {
+                yearSelect.style.display = 'none'; // Hide if no stream is selected
+            }
+        }
+
+        function goToYearPage() {
+            const selectedStream = document.getElementById('streamSelect').value;
+            const selectedYear = document.getElementById('yearSelect').value;
+
+            if (selectedStream && selectedYear) {
+                if (selectedStream === "MPC" && selectedYear === "first_year") {
+                    window.location.href = "first_year.html";
+                } else if (selectedStream === "MPC" && selectedYear === "second_year") {
+                    window.location.href = "second_year.html";
+                } else if (selectedStream === "BIPC" && selectedYear === "first_year") {
+                    window.location.href = "bipc_first.html";
+                } else if (selectedStream === "BIPC" && selectedYear === "second_year") {
+                    window.location.href = "bipc_second.html";
+                }
+            } else {
+                alert("Please select a stream and a year.");
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Select Your Stream for Intermediate</h1>
+
+    <!-- Replace this with a valid educational GIF -->
+    <img src="https://example.com/your-education-gif1.gif" alt="Education GIF" class="education-gif">
+
+    <label for="streamSelect">Choose Stream:</label>
+    <select id="streamSelect" name="streamSelect" onchange="showYearSelect()">
+        <option value="">--Select Stream--</option>
+        <option value="MPC">MPC</option>
+        <option value="BIPC">BIPC</option>
+    </select>
+
+    <label for="yearSelect">Choose Year:</label>
+    <select id="yearSelect" name="yearSelect" style="display: none;">
+        <option value="">--Select Year--</option>
+        <option value="first_year">1st Year</option>
+        <option value="second_year">2nd Year</option>
+    </select>
+
+    <button onclick="goToYearPage()">Go to Year</button>
+</div>
+
+<!-- Replace this with another valid educational GIF -->
+<img src="https://example.com/your-education-gif2.gif" alt="Learning GIF" class="education-gif">
+
+<footer>
+    © 2024 Data Science Masterclass. All rights reserved.
+</footer>
+
+</body>
+</html>

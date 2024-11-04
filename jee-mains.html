@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE Mains | Educational Platform</title>
+    <style>
+        /* Common styling */
+        body, h1, h2 {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f6ff;
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .resource-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .resource-item {
+            background-color: #e1bee7;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .resource-item:hover {
+            transform: translateY(-5px);
+        }
+        .resource-item a, .resource-item button {
+            padding: 10px 20px;
+            background-color: #8e24aa;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .resource-item a:hover, .resource-item button:hover {
+            background-color: #6a1b9a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JEE Mains Preparation</h1>
+        <div class="content-section">
+            <h2>Free Resources</h2>
+            <div class="resource-list">
+                <div class="resource-item">
+                    <h3>JEE Mains Syllabus</h3>
+                    <a href="#">Download</a>
+                </div>
+                <div class="resource-item">
+                    <h3>Previous Year Papers</h3>
+                    <a href="#">Download</a>
+                </div>
+                <div class="resource-item">
+                    <h3>Formula Cheat Sheets</h3>
+                    <a href="#">Download</a>
+                </div>
+                <div class="resource-item">
+                    <h3>Physics Problem Sets</h3>
+                    <a href="#">Download</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Premium Content</h2>
+            <div class="resource-list">
+                <div class="resource-item">
+                    <h3>Video Lectures</h3>
+                    <button>Add to Cart (₹799)</button>
+                </div>
+                <div class="resource-item">
+                    <h3>Advanced Mock Tests</h3>
+                    <button>Add to Cart (₹599)</button>
+                </div>
+                <div class="resource-item">
+                    <h3>1 Month Crash Course</h3>
+                    <button>Add to Cart (₹1199)</button>
+                </div>
+                <div class="resource-item">
+                    <h3>Complete Study Package</h3>
+                    <button>Add to Cart (₹1499)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

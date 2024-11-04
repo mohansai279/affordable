@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Dashboard</title>
+    <style>
+        /* Base and Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+        .container {
+            width: 85%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #fff;
+            padding: 1.2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        header h1 {
+            float: left;
+        }
+        nav {
+            float: right;
+        }
+        nav ul {
+            list-style: none;
+        }
+        nav li {
+            display: inline;
+            margin-left: 1rem;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #ffdd57;
+        }
+
+        /* Grade Selection Styles */
+        .grade-selection {
+            padding: 1rem 0;
+        }
+        .grade-selection h2 {
+            margin-bottom: 0.5rem;
+        }
+        .grade-cards {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
+            gap: 1rem;
+        }
+        .grade-card {
+            background: #ffffff;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: inherit; /* Inherit color to make text readable */
+        }
+        .grade-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Quick Access Button Styles */
+        .quick-access {
+            margin-top: 2rem;
+        }
+        .quick-access-buttons {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .quick-access-button {
+            background: #ffdd57;
+            color: #333;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            margin: 0.5rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .quick-access-button:hover {
+            background: #f1c40f;
+            transform: scale(1.05);
+        }
+
+        /* Announcements Carousel Styles */
+        .announcements {
+            margin-top: 2rem;
+            background: linear-gradient(135deg, #ff8e53 0%, #fe6b8b 100%);
+            color: #fff;
+            padding: 1.2rem;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .announcement {
+            display: none;
+        }
+        .announcement.active {
+            display: block;
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .carousel-button.prev {
+            left: 10px;
+        }
+        .carousel-button.next {
+            right: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1, nav {
+                float: none;
+                text-align: center;
+            }
+            nav ul {
+                margin-top: 1rem;
+            }
+            .grade-cards {
+                grid-template-columns: repeat(2, 1fr); /* 2 cards per row on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>EduDashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#grades">Grades</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#community">Community</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="grade-selection" id="grades">
+            <h2>Select Your Class</h2>
+            <div class="grade-cards">
+                <a href="aclass1.html" class="grade-card" style="background-color: #e74c3c;">Class 1</a>
+                <a href="bclass2.html" class="grade-card" style="background-color: #3498db;">Class 2</a>
+                <a href="dclass3.html" class="grade-card" style="background-color: #2ecc71;">Class 3</a>
+                <a href="eclass4.html" class="grade-card" style="background-color: #f1c40f;">Class 4</a>
+                <a href="fclass5.html" class="grade-card" style="background-color: #9b59b6;">Class 5</a>
+                <a href="gclass6.html" class="grade-card" style="background-color: #e67e22;">Class 6</a>
+                <a href="hclass7.html" class="grade-card" style="background-color: #1abc9c;">Class 7</a>
+                <a href="iclass8.html" class="grade-card" style="background-color: #34495e;">Class 8</a>
+                <a href="jclass9.html" class="grade-card" style="background-color: #d35400;">Class 9</a>
+                <a href="kclass10.html" class="grade-card" style="background-color: #c0392b;">Class 10</a>
+            </div>
+        </section>
+
+        <section class="quick-access" id="resources">
+            <h2>Quick Access</h2>
+            <div class="quick-access-buttons">
+                <button class="quick-access-button">Competitive Exams</button>
+                <button class="quick-access-button">Skill Building</button>
+                <button class="quick-access-button">Community Resources</button>
+            </div>
+        </section>
+
+        <section class="announcements">
+            <h2>Announcements</h2>
+            <div class="carousel">
+                <div class="announcement active">New Math resources added for Class 8!</div>
+                <div class="announcement">Upcoming Science fair - Register now!</div>
+                <div class="announcement">Community webinar on exam preparation this Saturday</div>
+            </div>
+            <button class="carousel-button prev">&lt;</button>
+            <button class="carousel-button next">&gt;</button>
+        </section>
+    </main>
+
+    <script>
+        // Announcements Carousel
+        const announcements = document.querySelectorAll('.announcement');
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const nextButton = document.querySelector('.carousel-button.next');
+        let currentAnnouncementIndex = 0;
+
+        function showAnnouncement(index) {
+            announcements.forEach(announcement => announcement.classList.remove('active'));
+            announcements[index].classList.add('active');
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentAnnouncementIndex = (currentAnnouncementIndex - 1 + announcements.length) % announcements.length;
+            showAnnouncement(currentAnnouncementIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentAnnouncementIndex = (currentAnnouncementIndex + 1) % announcements.length;
+            showAnnouncement(currentAnnouncementIndex);
+        });
+
+        // Auto-rotate announcements
+        setInterval(() => {
+            currentAnnouncementIndex = (currentAnnouncementIndex + 1) % announcements.length;
+            showAnnouncement(currentAnnouncementIndex);
+        }, 5000);
+    </script>
+</body>
+</html>

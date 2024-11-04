@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #333;
+            position: relative;
+        }
+
+        /* Request for Demo Button */
+        .demo-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .demo-button:hover {
+            background-color: #e64a19;
+        }
+
+        .auth-container {
+            background-color: #ffffff;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .auth-container h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #333;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .toggle-buttons button {
+            flex: 1;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .toggle-buttons .active {
+            background-color: #ff5722;
+            color: white;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .submit-btn {
+            padding: 12px 30px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #e64a19;
+        }
+
+        /* Footer for small links */
+        .auth-footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .auth-footer a {
+            color: #ff5722;
+            text-decoration: none;
+        }
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Request for Demo Button -->
+    <a href="demo-request.html" class="demo-button">Request for Demo</a>
+
+    <!-- Authentication Container -->
+    <div class="auth-container">
+        <h2 id="formTitle">Log In</h2>
+
+        <!-- Toggle Buttons for Login and Sign-Up -->
+        <div class="toggle-buttons">
+            <button id="loginBtn" class="active" onclick="toggleForm('login')">Log In</button>
+            <button id="signupBtn" onclick="toggleForm('signup')">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" style="display: block;">
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit" class="submit-btn">Log In</button>
+            <p class="auth-footer"><a href="#">Forgot Password?</a></p>
+        </form>
+
+        <!-- Sign-Up Form -->
+        <form id="signupForm" style="display: none;">
+            <div class="form-group">
+                <label for="signupFirstName">First Name *</label>
+                <input type="text" id="signupFirstName" required>
+            </div>
+            <!-- Additional sign-up form fields -->
+            <button type="submit" class="submit-btn">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to toggle between Login and Sign-Up forms
+        function toggleForm(formType) {
+            const loginForm = document.getElementById("loginForm");
+            const signupForm = document.getElementById("signupForm");
+            const formTitle = document.getElementById("formTitle");
+            const loginBtn = document.getElementById("loginBtn");
+            const signupBtn = document.getElementById("signupBtn");
+
+            if (formType === "login") {
+                loginForm.style.display = "block";
+                signupForm.style.display = "none";
+                formTitle.textContent = "Log In";
+                loginBtn.classList.add("active");
+                signupBtn.classList.remove("active");
+            } else {
+                loginForm.style.display = "none";
+                signupForm.style.display = "block";
+                formTitle.textContent = "Sign Up";
+                signupBtn.classList.add("active");
+                loginBtn.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>

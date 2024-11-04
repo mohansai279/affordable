@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botany 2nd Year Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes wave {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(5px) rotate(5deg); }
+            50% { transform: translateX(0) rotate(0deg); }
+            75% { transform: translateX(-5px) rotate(-5deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+        .animate-slideIn { animation: slideIn 0.5s ease-out; }
+        .animate-pulse { animation: pulse 2s infinite; }
+        .animate-rainbow {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffecd2, #fcb69f, #ff9a9e);
+            background-size: 400% 400%;
+            animation: rainbow 15s ease infinite;
+        }
+        .animate-rotate { animation: rotate 10s linear infinite; }
+        .animate-bounce { animation: bounce 2s infinite; }
+        .animate-wave { animation: wave 2s infinite; }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-green-100 via-blue-100 to-purple-100 min-h-screen font-sans">
+    <div class="container mx-auto p-6">
+        <h1 class="text-5xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600 animate-rainbow p-4">Botany 2nd Year Course - Chapters</h1>
+        
+        <div class="text-center mb-4 text-2xl font-bold text-gray-800 animate-bounce">
+            Total Maximum Marks for Botany: 60
+        </div>
+
+        <div class="mb-6 animate-slideIn">
+            <label for="categorySelect" class="block text-lg font-medium text-gray-700 mb-2">Select your category:</label>
+            <select id="categorySelect" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-gray-700">
+                <option value="general">General</option>
+                <option value="bpl">Below Poverty Line (BPL)</option>
+                <option value="sc">Schedule Caste (SC)</option>
+                <option value="st">Schedule Tribe (ST)</option>
+                <option value="obc">Other Backward Class (OBC)</option>
+                <option value="ews">Economically Weaker Section (EWS)</option>
+                <option value="minority">Minority</option>
+                <option value="disabled">Disabled</option>
+            </select>
+        </div>
+
+        <div id="courseContainer" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Course cards will be dynamically populated here -->
+        </div>
+    </div>
+
+    <!-- Modal for displaying question papers and resources -->
+    <div id="modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modalTitle"></h3>
+                <div class="mt-2 px-7 py-3" id="modalContent">
+                    <!-- Content will be dynamically populated here -->
+                </div>
+                <div class="items-center px-4 py-3">
+                    <button id="closeModal" class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const courses = [
+            { 
+                name: "Plant Physiology", 
+                status: "Premium", 
+                basePrice: 350, 
+                instructor: "Dr. Sarah Johnson",
+                email: "sarah.johnson@example.com",
+                phone: "+91 98765 43210",
+                textbook: "Advanced Plant Physiology by S. Johnson",
+                videoLecture: "https://botany.example.com/video/plant-physiology",
+                pdfNotes: "https://botany.example.com/pdf/plant-physiology.pdf",
+                doubtSession: "Every Monday, 4-6 PM",
+                questionPapers: {
+                    AP: "https://botany.example.com/papers/ap/plant-physiology",
+                    TS: "https://botany.example.com/papers/ts/plant-physiology"
+                }
+            },
+            { 
+                name: "Genetics", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Prof. Michael Chen",
+                email: "michael.chen@example.com",
+                phone: "+91 98765 43211",
+                textbook: "Fundamentals of Plant Genetics by M. Chen",
+                resourceLink: "https://botany.example.com/resources/genetics",
+                relatedSubjects: ["Molecular Biology", "Evolution"],
+                questionPapers: {
+                    AP: "https://botany.example.com/papers/ap/genetics",
+                    TS: "https://botany.example.com/papers/ts/genetics"
+                },
+                resourceContent: `
+                    <h4 class="font-bold mb-2">Genetics Resources</h4>
+                    <ul class="list-disc pl-5">
+                        <li><a href="#" class="text-green-500 hover:underline">Mendelian Genetics in Plants</a></li>
+                        <li><a href="#" class="text-green-500 hover:underline">Plant Genome Structure</a></li>
+                        <li><a href="#" class="text-green-500 hover:underline">Gene Expression in Plants</a></li>
+                        <li><a href="#" class="text-green-500 hover:underline">Plant Breeding and Genetics</a></li>
+                    </ul>
+                `
+            },
+            { 
+                name: "Molecular Biology", 
+                status: "Premium", 
+                basePrice: 400, 
+                instructor: "Dr. Emily Rodriguez",
+                email: "emily.rodriguez@example.com",
+                phone: "+91 98765 43212",
+                textbook: "Plant Molecular Biology by E. Rodriguez",
+                videoLecture: "https://botany.example.com/video/molecular-biology",
+                pdfNotes: "https://botany.example.com/pdf/molecular-biology.pdf",
+                doubtSession: "Every Wednesday, 3-5 PM",
+                questionPapers: {
+                    AP: "https://botany.example.com/papers/ap/molecular-biology",
+                    TS: "https://botany.example.com/papers/ts/molecular-biology"
+                }
+            },
+            { 
+                name: "Biotechnology", 
+                status: "Premium", 
+                basePrice: 380, 
+                instructor: "Prof. David Kumar",
+                email: "david.kumar@example.com",
+                phone: "+91 98765 43213",
+                textbook: "Plant Biotechnology: Principles and Applications by D. Kumar",
+                videoLecture: "https://botany.example.com/video/biotechnology",
+                pdfNotes: "https://botany.example.com/pdf/biotechnology.pdf",
+                doubtSession: "Every Friday, 4-6 PM",
+                questionPapers: {
+                    AP: "https://botany.example.com/papers/ap/biotechnology",
+                    TS: "https://botany.example.com/papers/ts/biotechnology"
+                }
+            },
+            { 
+                name: "Plants", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Dr. Lisa Patel",
+                email: "lisa.patel@example.com",
+                phone: "+91 98765 43214",
+                textbook: "Diversity of Plants by L. Patel",
+                resourceLink: "https://botany.example.com/resources/plants",
+                relatedSubjects: ["Taxonomy", "Ecology"],
+                questionPapers: {
+                    AP: "https://botany.example.com/papers/ap/plants",
+                    TS: "https://botany.example.com/papers/ts/plants"
+                },
+                resourceContent: `
+                    <h4 class="font-bold mb-2">Plants Resources</h4>
+                    <ul class="list-disc pl-5">
+                        <li><a href="#" class="text-green-500 hover:underline">Plant Classification</a></li>
+                        <li><a href="#" class="text-green-500 hover:underline">Plant Anatomy and Morphology</a></li>
+                        <li><a href="#" class="text-green-500 hover:underline">Plant Adaptations</a></li>
+                        <li><a href="#" class="text-green-500 hover:underline">Rare and Endangered Plant Species</a></li>
+                    </ul>
+                `
+            },
+            { 
+                name: "Microbes and Human Welfare", 
+                status: "Premium", 
+                basePrice: 300, 
+                instructor: "Prof. Anita Desai",
+                email: "anita.desai@example.com",
+                phone: "+91 98765 43215",
+                textbook: "Microbiology and Plant-Microbe Interactions by A. Desai",
+                videoLecture: "https://botany.example.com/video/microbes-human-welfare",
+                pdfNotes: "https://botany.example.com/pdf/microbes-human-welfare.pdf",
+                doubtSession: "Every Tuesday, 4-6 PM",
+                questionPapers: {
+                    AP: "https://botany.example.com/papers/ap/microbes-human-welfare",
+                    TS: "https://botany.example.com/papers/ts/microbes-human-welfare"
+                }
+            }
+        ];
+
+        function getDiscountFactor(category) {
+            switch (category) {
+                case 'bpl': return 0.1;
+                case 'sc': return 0.3;
+                case 'st': return 0.2;
+                case 'obc': return 0.5;
+                case 'ews': return 0.4;
+                case 'minority': return 0.6;
+                case 'disabled': return 0.3;
+                default: return 1;
+            }
+        }
+
+        function updateCourseDisplay() {
+            const courseContainer = document.getElementById('courseContainer');
+            const category = document.getElementById('categorySelect').value;
+            const discountFactor = getDiscountFactor(category);
+
+            courseContainer.innerHTML = '';
+
+            courses.forEach((course, index) => {
+                const adjustedPrice = Math.round(course.basePrice * discountFactor);
+                const priceDisplay = course.status === "Free" ? "Free" : `₹${adjustedPrice.toLocaleString('en-IN')}`;
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-lg overflow-hidden animate-fadeIn transform transition-all duration-300 hover:scale-105';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                let cardContent = `
+                    <div class="p-4 ${course.status === 'Premium' ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white' : 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white'}">
+                        <h3 class="text-xl font-bold mb-2">${course.name}</h3>
+                        <p class="text-sm">${course.instructor}</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="px-3 py-1 rounded-full text-sm font-semibold ${course.status === 'Premium' ? 'bg-yellow-400 text-gray-800' : 'bg-green-400 text-white'} animate-pulse">
+                                ${course.status}
+                            </span>
+                            <span class="font-bold text-lg ${course.status === 'Premium' ? 'text-blue-600' : 'text-green-600'}">
+                                ${priceDisplay}
+                            </span>
+                        </div>
+                        <p class="mb-2"><i class="fas fa-book mr-2 animate-bounce"></i><strong>Textbook:</strong> ${course.textbook}</p>
+                        <p class="mb-2"><i class="fas fa-user-tie mr-2  animate-wave"></i><strong>Instructor:</strong> ${course.instructor}</p>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2 animate-pulse"></i><strong>Email:</strong> ${course.email}</p>
+                        <p class="mb-2"><i class="fas fa-phone mr-2 animate-rotate"></i><strong>Phone:</strong> ${course.phone}</p>
+                        <p class="mb-2"><i class="fas fa-headset mr-2 animate-pulse"></i><strong>24/7 Support:</strong> Available</p>
+                `;
+
+                if (course.status === 'Premium') {
+                    cardContent += `
+                        <p class="mb-2"><i class="fas fa-video mr-2 animate-pulse"></i><strong>Video Lecture:</strong> <a href="${course.videoLecture}" class="text-blue-500 hover:underline" target="_blank">Watch</a></p>
+                        <p class="mb-2"><i class="fas fa-file-pdf mr-2 animate-bounce"></i><strong>PDF Notes:</strong> <a href="${course.pdfNotes}" class="text-blue-500 hover:underline" target="_blank">Download</a></p>
+                        <p class="mb-2"><i class="fas fa-question-circle mr-2 animate-wave"></i><strong>Doubt Session:</strong> ${course.doubtSession}</p>
+                    `;
+                } else {
+                    cardContent += `
+                        <p class="mb-2"><i class="fas fa-link mr-2 animate-pulse"></i><strong>Resource Link:</strong> <a href="#" class="text-blue-500 hover:underline" onclick="showResources('${course.name}')">Access</a></p>
+                        <p class="mb-2"><i class="fas fa-project-diagram mr-2 animate-wave"></i><strong>Related Subjects:</strong> ${course.relatedSubjects.join(', ')}</p>
+                    `;
+                }
+
+                cardContent += `
+                    <p class="mb-2"><i class="fas fa-file-alt mr-2 animate-bounce"></i><strong>Previous Year Papers:</strong></p>
+                    <p class="ml-6">
+                        <a href="#" class="text-blue-500 hover:underline" onclick="showQuestionPaper('${course.name}', 'AP')">AP</a> | 
+                        <a href="#" class="text-blue-500 hover:underline" onclick="showQuestionPaper('${course.name}', 'TS')">TS</a>
+                    </p>
+                    </div>
+                `;
+
+                card.innerHTML = cardContent;
+                courseContainer.appendChild(card);
+            });
+        }
+
+        function showQuestionPaper(courseName, state) {
+            const course = courses.find(c => c.name === courseName);
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            modalTitle.textContent = `${state} Question Paper for ${courseName}`;
+            modalContent.innerHTML = `
+                <p>This is a sample question paper for ${courseName} (${state}).</p>
+                <ol class="list-decimal pl-5 mt-4">
+                    <li>What is the importance of ${courseName} in modern botany?</li>
+                    <li>Describe the key concepts related to ${courseName}.</li>
+                    <li>Explain the significance of ${courseName} in plant biology.</li>
+                    <li>How does ${courseName} relate to other areas of botany?</li>
+                    <li>Discuss any recent advancements in the field of ${courseName}.</li>
+                </ol>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        function showResources(courseName) {
+            const course = courses.find(c => c.name === courseName);
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            modalTitle.textContent = `Resources for ${courseName}`;
+            modalContent.innerHTML = course.resourceContent || 'No resources available for this course.';
+
+            modal.classList.remove('hidden');
+        }
+
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('modal').classList.add('hidden');
+        });
+
+        document.getElementById('categorySelect').addEventListener('change', updateCourseDisplay);
+        updateCourseDisplay(); // Initial course display
+    </script>
+</body>
+</html>

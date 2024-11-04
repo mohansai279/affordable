@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics 1A</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out;
+        }
+        .animate-slideIn {
+            animation: slideIn 0.5s ease-out;
+        }
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        .animate-rainbow {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffecd2, #fcb69f, #ff9a9e);
+            background-size: 400% 400%;
+            animation: rainbow 15s ease infinite;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 min-h-screen font-sans">
+    <div class="container mx-auto p-6">
+        <h1 class="text-5xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 animate-rainbow p-4">Mathematics 1A - Chapters</h1>
+        
+        <div class="mb-6 animate-slideIn">
+            <label for="categorySelect" class="block text-lg font-medium text-gray-700 mb-2">Select your category:</label>
+            <select id="categorySelect" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-gray-700">
+                <option value="general">General</option>
+                <option value="bpl">Below the poverty line (BPL)</option>
+                <option value="sc">Schedule Caste (SC)</option>
+                <option value="st">Schedule Tribe (ST)</option>
+                <option value="obc">Other Backward Class (OBC)</option>
+                <option value="ews">Economically Weaker Section (EWS)</option>
+                <option value="minority">Minority</option>
+                <option value="disabled">Disabled</option>
+            </select>
+        </div>
+
+        <div id="courseContainer" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Course cards will be dynamically populated here -->
+        </div>
+    </div>
+
+    <script>
+        const courses = [
+            { 
+                name: "Functions", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Prof. A. Sharma",
+                email: "a.sharma@example.com",
+                phone: "+91 98765 43210",
+                textbook: "Introduction to Functions by A. Sharma",
+                resourceLink: "https://example.com/functions-resources"
+            },
+            { 
+                name: "Matrices", 
+                status: "Premium", 
+                basePrice: 200, 
+                instructor: "Dr. R. Gupta",
+                email: "r.gupta@example.com",
+                phone: "+91 98765 43211",
+                textbook: "Advanced Matrices by R. Gupta",
+                videoLecture: "https://example.com/matrices-lecture",
+                pdfNotes: "https://example.com/matrices-notes.pdf",
+                doubtSession: "Every Tuesday, 4-5 PM"
+            },
+            { 
+                name: "Vectors", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Prof. A. Sharma",
+                email: "a.sharma@example.com",
+                phone: "+91 98765 43210",
+                textbook: "Vector Basics by A. Sharma",
+                resourceLink: "https://example.com/vectors-resources"
+            },
+            { 
+                name: "Addition of Vectors", 
+                status: "Premium", 
+                basePrice: 150, 
+                instructor: "Dr. R. Gupta",
+                email: "r.gupta@example.com",
+                phone: "+91 98765 43211",
+                textbook: "Vector Operations by R. Gupta",
+                videoLecture: "https://example.com/vector-addition-lecture",
+                pdfNotes: "https://example.com/vector-addition-notes.pdf",
+                doubtSession: "Every Thursday, 3-4 PM"
+            },
+            { 
+                name: "Trigonometry", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Dr. N. Kumar",
+                email: "n.kumar@example.com",
+                phone: "+91 98765 43212",
+                textbook: "Fundamentals of Trigonometry by N. Kumar",
+                resourceLink: "https://example.com/trigonometry-resources"
+            }
+        ];
+
+        function getDiscountFactor(category) {
+            switch (category) {
+                case 'bpl': return 0.1;
+                case 'sc': return 0.2;
+                case 'st': return 0.2;
+                case 'obc': return 0.5;
+                case 'ews': return 0.3;
+                case 'minority': return 0.4;
+                case 'disabled': return 0.4;
+                default: return 1;
+            }
+        }
+
+        function updateCourseDisplay() {
+            const courseContainer = document.getElementById('courseContainer');
+            const category = document.getElementById('categorySelect').value;
+            const discountFactor = getDiscountFactor(category);
+
+            courseContainer.innerHTML = '';
+
+            courses.forEach((course, index) => {
+                const adjustedPrice = Math.round(course.basePrice * discountFactor);
+                const priceDisplay = course.status === "Free" ? "Free" : `₹${adjustedPrice.toLocaleString('en-IN')}`;
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-lg overflow-hidden animate-fadeIn';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                let cardContent = `
+                    <div class="p-4 ${course.status === 'Premium' ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white' : 'bg-gradient-to-r from-green-400 to-blue-500 text-white'}">
+                        <h3 class="text-xl font-bold mb-2">${course.name}</h3>
+                        <p class="text-sm">${course.instructor}</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="px-3 py-1 rounded-full text-sm font-semibold ${course.status === 'Premium' ? 'bg-yellow-400 text-gray-800' : 'bg-green-400 text-white'} animate-pulse">
+                                ${course.status}
+                            </span>
+                            <span class="font-bold text-lg ${course.status === 'Premium' ? 'text-purple-600' : 'text-green-600'}">
+                                ${priceDisplay}
+                            </span>
+                        </div>
+                        <p class="mb-2"><i class="fas fa-book mr-2"></i><strong>Textbook:</strong> ${course.textbook}</p>
+                        <p class="mb-2"><i class="fas fa-user-tie mr-2"></i><strong>Instructor:</strong> ${course.instructor}</p>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2"></i><strong>Email:</strong> ${course.email}</p>
+                        <p class="mb-2"><i class="fas fa-phone mr-2"></i><strong>Phone:</strong> ${course.phone}</p>
+                        <p class="mb-2"><i class="fas fa-headset mr-2"></i><strong>24/7 Support:</strong> Available</p>
+                `;
+
+                if (course.status === 'Premium') {
+                    cardContent += `
+                        <p class="mb-2"><i class="fas fa-video mr-2"></i><strong>Video Lecture:</strong> <a href="${course.videoLecture}" class="text-blue-500 hover:underline" target="_blank">Watch</a></p>
+                        <p class="mb-2"><i class="fas fa-file-pdf mr-2"></i><strong>PDF Notes:</strong> <a href="${course.pdfNotes}" class="text-blue-500 hover:underline" target="_blank">Download</a></p>
+                        <p class="mb-2"><i class="fas fa-question-circle mr-2"></i><strong>Doubt Session:</strong> ${course.doubtSession}</p>
+                    `;
+                } else {
+                    cardContent += `
+                        <p class="mb-2"><i class="fas fa-link mr-2"></i><strong>Resource Link:</strong> <a href="${course.resourceLink}" class="text-blue-500 hover:underline" target="_blank">Access</a></p>
+                    `;
+                }
+
+                cardContent += `
+                    </div>
+                `;
+
+                card.innerHTML = cardContent;
+                courseContainer.appendChild(card);
+            });
+        }
+
+        document.getElementById('categorySelect').addEventListener('change', updateCourseDisplay);
+        updateCourseDisplay(); // Initial course display
+    </script>
+</body>
+</html>

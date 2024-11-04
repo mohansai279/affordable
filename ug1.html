@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Undergraduate Programs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-3d {
+            transition: all 0.3s ease;
+            transform: translateY(-4px);
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        .btn-3d:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+        .btn-3d:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <div class="container mx-auto p-8">
+        <h1 class="text-4xl font-bold text-center mb-8 animate-float">Enhanced Undergraduate Programs</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div class="card">
+                <h2 class="text-2xl font-semibold mb-4">Select Your Program</h2>
+                <select id="programSelect" class="w-full p-2 rounded bg-white text-gray-800">
+                    <option value="">Choose a Program</option>
+                    <option value="BBA">BBA</option>
+                    <option value="Engineering">Engineering (BE/B.Tech/B.Arch)</option>
+                    <option value="BCA">BCA (Computer Application)</option>
+                    <option value="Designing">Designing (Fashion/Interior/Web)</option>
+                    <option value="BJMC">BJMC (Mass-Communication/Journalism)</option>
+                    <option value="HotelManagement">Hotel Management</option>
+                    <option value="Medical">Medical (BDS/MBBS)</option>
+                    <option value="Finance">Finance (B.Com/CA)</option>
+                    <option value="Arts">Arts (Psychology and Sociology)</option>
+                    <option value="Law">Law (BA LLB/LLB)</option>
+                </select>
+            </div>
+            
+            <div class="card">
+                <h2 class="text-2xl font-semibold mb-4">Select Your Subdomain</h2>
+                <select id="subdomainSelect" class="w-full p-2 rounded bg-white text-gray-800" disabled>
+                    <option value="">Choose a Subdomain</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="backgroundSelection" class="card mb-8 hidden">
+            <h2 class="text-2xl font-semibold mb-4">Select Your Background</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="General">General</button>
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="SC">SC</button>
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="ST">ST</button>
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="OBC">OBC</button>
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="EWS">EWS</button>
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="BPL">BPL</button>
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="Minority">Minority</button>
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="HighAltitude">High Altitude</button>
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="Tribal">Tribal</button>
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="NGO">NGO</button>
+                <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" data-background="PWD">Person with Disability</button>
+            </div>
+        </div>
+        
+        <div id="idVerification" class="card mb-8 hidden">
+            <h2 class="text-2xl font-semibold mb-4">ID Verification</h2>
+            <input type="text" id="idInput" class="w-full p-2 rounded bg-white text-gray-800" placeholder="Enter Caste Certificate Number / Aadhaar ID / Other ID">
+            <button id="verifyId" class="btn-3d bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-4">Verify ID</button>
+        </div>
+        
+        <div id="verificationMessage" class="card mb-8 hidden">
+            <h2 class="text-2xl font-semibold mb-4">Verification Status</h2>
+            <p id="verificationStatus"></p>
+        </div>
+
+        <div id="resources" class="hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="card">
+                    <h2 class="text-2xl font-semibold mb-4">Free Resources</h2>
+                    <ul id="freeResourcesList" class="space-y-2"></ul>
+                </div>
+                <div class="card">
+                    <h2 class="text-2xl font-semibold mb-4">Premium Content</h2>
+                    <ul id="premiumResourcesList" class="space-y-2"></ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="cart" class="card mb-8 hidden">
+            <h2 class="text-2xl font-semibold mb-4">Your Cart</h2>
+            <ul id="cartItems" class="mb-4"></ul>
+            <p id="totalAmount" class="text-xl font-bold"></p>
+            <button id="checkout" class="btn-3d bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mt-4">Proceed to Checkout</button>
+        </div>
+
+        <div id="paymentSection" class="card mb-8 hidden">
+            <h2 class="text-2xl font-semibold mb-4">Payment</h2>
+            <div id="qrcode" class="mb-4"></div>
+            <input type="text" id="upiId" class="w-full p-2 rounded bg-white text-gray-800 mb-4" placeholder="Enter UPI ID">
+            <button id="submitPayment" class="btn-3d bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Submit Payment</button>
+        </div>
+
+        <div id="purchaseSuccess" class="card mb-8 hidden">
+            <h2 class="text-2xl font-semibold mb-4">Purchase Successful</h2>
+            <p>Your purchase was successful. You will be redirected to the tracking page shortly.</p>
+        </div>
+    </div>
+
+    <script>
+        const programs = {
+            "BBA": ["General Management", "Finance", "Marketing", "Human Resource Management"],
+            "Engineering": ["Computer Science", "Electrical Engineering", "Mechanical Engineering", "Civil Engineering", "Architecture"],
+            "BCA": ["Programming", "Database Management", "Networking"],
+            "Designing": ["Fashion Design", "Interior Design", "Web Design"],
+            "BJMC": ["Journalism", "Mass Communication"],
+            "HotelManagement": ["Food and Beverage", "Hospitality Operations"],
+            "Medical": ["BDS", "MBBS"],
+            "Finance": ["B.Com", "CA"],
+            "Arts": ["Psychology", "Sociology"],
+            "Law": ["BA LLB", "LLB"]
+        };
+
+        const resources = {
+            "BBA": {
+                "General Management": {
+                    free: [
+                        { name: "Principles of Management", type: "Textbook", author: "Stephen P. Robbins", link: "#" },
+                        { name: "Organizational Behavior", type: "Notes", author: "John R. Schermerhorn", link: "#" },
+                        { name: "Business Communication", type: "Online Course", author: "Mary Ellen Guffey", link: "#" }
+                    ],
+                    premium: [
+                        { name: "Strategic Management Video Lectures", basePrice: 599.9, type: "Video Course" },
+                        { name: "Business Ethics Case Studies", basePrice: 399.9, type: "Solutions" },
+                        { name: "Leadership Development Program", basePrice: 999.9, type: "Online Tutoring" },
+                        { name: "Management Consulting Mentorship", basePrice: 1499.9, type: "1-to-1 Talk" }
+                    ]
+                },
+                // Add other BBA subdomains here
+            },
+            "Engineering": {
+                "Computer Science": {
+                    free: [
+                        { name: "Introduction to Algorithms", type: "Textbook", author: "Thomas H. Cormen", link: "#" },
+                        { name: "Data Structures and Algorithms", type: "Notes", author: "Robert Sedgewick", link: "#" },
+                        { name: "Web Development Basics", type: "Online Course", author: "Colt Steele", link: "#" }
+                    ],
+                    premium: [
+                        { name: "Advanced Algorithm Design Video Lectures", basePrice: 699.9, type: "Video Course" },
+                        { name: "Machine Learning Projects Kit", basePrice: 899.9, type: "Solutions" },
+                        { name: "Software Engineering Case Studies", basePrice: 499.9, type: "eBook" },
+                        { name: "Full Stack Development Bootcamp", basePrice: 1299.9, type: "Online Tutoring" },
+                        { name: "Tech Interview Preparation", basePrice: 799.9, type: "1-to-1 Talk" }
+                    ]
+                },
+                // Add other Engineering subdomains here
+            },
+            // Add other programs and their resources here
+        };
+
+        let userBackground = '';
+        let userProgram = '';
+        let userSubdomain = '';
+
+        document.getElementById('programSelect').addEventListener('change', function() {
+            const subdomainSelect = document.getElementById('subdomainSelect');
+            subdomainSelect.innerHTML = '<option value="">Choose a Subdomain</option>';
+            userProgram = this.value;
+            if (userProgram) {
+                programs[userProgram].forEach(subdomain => {
+                    const option = document.createElement('option');
+                    option.value = subdomain;
+                    option.textContent = subdomain;
+                    subdomainSelect.appendChild(option);
+                });
+                subdomainSelect.disabled = false;
+            } else {
+                subdomainSelect.disabled = true;
+            }
+        });
+
+        document.getElementById('subdomainSelect').addEventListener('change', function() {
+            userSubdomain = this.value;
+            if (userSubdomain) {
+                document.getElementById('backgroundSelection').classList.remove('hidden');
+            }
+        });
+
+        document.querySelectorAll('#backgroundSelection button').forEach(button => {
+            button.addEventListener('click', function() {
+                userBackground = this.dataset.background;
+                document.getElementById('idVerification').classList.remove('hidden');
+            });
+        });
+
+        document.getElementById('verifyId').addEventListener('click', function() {
+            const idInput = document.getElementById('idInput').value;
+            if (idInput) {
+                document.getElementById('verificationMessage').classList.remove('hidden');
+                document.getElementById('verificationStatus').textContent = "Your ID has been verified. You can now access the resources.";
+                loadResources();
+            } else {
+                alert('Please enter a valid ID');
+            }
+        });
+
+        function loadResources() {
+            const freeResourcesList = document.getElementById('freeResourcesList');
+            const premiumResourcesList = document.getElementById('premiumResourcesList');
+            freeResourcesList.innerHTML = '';
+            premiumResourcesList.innerHTML = '';
+
+            const programResources = resources[userProgram][userSubdomain];
+
+            programResources.free.forEach(resource =>   {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span>${resource.name} (${resource.type}) by ${resource.author}</span>
+                        <a href="${resource.link}" class="btn-3d bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded text-sm">Download</a>
+                    </div>
+                `;
+                freeResourcesList.appendChild(li);
+            });
+
+            programResources.premium.forEach(resource => {
+                const li = document.createElement('li');
+                const price = calculatePrice(resource.basePrice);
+                li.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span>${resource.name} (${resource.type})</span>
+                        <button class="btn-3d bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded text-sm" onclick="addToCart('${resource.name}', ${price})">
+                            Add to Cart (₹${price.toFixed(1)})
+                        </button>
+                    </div>
+                `;
+                premiumResourcesList.appendChild(li);
+            });
+
+            document.getElementById('resources').classList.remove('hidden');
+            document.getElementById('cart').classList.remove('hidden');
+        }
+
+        function calculatePrice(basePrice) {
+            const discountCategories = ['SC', 'ST', 'BPL', 'OBC', 'EWS'];
+            if (discountCategories.includes(userBackground)) {
+                return Math.max(100, Math.min(basePrice * 0.6, 500));
+            } else {
+                return Math.max(300, Math.min(basePrice, 1000));
+            }
+        }
+
+        let cart = [];
+        let total = 0;
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            total += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const totalAmount = document.getElementById('totalAmount');
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - ₹${item.price.toFixed(1)}`;
+                cartItems.appendChild(li);
+            });
+            totalAmount.textContent = `Total: ₹${total.toFixed(1)}`;
+        }
+
+        document.getElementById('checkout').addEventListener('click', function() {
+            if (cart.length > 0) {
+                document.getElementById('paymentSection').classList.remove('hidden');
+                generateQRCode();
+            } else {
+                alert('Your cart is empty. Please add items before checking out.');
+            }
+        });
+
+        function generateQRCode() {
+            const qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: `upi://pay?pa=9494417644@ybl&pn=edunet&am=${total.toFixed(1)}&cu=INR`,
+                width: 128,
+                height: 128
+            });
+        }
+
+        document.getElementById('submitPayment').addEventListener('click', function() {
+            const upiId = document.getElementById('upiId').value;
+            if (upiId) {
+                document.getElementById('purchaseSuccess').classList.remove('hidden');
+                document.getElementById('paymentSection').classList.add('hidden');
+                setTimeout(() => {
+                    window.location.href = 'tracking.html';  // Redirect to tracking page
+                }, 3000);
+            } else {
+                alert('Please enter a valid UPI ID');
+            }
+        });
+    </script>
+</body>
+</html>

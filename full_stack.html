@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes from 1 to 10 standard information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 50px;
+            text-align: center;
+        }
+        h1 {
+            color: #ff5722;
+            font-size: 24px;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function goToClassPage() {
+            const selectedClass = document.getElementById('classes').value;
+            if (selectedClass) {
+                window.location.href = selectedClass + ".html";
+            } else {
+                alert("Please select a class.");
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Classes from 1 to 10 standard information</h1>
+
+    <label for="classes">Choose Class:</label>
+    <select id="classes" name="classes">
+        <option value="">--Select Class--</option>
+        <option value="class1">Class 1</option>
+        <option value="class2">Class 2</option>
+        <option value="class3">Class 3</option>
+        <option value="class4">Class 4</option>
+        <option value="class5">Class 5</option>
+        <option value="class6">Class 6</option>
+        <option value="class7">Class 7</option>
+        <option value="class8">Class 8</option>
+        <option value="class9">Class 9</option>
+        <option value="class10">Class 10</option> <!-- Added Class 10 option -->
+    </select>
+    <br>
+    <button onclick="goToClassPage()">Go to Class</button>
+
+</body>
+</html>

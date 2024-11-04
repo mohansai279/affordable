@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Undergraduate Courses Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out;
+        }
+        .animate-slideIn {
+            animation: slideIn 0.5s ease-out;
+        }
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        .animate-rainbow {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffecd2, #fcb69f, #ff9a9e);
+            background-size: 400% 400%;
+            animation: rainbow 15s ease infinite;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 min-h-screen">
+    <div class="container mx-auto p-4">
+        <h1 class="text-5xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 animate-rainbow p-4">Comprehensive Undergraduate Courses Hub</h1>
+        <div class="flex flex-wrap gap-4 mb-8 justify-center">
+            <select id="domainSelect" class="w-64 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                <option value="">Select a Domain</option>
+            </select>
+            <select id="categorySelect" class="w-64 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                <option value="general">General</option>
+                <option value="bpl">Below the poverty line (BPL)</option>
+                <option value="sc">Schedule Caste (SC)</option>
+                <option value="st">Schedule Tribe (ST)</option>
+                <option value="obc">Other Backward Class (OBC)</option>
+                <option value="ews">Economically Weaker Section (EWS)</option>
+                <option value="minority">Minority</option>
+                <option value="disabled">Disabled</option>
+            </select>
+        </div>
+        <div id="subjectDetails" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+    </div>
+
+    <script>
+        const domains = [
+            { name: "B.Tech", icon: "fa-microchip" },
+            { name: "BA/BSc/BBA", icon: "fa-book" },
+            { name: "B.Com", icon: "fa-chart-line" }
+        ];
+
+        const subjects = {
+            "B.Tech": {
+                "CSE": [
+                    { name: "Data Structures", teacher: "Dr. Rajesh Kumar", textbook: "Data Structures and Algorithms in Python by Goodrich, Tamassia, and Goldwasser", isPremium: true, cost: 500, videoLink: "https://example.com/data-structures-video", pdfLink: "https://example.com/data-structures-notes.pdf", resourceLink: "https://example.com/data-structures-resources" },
+                    { name: "Algorithms", teacher: "Prof. Priya Sharma", textbook: "Introduction to Algorithms by Cormen, Leiserson, Rivest, and Stein", isPremium: true, cost: 500, videoLink: "https://example.com/algorithms-video", pdfLink: "https://example.com/algorithms-notes.pdf", resourceLink: "https://example.com/algorithms-resources" },
+                    { name: "Database Management", teacher: "Dr. Amit Patel", textbook: "Database System Concepts by Silberschatz, Korth, and Sudarshan", isPremium: false, cost: 0, pdfLink: "https://example.com/dbms-notes.pdf", resourceLink: "https://example.com/dbms-resources" }
+                ],
+                "ECE": [
+                    { name: "Circuit Theory", teacher: "Prof. Sunita Gupta", textbook: "Electric Circuits by Nilsson and Riedel", isPremium: true, cost: 450, videoLink: "https://example.com/circuit-theory-video", pdfLink: "https://example.com/circuit-theory-notes.pdf", resourceLink: "https://example.com/circuit-theory-resources" },
+                    { name: "Digital Electronics", teacher: "Dr. Vikram Singh", textbook: "Digital Design by Mano and Ciletti", isPremium: false, cost: 0, pdfLink: "https://example.com/digital-electronics-notes.pdf", resourceLink: "https://example.com/digital-electronics-resources" },
+                    { name: "Signals and Systems", teacher: "Prof. Anita Desai", textbook: "Signals and Systems by Oppenheim and Willsky", isPremium: true, cost: 500, videoLink: "https://example.com/signals-systems-video", pdfLink: "https://example.com/signals-systems-notes.pdf", resourceLink: "https://example.com/signals-systems-resources" }
+                ],
+                "Mechanical": [
+                    { name: "Thermodynamics", teacher: "Dr. Rahul Verma", textbook: "Fundamentals of Engineering Thermodynamics by Moran, Shapiro, Boettner, and Bailey", isPremium: true, cost: 475, videoLink: "https://example.com/thermodynamics-video", pdfLink: "https://example.com/thermodynamics-notes.pdf", resourceLink: "https://example.com/thermodynamics-resources" },
+                    { name: "Fluid Mechanics", teacher: "Prof. Neha Kapoor", textbook: "Fluid Mechanics by Frank M. White", isPremium: true, cost: 500, videoLink: "https://example.com/fluid-mechanics-video", pdfLink: "https://example.com/fluid-mechanics-notes.pdf", resourceLink: "https://example.com/fluid-mechanics-resources" },
+                    { name: "Machine Design", teacher: "Dr. Sanjay Mehta", textbook: "Shigley's Mechanical Engineering Design by Budynas and Nisbett", isPremium: false, cost: 0, pdfLink: "https://example.com/machine-design-notes.pdf", resourceLink: "https://example.com/machine-design-resources" }
+                ]
+            },
+            "BA/BSc/BBA": {
+                "English": [
+                    { name: "British Literature", teacher: "Prof. Aruna Sinha", textbook: "The Norton Anthology of English Literature", isPremium: true, cost: 400, videoLink: "https://example.com/british-literature-video", pdfLink: "https://example.com/british-literature-notes.pdf", resourceLink: "https://example.com/british-literature-resources" },
+                    { name: "American Literature", teacher: "Dr. Deepak Chopra", textbook: "The Norton Anthology of American Literature", isPremium: false, cost: 0, pdfLink: "https://example.com/american-literature-notes.pdf", resourceLink: "https://example.com/american-literature-resources" },
+                    { name: "Linguistics", teacher: "Prof. Meenakshi Iyer", textbook: "An Introduction to Language by Fromkin, Rodman, and Hyams", isPremium: true, cost: 450, videoLink: "https://example.com/linguistics-video", pdfLink: "https://example.com/linguistics-notes.pdf", resourceLink: "https://example.com/linguistics-resources" }
+                ],
+                "Psychology": [
+                    { name: "Cognitive Psychology", teacher: "Prof. Nandini Rao", textbook: "Cognitive Psychology by Sternberg and Sternberg", isPremium: true, cost: 475, videoLink: "https://example.com/cognitive-psychology-video", pdfLink: "https://example.com/cognitive-psychology-notes.pdf", resourceLink: "https://example.com/cognitive-psychology-resources" },
+                    { name: "Social Psychology", teacher: "Dr. Vivek Kulkarni", textbook: "Social Psychology by Myers and Twenge", isPremium: false, cost: 0, pdfLink: "https://example.com/social-psychology-notes.pdf", resourceLink: "https://example.com/social-psychology-resources" },
+                    { name: "Abnormal Psychology", teacher: "Prof. Shweta Menon", textbook: "Abnormal Psychology by Barlow and Durand", isPremium: true, cost: 500, videoLink: "https://example.com/abnormal-psychology-video", pdfLink: "https://example.com/abnormal-psychology-notes.pdf", resourceLink: "https://example.com/abnormal-psychology-resources" }
+                ]
+            },
+            "B.Com": {
+                "Accounting": [
+                    { name: "Financial Accounting", teacher: "Prof. Deepak Gupta", textbook: "Financial Accounting by Weygandt, Kimmel, and Kieso", isPremium: true, cost: 475, videoLink: "https://example.com/financial-accounting-video", pdfLink: "https://example.com/financial-accounting-notes.pdf", resourceLink: "https://example.com/financial-accounting-resources" },
+                    { name: "Cost Accounting", teacher: "Dr. Anita Desai", textbook: "Cost Accounting: A Managerial Emphasis by Horngren, Datar, and Rajan", isPremium: false, cost: 0, pdfLink: "https://example.com/cost-accounting-notes.pdf", resourceLink: "https://example.com/cost-accounting-resources" },
+                    { name: "Auditing", teacher: "Prof. Rahul Sharma", textbook: "Auditing and Assurance Services by Arens, Elder, and Beasley", isPremium: true, cost: 450, videoLink: "https://example.com/auditing-video", pdfLink: "https://example.com/auditing-notes.pdf", resourceLink: "https://example.com/auditing-resources" }
+                ],
+                "Finance": [
+                    { name: "Corporate Finance", teacher: "Dr. Sanjay Kapoor", textbook: "Principles of Corporate Finance by Brealey, Myers, and Allen", isPremium: true, cost: 500, videoLink: "https://example.com/corporate-finance-video", pdfLink: "https://example.com/corporate-finance-notes.pdf", resourceLink: "https://example.com/corporate-finance-resources" },
+                    { name: "Investment Analysis", teacher: "Prof. Meera Reddy", textbook: "Investments by Bodie, Kane, and Marcus", isPremium: true, cost: 500, videoLink: "https://example.com/investment-analysis-video", pdfLink: "https://example.com/investment-analysis-notes.pdf", resourceLink: "https://example.com/investment-analysis-resources" },
+                    { name: "Financial Markets", teacher: "Dr. Amit Patel", textbook: "Financial Markets and Institutions by Mishkin and Eakins", isPremium: false, cost: 0, pdfLink: "https://example.com/financial-markets-notes.pdf", resourceLink: "https://example.com/financial-markets-resources" }
+                ]
+            }
+        };
+
+        function populateDropdown(selectId, options) {
+            const select = document.getElementById(selectId);
+            select.innerHTML = `<option value="">Select a ${selectId.replace('Select', '')}</option>`;
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = typeof option === 'object' ? option.name : option;
+                optionElement.textContent = typeof option === 'object' ? option.name : option;
+                select.appendChild(optionElement);
+            });
+        }
+
+        function getDiscountFactor(category) {
+            switch (category) {
+                case 'bpl': return 0.3;
+                case 'sc': return 0.5;
+                case 'st': return 0.5;
+                case 'obc': return 0.7;
+                case 'ews': return 0.6;
+                case 'minority': return 0.8;
+                case 'disabled': return 0.4;
+                default: return 1;
+            }
+        }
+
+        function showSubjectDetails() {
+            const domainSelect = document.getElementById('domainSelect');
+            const categorySelect = document.getElementById('categorySelect');
+            const subjectDetails = document.getElementById('subjectDetails');
+
+            if (domainSelect.value) {
+                const selectedDomain = domainSelect.value;
+                const domainSubjects = subjects[selectedDomain];
+                subjectDetails.innerHTML = '';
+
+                for (const subdomain in domainSubjects) {
+                    const subdomainHeader = document.createElement('h2');
+                    subdomainHeader.className = 'text-2xl font-bold mb-4 col-span-full';
+                    subdomainHeader.textContent = subdomain;
+                    subjectDetails.appendChild(subdomainHeader);
+
+                    domainSubjects[subdomain].forEach((subject, index) => {
+                        const discountFactor = getDiscountFactor(categorySelect.value);
+                        const adjustedCost = subject.isPremium 
+                            ? Math.max(150, Math.min(500, Math.round(subject.cost * discountFactor))) 
+                            : 0;
+
+                        const subjectCard = document.createElement('div');
+                        subjectCard.className = 'bg-white shadow-lg rounded-lg overflow-hidden animate-fadeIn border border-gray-200 hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 transition-transform';
+                        subjectCard.style.animationDelay = `${index * 0.1}s`;
+
+                        let contentHTML = `
+                            <div class="px-6 py-4 ${subject.isPremium ? 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white' : 'bg-gradient-to-r from-green-400 to-blue-500 text-white'}">
+                                <h3 class="font-bold text-xl  mb-2">${subject.name}</h3>
+                                <p class="text-sm">${subject.teacher}</p>
+                            </div>
+                            <div class="px-6 py-4">
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="px-3 py-1 rounded-full text-sm font-semibold ${subject.isPremium ? 'bg-yellow-400 text-gray-800' : 'bg-green-400 text-white'} animate-pulse">
+                                        ${subject.isPremium ? 'Premium' : 'Free'}
+                                    </span>
+                                    <span class="font-bold text-lg ${subject.isPremium ? 'text-purple-600' : 'text-green-600'}">
+                                        ${adjustedCost > 0 ? `₹${adjustedCost.toLocaleString('en-IN')}` : 'Free'}
+                                    </span>
+                                </div>
+                                <p class="mb-4">Textbook: ${subject.textbook}</p>
+                                <div class="space-y-2">
+                        `;
+
+                        if (subject.isPremium) {
+                            contentHTML += `
+                                <p><i class="fas fa-video text-blue-500"></i> <a href="${subject.videoLink}" class="text-blue-500 hover:underline">Watch Video Lecture</a></p>
+                                <p><i class="fas fa-file-pdf text-red-500"></i> <a href="${subject.pdfLink}" class="text-blue-500 hover:underline">Download PDF Notes</a></p>
+                                <p><i class="fas fa-external-link-alt text-green-500"></i> <a href="${subject.resourceLink}" class="text-blue-500 hover:underline">Additional Resources</a></p>
+                                <p><i class="fas fa-question-circle text-green-500"></i> Doubt Session: Available</p>
+                            `;
+                        } else {
+                            contentHTML += `
+                                <p><i class="fas fa-file-pdf text-red-500"></i> <a href="${subject.pdfLink}" class="text-blue-500 hover:underline">Download Free PDF</a></p>
+                                <p><i class="fas fa-external-link-alt text-green-500"></i> <a href="${subject.resourceLink}" class="text-blue-500 hover:underline">Related Resources</a></p>
+                            `;
+                        }
+
+                        contentHTML += `
+                                </div>
+                            </div>
+                        `;
+
+                        subjectCard.innerHTML = contentHTML;
+                        subjectDetails.appendChild(subjectCard);
+                    });
+                }
+            } else {
+                subjectDetails.innerHTML = '';
+            }
+        }
+
+        // Initialize the domain dropdown
+        populateDropdown('domainSelect', domains);
+
+        // Event listeners
+        document.getElementById('domainSelect').addEventListener('change', showSubjectDetails);
+        document.getElementById('categorySelect').addEventListener('change', showSubjectDetails);
+    </script>
+</body>
+</html>

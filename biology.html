@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology Course</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+        .animate-slideIn { animation: slideIn 0.5s ease-out; }
+        .animate-pulse { animation: pulse 2s infinite; }
+        .animate-rainbow {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffecd2, #fcb69f, #ff9a9e);
+            background-size: 400% 400%;
+            animation: rainbow 15s ease infinite;
+        }
+        .animate-rotate { animation: rotate 10s linear infinite; }
+        .animate-bounce { animation: bounce 2s infinite; }
+        .animate-wave { animation: wave 2s infinite; }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-green-100 via-blue-100 to-purple-100 min-h-screen font-sans">
+    <div class="container mx-auto p-6">
+        <h1 class="text-5xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600 animate-rainbow p-4">Biology Course - Chapters</h1>
+        
+        <div class="text-center mb-4 text-2xl font-bold text-gray-800 animate-bounce">
+            Total Maximum Marks for Botany: 60
+        </div>
+
+        <div class="mb-6 animate-slideIn">
+            <label for="categorySelect" class="block text-lg font-medium text-gray-700 mb-2">Select your category:</label>
+            <select id="categorySelect" class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-gray-700">
+                <option value="general">General</option>
+                <option value="bpl">Below Poverty Line (BPL)</option>
+                <option value="sc">Schedule Caste (SC)</option>
+                <option value="st">Schedule Tribe (ST)</option>
+                <option value="obc">Other Backward Class (OBC)</option>
+                <option value="ews">Economically Weaker Section (EWS)</option>
+                <option value="minority">Minority</option>
+                <option value="disabled">Disabled</option>
+            </select>
+        </div>
+
+        <div id="courseContainer" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Course cards will be dynamically populated here -->
+        </div>
+    </div>
+
+    <script>
+        const courses = [
+            { 
+                name: "Plant Anatomy", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Dr. S. Mishra",
+                email: "s.mishra@example.com",
+                phone: "+91 98765 43210",
+                textbook: "Introduction to Plant Anatomy by S. Mishra",
+                resourceLink: "https://biology.example.com/resources/plant-anatomy"
+            },
+            { 
+                name: "Genetics and Evolution", 
+                status: "Premium", 
+                basePrice: 300, 
+                instructor: "Prof. N. Chatterjee",
+                email: "n.chatterjee@example.com",
+                phone: "+91 98765 43211",
+                textbook: "Advanced Genetics and Evolution by N. Chatterjee",
+                videoLecture: "https://biology.example.com/video/genetics-evolution",
+                pdfNotes: "https://biology.example.com/pdf/genetics-evolution.pdf",
+                doubtSession: "Every Tuesday, 4-6 PM"
+            },
+            { 
+                name: "Plant Physiology", 
+                status: "Premium", 
+                basePrice: 250, 
+                instructor: "Dr. A. Kumar",
+                email: "a.kumar@example.com",
+                phone: "+91 98765 43212",
+                textbook: "Understanding Plant Physiology by A. Kumar",
+                videoLecture: "https://biology.example.com/video/plant-physiology",
+                pdfNotes: "https://biology.example.com/pdf/plant-physiology.pdf",
+                doubtSession: "Every Thursday, 3-5 PM"
+            },
+            { 
+                name: "Ecology", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Prof. P. Gupta",
+                email: "p.gupta@example.com",
+                phone: "+91 98765 43213",
+                textbook: "Fundamentals of Ecology by P. Gupta",
+                resourceLink: "https://biology.example.com/resources/ecology"
+            },
+            { 
+                name: "Biotechnology", 
+                status: "Premium", 
+                basePrice: 350, 
+                instructor: "Dr. M. Sharma",
+                email: "m.sharma@example.com",
+                phone: "+91 98765 43214",
+                textbook: "Modern Biotechnology by M. Sharma",
+                videoLecture: "https://biology.example.com/video/biotechnology",
+                pdfNotes: "https://biology.example.com/pdf/biotechnology.pdf",
+                doubtSession: "Every Wednesday, 4-6 PM"
+            },
+            { 
+                name: "Plant Growth and Development", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Prof. K. Singh",
+                email: "k.singh@example.com",
+                phone: "+91 98765 43215",
+                textbook: "Plant Growth Dynamics by K. Singh",
+                resourceLink: "https://biology.example.com/resources/plant-growth"
+            },
+            { 
+                name: "Microbiology", 
+                status: "Premium", 
+                basePrice: 280, 
+                instructor: "Dr. V. Narayan",
+                email: "v.narayan@example.com",
+                phone: "+91 98765 43216",
+                textbook: "Microbiology and Human Health by V. Narayan",
+                videoLecture: "https://biology.example.com/video/microbiology",
+                pdfNotes: "https://biology.example.com/pdf/microbiology.pdf",
+                doubtSession: "Every Friday, 3-5 PM"
+            },
+            { 
+                name: "Environmental Biology", 
+                status: "Free", 
+                basePrice: 0, 
+                instructor: "Prof. A. Joshi",
+                email: "a.joshi@example.com",
+                phone: "+91 98765 43217",
+                textbook: "Environmental Biology and Conservation by A. Joshi",
+                resourceLink: "https://biology.example.com/resources/environmental-biology"
+            },
+            { 
+                name: "Molecular Biology", 
+                status: "Premium", 
+                basePrice: 400, 
+                instructor: "Dr. R. Sinha",
+                email: "r.sinha@example.com",
+                phone: "+91 98765 43218",
+                textbook: "Advanced Molecular Biology by R. Sinha",
+                videoLecture: "https://biology.example.com/video/molecular-biology",
+                pdfNotes: "https://biology.example.com/pdf/molecular-biology.pdf",
+                doubtSession: "Every Saturday, 10 AM-12 PM"
+            }
+        ];
+
+        function getDiscountFactor(category) {
+            switch (category) {
+                case 'bpl': return 0.1;
+                case 'sc': return 0.3;
+                case 'st': return 0.2;
+                case 'obc': return 0.5;
+                case 'ews': return 0.4;
+                case 'minority': return 0.6;
+                case 'disabled': return 0.3;
+                default: return 1;
+            }
+        }
+
+        function updateCourseDisplay() {
+            const courseContainer = document.getElementById('courseContainer');
+            const category = document.getElementById('categorySelect').value;
+            const discountFactor = getDiscountFactor(category);
+
+            courseContainer.innerHTML = '';
+
+            courses.forEach((course, index) => {
+                const adjustedPrice = Math.round(course.basePrice * discountFactor);
+                const priceDisplay = course.status === "Free" ? "Free" : `₹${adjustedPrice.toLocaleString('en-IN')}`;
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-lg overflow-hidden animate-fadeIn transform transition-all duration-300 hover:scale-105';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                let cardContent = `
+                    <div class="p-4 ${course.status === 'Premium' ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white' : 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white'}">
+                        <h3 class="text-xl font-bold mb-2">${course.name}</h3>
+                        <p class="text-sm">${course.instructor}</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="px-3 py-1 rounded-full text-sm font-semibold ${course.status === 'Premium' ? 'bg-yellow-400 text-gray-800' : 'bg-green-400 text-white'} animate-pulse">
+                                ${course.status}
+                            </span>
+                            <span class="font-bold text-lg ${course.status === 'Premium' ? 'text-blue-600' : 'text-green-600'}">
+                                ${priceDisplay}
+                            </span>
+                        </div>
+                        <p class="mb-2"><i class="fas fa-book mr-2 animate-bounce"></i><strong>Textbook:</strong> ${course.textbook}</p>
+                        <p class="mb-2"><i class="fas fa-user-tie mr-2 animate-wave"></i><strong>Instructor:</strong> ${course.instructor}</p>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2 animate-pulse"></i><strong>Email:</strong> ${course.email}</p>
+                        <p class="mb-2"><i class="fas fa-phone mr-2 animate-rotate"></i><strong>Phone:</strong> ${course.phone}</p>
+                        <p class="mb-2"><i class="fas fa-headset mr-2 animate-pulse"></i><strong>24/7 Support:</strong> Available</p>
+                `;
+
+                if (course.status === 'Premium') {
+                    cardContent += `
+                        <p class="mb-2"><i class="fas fa-video mr-2 animate-pulse"></i><strong>Video Lecture:</strong> <a href="${course.videoLecture}" class="text-blue-500 hover:underline" target="_blank">Watch</a></p>
+                        <p class="mb-2"><i class="fas fa-file-pdf mr-2 animate-bounce"></i><strong>PDF Notes:</strong> <a href="${course.pdfNotes}" class="text-blue-500 hover:underline" target="_blank">Download</a></p>
+                        <p class="mb-2"><i class="fas fa-question-circle mr-2 animate-wave"></i><strong>Doubt Session:</strong> ${course.doubtSession}</p>
+                    `;
+                } else {
+                    cardContent += `
+                        <p class="mb-2"><i class="fas fa-link mr-2 animate-pulse"></i><strong>Resource Link:</strong> <a href="${course.resourceLink}" class="text-blue-500 hover:underline" target="_blank">Access</a></p>
+                    `;
+                }
+
+                cardContent += `
+                    </div>
+                `;
+
+                card.innerHTML = cardContent;
+                courseContainer.appendChild(card);
+            });
+        }
+
+        document.getElementById('categorySelect').addEventListener('change', updateCourseDisplay);
+        updateCourseDisplay(); // Initial course display
+    </script>
+</body>
+</html>

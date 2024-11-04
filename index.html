@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affordable Education for All</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #F3F4F6; /* Light gray background */
+            color: #333333; /* Dark gray for text */
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            text-align: center;
+            color: white;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('imageshero.jpeg') center/cover;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #F3F4F6; /* Light gray for readability */
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+        .hero p {
+            font-size: 1.3rem;
+            color: #D1D5DB; /* Softer gray */
+            margin-bottom: 25px;
+        }
+        .cta-button {
+            padding: 12px 30px;
+            background-color: #10B981; /* Aqua green */
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #059669; /* Darker aqua on hover */
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 60px 20px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+        .benefits-section h2 {
+            font-size: 2.4rem;
+            color: #1E3A8A; /* Deep Blue */
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        .benefits {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .benefit-item {
+            flex: 1 1 30%;
+            max-width: 300px;
+            background-color: #F9FAFB; /* Slightly off-white */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+        .benefit-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        .benefit-item img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+        .benefit-item:hover img {
+            transform: scale(1.1);
+        }
+        .benefit-item h3 {
+            font-size: 1.3rem;
+            color: #10B981; /* Aqua green for emphasis */
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .benefit-item p {
+            font-size: 1rem;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Intro Video Section */
+        .intro-video-section {
+            background-color: #ffffff;
+            padding: 50px 20px;
+            margin: 40px auto;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
+        }
+        .intro-video-section h2 {
+            font-size: 2.2rem;
+            color: #1E3A8A; /* Deep blue */
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .video-thumbnail {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        .video-thumbnail img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 12px;
+        }
+        .video-thumbnail:hover {
+            transform: scale(1.05);
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 28px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .play-button:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Scholarship Opportunities Section */
+        .scholarship-opportunities-section {
+            padding: 60px 20px;
+            background: url('Scholarship\ Opportunities.jpeg') center/cover no-repeat;
+            color: white;
+            position: relative;
+            text-align: center;
+        }
+        .scholarship-opportunities-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+        }
+        .scholarship-opportunities-section h2 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            position: relative;
+            font-weight: 700;
+        }
+        .scholarship-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .scholarship-item {
+            flex: 1 1 200px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent for readability */
+            border-radius: 12px;
+            color: #333333;
+            text-align: left;
+        }
+        .scholarship-item span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #10B981; /* Aqua green */
+        }
+        .scholarship-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        .scholarship-item p {
+            font-size: 1rem;
+            color: #555555;
+        }
+
+        /* Get Involved Section */
+        .get-involved-section {
+            padding: 60px 20px;
+            background-color: #F3F4F6; /* Light gray */
+            text-align: center;
+        }
+        .get-involved-section h2 {
+            font-size: 2.2rem;
+            color: #1E3A8A; /* Deep blue */
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .get-involved-section .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .cta-button.volunteer {
+            background-color: #3B82F6; /* Soft blue for Volunteer */
+        }
+        .get-involved-section p {
+            color: #333333;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: #1E3A8A; /* Deep blue */
+            color: #F3F4F6; /* Light gray text */
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .footer .footer-links {
+            margin-bottom: 10px;
+        }
+        .footer .footer-links a {
+            color: #10B981; /* Aqua green */
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer .footer-links a:hover {
+            color: #34D399; /* Lighter green */
+        }
+        .footer p {
+            margin-top: 15px;
+            color: #D1D5DB;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-text">
+            <h1>Affordable Education for All</h1>
+            <p>Empowering learners with accessible, high-quality education</p>
+            <a href="loginpage.html" class="cta-button">Get Started</a>
+        </div>
+    </header>
+
+    <!-- Key Benefits Section -->
+    <section class="benefits-section">
+        <h2>Key Benefits</h2>
+        <div class="benefits">
+            <a href="Affordable.html" class="benefit-item">
+                <img src="imagesaffordable.jpeg" alt="Affordable icon">
+                <h3>Affordable</h3>
+                <p>Our platform provides quality education at low prices to make learning accessible to everyone.</p>
+            </a>
+            <a href="Accessible.html" class="benefit-item">
+                <img src="imagesaccessible.jpeg" alt="Accessible icon">
+                <h3>Accessible</h3>
+                <p>Available to anyone, anywhere, anytime - our learning resources are globally accessible.</p>
+            </a>
+            <a href="Highquality.html" class="benefit-item">
+                <img src="imageshighquality.jpeg" alt="High Quality icon">
+                <h3>High Quality</h3>
+                <p>We offer top-tier educational content created by industry experts.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Intro Video Section -->
+    <section class="intro-video-section">
+        <h2>Intro Video</h2>
+        <div class="video-thumbnail">
+            <img src="imagesintrovideo.jpeg" alt="Intro Video">
+            <button class="play-button">▶</button>
+        </div>
+        <p>Watch a brief introduction to our platform’s features.</p>
+    </section>
+
+    <!-- Scholarship Opportunities Section -->
+    <section class="scholarship-opportunities-section">
+        <h2>Scholarship Opportunities</h2>
+        <div class="scholarship-options">
+            <div class="scholarship-item">
+                <span>1</span>
+                <h3>Merit-Based Scholarships</h3>
+                <p>Awarded for academic excellence, leadership, and extracurricular achievements.</p>
+            </div>
+            <div class="scholarship-item">
+                <span>2</span>
+                <h3>Need-Based Scholarships</h3>
+                <p>Provide financial assistance to students with demonstrated financial need.</p>
+            </div>
+            <div class="scholarship-item">
+                <span>3</span>
+                <h3>Departmental Scholarships</h3>
+                <p>Offered by individual academic departments to support specialized studies.</p>
+            </div>
+            <div class="scholarship-item">
+                <span>4</span>
+                <h3>External Scholarships</h3>
+                <p>Explore scholarships from external organizations and foundations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Involved Section -->
+    <section class="get-involved-section">
+        <h2>Get Involved: How You Can Make a Difference</h2>
+        <div class="cta-buttons">
+            <a href="support.html" class="cta-button">Donate</a>
+            <a href="volunteer.html" class="cta-button volunteer">Volunteer</a>
+        </div>
+        <p>Join our mission to make education more affordable and accessible. Contribute your skills, resources, or time to help empower learners worldwide.</p>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#contact">Contact Us</a>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="#partners">Partnerships</a>
+        </div>
+        <p>&copy; 2023 Affordable Education. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Play button functionality placeholder
+        document.querySelector(".play-button").addEventListener("click", () => {
+            alert("Play intro video.");
+        });
+    </script>
+</body>
+</html>

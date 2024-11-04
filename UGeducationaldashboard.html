@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UG Educational Dashboard</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-bottom: 20px;
+        }
+        .section {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #e9ecef;
+            border: 1px solid #dee2e6;
+        }
+        .tab.active {
+            background-color: #fff;
+            border-bottom: none;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            padding: 3px;
+            border-radius: 3px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+        }
+        .progress-bar-fill {
+            display: block;
+            height: 22px;
+            background-color: #659cef;
+            border-radius: 3px;
+            transition: width 500ms ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="section">
+            <h1>UG Educational Dashboard</h1>
+            <div id="greeting">Welcome back, Student!</div>
+            <nav>
+                <a href="#" class="btn">Home</a>
+                <a href="#" class="btn">Profile</a>
+                <a href="#" class="btn">Settings</a>
+            </nav>
+        </header>
+
+        <section class="section" id="discipline-selection">
+            <h2>Select Your Discipline</h2>
+            <div class="grid">
+                <div class="card" style="background-color: #ffcccb;">
+                    <h3>Engineering</h3>
+                    <a href="#" class="btn">Explore</a>
+                </div>
+                <div class="card" style="background-color: #c2f0c2;">
+                    <h3>Business</h3>
+                    <a href="#" class="btn">Explore</a>
+                </div>
+                <div class="card" style="background-color: #fdfd96;">
+                    <h3>Humanities</h3>
+                    <a href="#" class="btn">Explore</a>
+                </div>
+                <div class="card" style="background-color: #c2e2f0;">
+                    <h3>Sciences</h3>
+                    <a href="#" class="btn">Explore</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="quick-access">
+            <h2>Quick Access</h2>
+            <a href="#" class="btn">Career Prep</a>
+            <a href="#" class="btn">Skill Building</a>
+            <a href="#" class="btn">Community Resources</a>
+            <a href="#" class="btn">Events & Announcements</a>
+        </section>
+
+        <section class="section" id="announcements">
+            <h2>Announcements</h2>
+            <div class="card">
+                <h3>New Internship Opportunities</h3>
+                <p>Check out the latest internship postings in the Career Center.</p>
+            </div>
+            <div class="card">
+                <h3>Upcoming Exam Schedule</h3>
+                <p>Final exam schedules are now available. Review your personalized schedule.</p>
+            </div>
+        </section>
+
+        <section class="section" id="course-materials">
+            <h2>Course Materials</h2>
+            <div class="tabs">
+                <div class="tab active">Core Subjects</div>
+                <div class="tab">Electives</div>
+                <div class="tab">Labs</div>
+                <div class="tab">Project Work</div>
+            </div>
+            <div class="card">
+                <h3>Introduction to Data Structures</h3>
+                <a href="#" class="btn">View OER Resources</a>
+                <a href="#" class="btn">Download Materials</a>
+            </div>
+        </section>
+
+        <section class="section" id="progress-tracker">
+            <h2>Your Progress</h2>
+            <div class="card">
+                <h3>Data Structures</h3>
+                <div class="progress-bar">
+                    <span class="progress-bar-fill" style="width: 70%;"></span>
+                </div>
+                <p>70% Complete</p>
+            </div>
+            <div class="card">
+                <h3>Web Development</h3>
+                <div class="progress-bar">
+                    <span class="progress-bar-fill" style="width: 45%;"></span>
+                </div>
+                <p>45% Complete</p>
+            </div>
+        </section>
+
+        <section class="section" id="career-prep">
+            <h2>Career Preparation</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Data Science</h3>
+                    <p>Explore career paths in data science</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+                <div class="card">
+                    <h3>Software Engineering</h3>
+                    <p>Discover software engineering roles</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Resume Builder</h3>
+                <a href="#" class="btn">Create Resume</a>
+            </div>
+            <div class="card">
+                <h3>Mock Interviews</h3>
+                <a href="#" class="btn">Practice Now</a>
+            </div>
+        </section>
+
+        <section class="section" id="skill-building">
+            <h2>Skill Building</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Python Programming</h3>
+                    <p>Level: Beginner</p>
+                    <a href="#" class="btn">Start Learning</a>
+                </div>
+                <div class="card">
+                    <h3>Data Analysis with R</h3>
+                    <p>Level: Intermediate</p>
+                    <a href="#" class="btn">Start Learning</a>
+                </div>
+                <div class="card">
+                    <h3>Machine Learning</h3>
+                    <p>Level: Advanced</p>
+                    <a href="#" class="btn">Start Learning</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="community">
+            <h2>Community</h2>
+            <div class="card">
+                <h3>Discussion Forums</h3>
+                <a href="#" class="btn">Join Discussions</a>
+            </div>
+            <div class="card">
+                <h3>Resource Sharing</h3>
+                <a href="#" class="btn">Browse Resources</a>
+                <a href="#" class="btn">Upload Resource</a>
+            </div>
+            <div class="card">
+                <h3>Study Groups</h3>
+                <a href="#" class="btn">Find a Group</a>
+                <a href="#" class="btn">Create a Group</a>
+            </div>
+        </section>
+
+        <section class="section" id="faculty-mentorship">
+            <h2>Faculty and Mentorship</h2>
+            <div class="card">
+                <h3>Dr. Jane Smith</h3>
+                <p>Expertise: Data Science</p>
+                <a href="#" class="btn">View Profile</a>
+                <a href="#" class="btn">Book Office Hours</a>
+            </div>
+            <div class="card">
+                <h3>Mentorship Program</h3>
+                <a href="#" class="btn">Find a Mentor</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // This script would typically be in a separate file
+        // and would include more complex functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set greeting based on time of day
+            const greeting = document.getElementById('greeting');
+            const hour = new Date().getHours();
+            if (hour < 12) greeting.textContent = 'Good morning, Student!';
+            else if (hour < 18) greeting.textContent = 'Good afternoon, Student!';
+            else greeting.textContent = 'Good evening, Student!';
+
+            // Add tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    // Here you would typically load content based on the selected tab
+                });
+            });
+        });
+    </script>
+</body>
+</html>

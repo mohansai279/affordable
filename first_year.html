@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Year Subjects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .subject-icon {
+            width: 40px;
+            height: 40px;
+        }
+        .free {
+            color: green;
+        }
+        .premium {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>First Year Subjects</h1>
+    
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Icon</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>Mathematics 1A</td>
+            <td><img src="https://img.icons8.com/color/48/000000/calculator.png" alt="Math Icon" class="subject-icon"></td>
+            <td><button onclick="window.location.href='mathematics1A.html'">Go to Mathematics 1A</button></td>
+        </tr>
+        <tr>
+            <td>Mathematics 1B</td>
+            <td><img src="https://img.icons8.com/color/48/000000/calculator.png" alt="Math Icon" class="subject-icon"></td>
+            <td><button onclick="window.location.href='mathematics1B.html'">Go to Mathematics 1B</button></td>
+        </tr>
+        <tr>
+            <td>Physics</td>
+            <td><img src="https://img.icons8.com/color/48/000000/physics.png" alt="Physics Icon" class="subject-icon"></td>
+            <td><button onclick="window.location.href='physics.html'">Go to Physics</button></td>
+        </tr>
+        <tr>
+            <td>Chemistry</td>
+            <td><img src="https://img.icons8.com/color/48/000000/chemistry.png" alt="Chemistry Icon" class="subject-icon"></td>
+            <td><button onclick="window.location.href='chemistry.html'">Go to Chemistry</button></td>
+        </tr>
+    </table>
+
+</body>
+</html>

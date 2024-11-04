@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Games Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #4a90e2;
+            text-align: center;
+        }
+        .game-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .game-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .game-button:hover {
+            background-color: #45a049;
+        }
+        #gameArea {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Educational Games Hub</h1>
+    <div class="game-buttons">
+        <button class="game-button" onclick="loadGame('mathQuiz')">Math Quiz</button>
+        <button class="game-button" onclick="loadGame('spellingBee')">Spelling Bee</button>
+        <button class="game-button" onclick="loadGame('geographyChallenge')">Geography Challenge</button>
+        <button class="game-button" onclick="loadGame('scienceTrivia')">Science Trivia</button>
+        <button class="game-button" onclick="loadGame('historyTimeline')">History Timeline</button>
+        <button class="game-button" onclick="loadGame('codingPuzzle')">Coding Puzzle</button>
+        <button class="game-button" onclick="loadGame('musicNotes')">Music Notes</button>
+        <button class="game-button" onclick="loadGame('artColors')">Art Colors</button>
+        <button class="game-button" onclick="loadGame('literatureQuotes')">Literature Quotes</button>
+        <button class="game-button" onclick="loadGame('memoryGame')">Memory Game</button>
+    </div>
+    <div id="gameArea"></div>
+
+    <script>
+        function loadGame(gameName) {
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = '';
+            switch(gameName) {
+                case 'mathQuiz':
+                    gameArea.innerHTML = `
+                        <h2>Math Quiz</h2>
+                        <p>Solve the following math problem:</p>
+                        <div id="mathProblem"></div>
+                        <input type="number" id="mathAnswer">
+                        <button onclick="checkMathAnswer()">Submit</button>
+                        <p id="mathResult"></p>
+                    `;
+                    generateMathProblem();
+                    break;
+                case 'spellingBee':
+                    gameArea.innerHTML = `
+                        <h2>Spelling Bee</h2>
+                        <p>Spell the word you hear:</p>
+                        <button onclick="speakWord()">Hear Word</button>
+                        <input type="text" id="spellingAnswer">
+                        <button onclick="checkSpelling()">Submit</button>
+                        <p id="spellingResult"></p>
+                    `;
+                    break;
+                case 'geographyChallenge':
+                    gameArea.innerHTML = `
+                        <h2>Geography Challenge</h2>
+                        <p>Name the capital city of:</p>
+                        <div id="country"></div>
+                        <input type="text" id="capitalAnswer">
+                        <button onclick="checkCapital()">Submit</button>
+                        <p id="geographyResult"></p>
+                    `;
+                    generateCountry();
+                    break;
+                case 'scienceTrivia':
+                    gameArea.innerHTML = `
+                        <h2>Science Trivia</h2>
+                        <p id="scienceQuestion"></p>
+                        <div id="scienceOptions"></div>
+                        <button onclick="checkScienceAnswer()">Submit</button>
+                        <p id="scienceResult"></p>
+                    `;
+                    generateScienceQuestion();
+                    break;
+                case 'historyTimeline':
+                    gameArea.innerHTML = `
+                        <h2>History Timeline</h2>
+                        <p>Arrange the following events in chronological order:</p>
+                        <div id="events"></div>
+                        <button onclick="checkTimeline()">Submit</button>
+                        <p id="timelineResult"></p>
+                    `;
+                    generateHistoryEvents();
+                    break;
+                case 'codingPuzzle':
+                    gameArea.innerHTML = `
+                        <h2>Coding Puzzle</h2>
+                        <p>Complete the following code to print "Hello, World!":</p>
+                        <pre>
+print(<input type="text" id="codingAnswer">)
+                        </pre>
+                        <button onclick="checkCoding()">Run Code</button>
+                        <p id="codingResult"></p>
+                    `;
+                    break;
+                case 'musicNotes':
+                    gameArea.innerHTML = `
+                        <h2>Music Notes</h2>
+                        <p>Identify the note on the staff:</p>
+                        <div id="musicStaff"></div>
+                        <input type="text" id="noteAnswer">
+                        <button onclick="checkNote()">Submit</button>
+                        <p id="musicResult"></p>
+                    `;
+                    generateMusicNote();
+                    break;
+                case 'artColors':
+                    gameArea.innerHTML = `
+                        <h2>Art Colors</h2>
+                        <p>Mix the primary colors to create the requested color:</p>
+                        <div id="colorRequest"></div>
+                        <div id="colorMixer"></div>
+                        <button onclick="checkColor()">Submit</button>
+                        <p id="colorResult"></p>
+                    `;
+                    generateColorRequest();
+                    break;
+                case 'literatureQuotes':
+                    gameArea.innerHTML = `
+                        <h2>Literature Quotes</h2>
+                        <p>Who said the following quote?</p>
+                        <div id="quote"></div>
+                        <input type="text" id="authorAnswer">
+                        <button onclick="checkAuthor()">Submit</button>
+                        <p id="quoteResult"></p>
+                    `;
+                    generateQuote();
+                    break;
+                case 'memoryGame':
+                    gameArea.innerHTML = `
+                        <h2>Memory Game</h2>
+                        <p>Remember the sequence of numbers:</p>
+                        <div id="memorySequence"></div>
+                        <input type="text" id="memoryAnswer" style="display:none;">
+                        <button onclick="startMemoryGame()">Start</button>
+                        <button onclick="checkMemory()" style="display:none;">Submit</button>
+                        <p id="memoryResult"></p>
+                    `;
+                    break;
+            }
+        }
+
+        // Math Quiz
+        function generateMathProblem() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            const operator = ['+', '-', '*'][Math.floor(Math.random() * 3)];
+            document.getElementById('mathProblem').textContent = `${num1} ${operator} ${num2} = ?`;
+            window.mathAnswer = eval(`${num1} ${operator} ${num2}`);
+        }
+
+        function checkMathAnswer() {
+            const userAnswer = parseInt(document.getElementById('mathAnswer').value);
+            const resultElement = document.getElementById('mathResult');
+            if (userAnswer === window.mathAnswer) {
+                resultElement.textContent = "Correct! Well done!";
+            } else {
+                resultElement.textContent = `Sorry, the correct answer is ${window.mathAnswer}.`;
+            }
+            generateMathProblem();
+        }
+
+        // Spelling Bee
+        const words = ['apple', 'banana', 'cherry', 'date', 'elderberry'];
+        let currentWord = '';
+
+        function speakWord() {
+            currentWord = words[Math.floor(Math.random() * words.length)];
+            const utterance = new SpeechSynthesisUtterance(currentWord);
+            speechSynthesis.speak(utterance);
+        }
+
+        function checkSpelling() {
+            const userAnswer = document.getElementById('spellingAnswer').value.toLowerCase();
+            const resultElement = document.getElementById('spellingResult');
+            if (userAnswer === currentWord) {
+                resultElement.textContent = "Correct spelling!";
+            } else {
+                resultElement.textContent = `Sorry, the correct spelling is ${currentWord}.`;
+            }
+        }
+
+        // Geography Challenge
+        const countries = {
+            'France': 'Paris',
+            'Japan': 'Tokyo',
+            'Brazil': 'Brasília',
+            'Egypt': 'Cairo',
+            'Australia': 'Canberra'
+        };
+        let currentCountry = '';
+
+        function generateCountry() {
+            const countryNames = Object.keys(countries);
+            currentCountry = countryNames[Math.floor(Math.random() * countryNames.length)];
+            document.getElementById('country').textContent = currentCountry;
+        }
+
+        function checkCapital() {
+            const userAnswer = document.getElementById('capitalAnswer').value;
+            const resultElement = document.getElementById('geographyResult');
+            if (userAnswer.toLowerCase() === countries[currentCountry].toLowerCase()) {
+                resultElement.textContent = "Correct! Well done!";
+            } else {
+                resultElement.textContent = `Sorry, the capital of ${currentCountry} is ${countries[currentCountry]}.`;
+            }
+            generateCountry();
+        }
+
+        // Science Trivia
+        const scienceQuestions = [
+            {
+                question: "What is the chemical symbol for gold?",
+                options: ["Au", "Ag", "Fe", "Cu"],
+                answer: 0
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Venus", "Mars", "Jupiter", "Saturn"],
+                answer: 1
+            },
+            {
+                question: "What is the largest organ in the human body?",
+                options: ["Heart", "Brain", "Liver", "Skin"],
+                answer: 3
+            }
+        ];
+        let currentScienceQuestion = {};
+
+        function generateScienceQuestion() {
+            currentScienceQuestion = scienceQuestions[Math.floor(Math.random() * scienceQuestions.length)];
+            document.getElementById('scienceQuestion').textContent = currentScienceQuestion.question;
+            const optionsHtml = currentScienceQuestion.options.map((option, index) => 
+                `<input type="radio" name="scienceOption" value="${index}"> ${option}<br>`
+            ).join('');
+            document.getElementById('scienceOptions').innerHTML = optionsHtml;
+        }
+
+        function checkScienceAnswer() {
+            const selectedOption = document.querySelector('input[name="scienceOption"]:checked');
+            const resultElement = document.getElementById('scienceResult');
+            if (selectedOption && parseInt(selectedOption.value) === currentScienceQuestion.answer) {
+                resultElement.textContent = "Correct! Great job!";
+            } else {
+                resultElement.textContent = `Sorry, the correct answer is ${currentScienceQuestion.options[currentScienceQuestion.answer]}.`;
+            }
+            generateScienceQuestion();
+        }
+
+        // History Timeline
+        const historicalEvents = [
+            {event: "World War II ends", year: 1945},
+            {event: "Moon landing", year: 1969},
+            {event: "Fall of the Berlin Wall", year: 1989},
+            {event: "Declaration of Independence", year: 1776},
+            {event: "Industrial Revolution begins", year: 1760}
+        ];
+        let shuffledEvents = [];
+
+        function generateHistoryEvents() {
+            shuffledEvents = [...historicalEvents].sort(() => Math.random() - 0.5);
+            const eventsHtml = shuffledEvents.map((event, index) => 
+                `<div draggable="true" ondragstart="drag(event)" id="event${index}">${event.event}</div>`
+            ).join('');
+            document.getElementById('events').innerHTML = eventsHtml;
+        }
+
+        function checkTimeline() {
+            const orderedEvents = Array.from(document.getElementById('events').children);
+            const isCorrect = orderedEvents.every((event, index) => 
+                event.textContent === historicalEvents[index].event
+            );
+            const resultElement = document.getElementById('timelineResult');
+            if (isCorrect) {
+                resultElement.textContent = "Correct! You've ordered the events correctly!";
+            } else {
+                resultElement.textContent = "Sorry, that's not the correct order. Try again!";
+            }
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        // Coding Puzzle
+        function checkCoding() {
+            const userAnswer = document.getElementById('codingAnswer').value;
+            const resultElement = document.getElementById('codingResult');
+            if (userAnswer.toLowerCase() === '"hello, world!"') {
+                resultElement.textContent = 'Correct! The code will print: Hello, World!';
+            } else {
+                resultElement.textContent = 'Not quite. Try again!';
+            }
+        }
+
+        // Music Notes
+        const notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+        let currentNote = '';
+
+        function generateMusicNote() {
+            currentNote = notes[Math.floor(Math.random() * notes.length)];
+            document.getElementById('musicStaff').textContent = `[Musical staff with ${currentNote} note]`;
+        }
+
+        function checkNote() {
+            const userAnswer = document.getElementById('noteAnswer').value;
+            const resultElement = document.getElementById('musicResult');
+            if (userAnswer.toUpperCase() === currentNote) {
+                resultElement.textContent = "Correct! You've identified the note!";
+            } else {
+                resultElement.textContent = `Sorry, the correct note was ${currentNote}.`;
+            }
+            generateMusicNote();
+        }
+
+        // Art Colors
+        const colors = ['Green', 'Orange', 'Purple'];
+        let currentColor = '';
+
+        function generateColorRequest() {
+            currentColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            document.getElementById('colorRequest').textContent = `Create: ${currentColor}`;
+            document.getElementById('colorMixer').innerHTML = `
+                <input type="checkbox" id="red"> Red
+                <input type="checkbox" id="blue"> Blue
+                <input type="checkbox" id="yellow"> Yellow
+            `;
+        }
+
+        function checkColor() {
+            const red = document.getElementById('red').checked;
+            const blue = document.getElementById('blue').checked;
+            const yellow = document.getElementById('yellow').checked;
+            const resultElement = document.getElementById('colorResult');
+            
+            let correct = false;
+            if (currentColor === 'Green' && yellow && blue && !red) correct = true;
+            if (currentColor === 'Orange' && red && yellow && !blue) correct = true;
+            if (currentColor === 'Purple' && red && blue && !yellow) correct = true;
+
+            if (correct) {
+                resultElement.textContent = "Correct! You've mixed the right colors!";
+            } else {
+                resultElement.textContent = "Sorry, that's not the right mix. Try again!";
+            }
+            generateColorRequest();
+        }
+
+        // Literature Quotes
+        const quotes = [
+            {quote: "To be or not to be, that is the question.", author: "William Shakespeare"},
+            {quote: "I think, therefore I am.", author: "René Descartes"},
+            {quote: "Two roads diverged in a wood, and I—I took the one less traveled by.", author: "Robert Frost"}
+        ];
+        let currentQuote = {};
+
+        function generateQuote() {
+            currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quote').textContent = currentQuote.quote;
+        }
+
+        function checkAuthor() {
+            const userAnswer = document.getElementById('authorAnswer').value;
+            const resultElement = document.getElementById('quoteResult');
+            if (userAnswer.toLowerCase() === currentQuote.author.toLowerCase()) {
+                resultElement.textContent = "Correct! You know your literature!";
+            } else {
+                resultElement.textContent = `Sorry, the author was ${currentQuote.author}.`;
+            }
+            generateQuote();
+        }
+
+        // Memory Game
+        let memorySequence = [];
+        let userSequence = [];
+
+        function startMemoryGame() {
+            memorySequence = Array.from({length: 5}, () => Math.floor(Math.random() * 10));
+            document.getElementById('memorySequence').textContent = memorySequence.join(' ');
+            setTimeout(() => {
+                document.getElementById('memorySequence').textContent = '?????';
+                document.getElementById('memoryAnswer').style.display = 'inline';
+                document.querySelector('button[onclick="checkMemory()"]').style.display = 'inline';
+            }, 3000);
+        }
+
+        function checkMemory() {
+            const userAnswer = document.getElementById('memoryAnswer').value;
+            const resultElement = document.getElementById('memoryResult');
+            if (userAnswer === memorySequence.join('')) {
+                resultElement.textContent = "Impressive! You remembered the sequence correctly!";
+            } else {
+                resultElement.textContent = `Sorry, the correct sequence was ${memorySequence.join('')}.`;
+            }
+            document.getElementById('memoryAnswer').style.display = 'none';
+            document.querySelector('button[onclick="checkMemory()"]').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

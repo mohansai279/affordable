@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursing Courses | Educational Platform</title>
+    <style>
+        /* Common styling */
+        body, h1, h2 {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f8e9;
+            color: #388e3c;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .resource-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .resource-item {
+            background-color: #c5e1a5;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .resource-item:hover {
+            transform: translateY(-5px);
+        }
+        .resource-item a, .resource-item button {
+            padding: 10px 20px;
+            background-color: #2e7d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .resource-item a:hover, .resource-item button:hover {
+            background-color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nursing Courses Preparation</h1>
+        <div class="content-section">
+            <h2>Free Resources</h2>
+            <div class="resource-list">
+                <div class="resource-item">
+                    <h3>Basic Nursing Syllabus</h3>
+                    <a href="#">Download</a>
+                </div>
+                <div class="resource-item">
+                    <h3>Health Science Papers</h3>
+                    <a href="#">Download</a>
+                </div>
+                <div class="resource-item">
+                    <h3>First Aid Guidelines</h3>
+                    <a href="#">Download</a>
+                </div>
+                <div class="resource-item">
+                    <h3>Clinical Practice Materials</h3>
+                    <a href="#">Download</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Premium Content</h2>
+            <div class="resource-list">
+                <div class="resource-item">
+                    <h3>Video Tutorials</h3>
+                    <button>Add to Cart (₹699)</button>
+                </div>
+                <div class="resource-item">
+                    <h3>Mock Exams</h3>
+                    <button>Add to Cart (₹499)</button>
+                </div>
+                <div class="resource-item">
+                    <h3>Advanced Nursing Materials</h3>
+                    <button>Add to Cart (₹999)</button>
+                </div>
+                <div class="resource-item">
+                    <h3>Complete Course</h3>
+                    <button>Add to Cart (₹1499)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
